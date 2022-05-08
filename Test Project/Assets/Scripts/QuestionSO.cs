@@ -14,7 +14,11 @@ public class QuestionSO : ScriptableObject
     [SerializeField] private string[] answers = {"A", "B", "C", "D"};
     [SerializeField] private int correctAnswerIndex;
 
-    public string GetQuestion()
+    [SerializeField] private Sprite[] sprites = new Sprite[4];
+    
+    
+
+    public string GetQuestionText()
     {
         return question;
     }
@@ -22,8 +26,14 @@ public class QuestionSO : ScriptableObject
     {
         return answers[index];
     }
+    
     public int GetCorrectAnswerIndex()
     {
         return correctAnswerIndex;
+    }
+
+    public Sprite GetSprite(int index)
+    {
+        return sprites[index];
     }
 }
