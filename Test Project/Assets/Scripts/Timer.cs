@@ -59,5 +59,5 @@ public class Timer : MonoBehaviour
     public int GetTimerState()
     {
         return timerState;
-    }
+    } 
 }

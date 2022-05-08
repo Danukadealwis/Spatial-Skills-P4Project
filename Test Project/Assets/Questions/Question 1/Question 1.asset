@@ -19,3 +19,8 @@ MonoBehaviour:
   - C
   - D
   correctAnswerIndex: 3
+  sprites:
+  - {fileID: 21300000, guid: e1a86e620b9484f9bb4b73d983a8bd23, type: 3}
+  - {fileID: 21300000, guid: 50bb21001e0024de0a9299e5734ee7ba, type: 3}
+  - {fileID: 21300000, guid: e38d3332d24d74b638a35783895e13c2, type: 3}
+  - {fileID: 21300000, guid: b4bd808391fd94cb489dac38615c13fe, type: 3}
