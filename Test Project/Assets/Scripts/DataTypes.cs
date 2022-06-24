@@ -14,4 +14,11 @@ namespace DefaultNamespace
         QuizComplete = 3
         
     }
+    
+    enum TestType
+    {
+        Mct = 1,
+        Mrt = 2,
+        CombinedTest = 3
+    }
 }

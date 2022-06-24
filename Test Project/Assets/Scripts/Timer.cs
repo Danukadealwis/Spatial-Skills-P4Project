@@ -25,7 +25,7 @@ public class Timer : MonoBehaviour
     {
     
         timerValue -= timerChange;
-        Debug.Log(timerChange);
+        // Debug.Log(timerChange);
         if (timerValue <= 0)
         {
             SetTimerState((int)TimerState.TimeElapsed);

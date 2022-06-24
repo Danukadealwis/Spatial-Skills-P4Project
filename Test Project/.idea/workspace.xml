@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ade48a2-0ab1-4c13-944d-404a973fcd83" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Timer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Timer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +33,8 @@
       <option name="presentableId" value="Default" />
       <updated>1652050280097</updated>
       <workItem from="1652050283045" duration="9000" />
+      <workItem from="1652908229817" duration="36000" />
+      <workItem from="1653439625165" duration="3000" />
     </task>
     <servers />
   </component>
