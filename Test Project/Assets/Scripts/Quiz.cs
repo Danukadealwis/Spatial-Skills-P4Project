@@ -7,13 +7,16 @@ using DefaultNamespace;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
+using TimerState = DefaultNamespace.TimerState;
 
 
 public class Quiz : MonoBehaviour
 {
     private QuestionSO currentQuestion;
-    [SerializeField] private List<QuestionSO> questions = new List<QuestionSO>();
+    [SerializeField] private List<QuestionSO> questions;
     [SerializeField] private GameObject[] answerGroups;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button previousButton;
@@ -42,27 +45,18 @@ public class Quiz : MonoBehaviour
         DisplayQuestion();
         userAnswersList = Enumerable.Repeat(-1, questions.Count).ToArray();
         gameManager = FindObjectOfType<GameManager>();
-        nextButton.onClick.AddListener(delegate { NavigateQuestion(1);});
-        previousButton.onClick.AddListener(delegate { NavigateQuestion(-1);});
+        nextButton.onClick.AddListener(delegate { NavigateQuestion(currentQuestionIndex+1);});
+        previousButton.onClick.AddListener(delegate { NavigateQuestion(currentQuestionIndex-1);});
 
 
     }
     
     //Call this when the next button is selected
-    public void NavigateQuestion(int questionNumberChange)
+    public void NavigateQuestion(int questionIndex)
     {
-        //Needs to be changed to the state is showing the previously selected answer.
-        // SetButtonState((int)AnswerButtonState.Reset);
-        Debug.Log("current question index before change: " + currentQuestionIndex);
-        if (0 <= (currentQuestionIndex + questionNumberChange) && (currentQuestionIndex + questionNumberChange) < questions.Count)
-        {
-            
-            currentQuestionIndex += questionNumberChange;
-            Debug.Log("current question index: " + currentQuestionIndex);
-            GetQuestion();
-            DisplayQuestion();
-        }
-
+        currentQuestionIndex = questionIndex;
+        GetQuestion();
+        DisplayQuestion();
     }
 
     
@@ -85,32 +79,40 @@ public class Quiz : MonoBehaviour
     
     void DisplayQuestion()
     {
-        TextMeshProUGUI button;
+        
         Image answerImage;
         Button answerButton;
-        
+        TextMeshProUGUI questionNumberIndicator;
+        TextMeshProUGUI answerButtonText;
+        Button[] questionListButtons;
+       
         
         for (int i = 0; i < answerGroups.Length; i++)
         {
             answerButton = answerGroups[i].GetComponentInChildren<Button>();
-            TextMeshProUGUI buttonText = answerGroups[i].GetComponentInChildren<TextMeshProUGUI>();
+            answerButtonText = answerGroups[i].GetComponentInChildren<TextMeshProUGUI>();
 
             if (userAnswersList != null)
             {
                 if (userAnswersList[currentQuestionIndex] == i)
                 {
                     answerButton.image.color = Color.black;
-                    buttonText.color = Color.white;
+                    answerButtonText.color = Color.white;
                 }else
                 {
                     answerButton.image.color = Color.white;
-                    buttonText.color = Color.black;
+                    answerButtonText.color = Color.black;
                 }
             }
+            answerImage = answerGroups[i].GetComponentInChildren<Image>();
+            answerImage.sprite = currentQuestion.GetSprite(i);
+            answerButtonText.text = currentQuestion.GetAnswer(i);
             
         }
+
+        questionNumberIndicator = transform.Find("Question Number Indicator").GetComponent<TextMeshProUGUI>();
+        questionNumberIndicator.text = "Question: " + (currentQuestionIndex + 1) + "/" + questions.Count;
         
-        Debug.Log("Displaying Question for " + this.name);
         questionImage.sprite = currentQuestion.GetQuestionImage();
         if (currentQuestionIndex == questions.Count - 1)
         {
@@ -133,17 +135,27 @@ public class Quiz : MonoBehaviour
             if (resetNextButtonOnClick)
             {
                 nextButton.onClick.RemoveAllListeners();
-                nextButton.onClick.AddListener(delegate { NavigateQuestion(1); });
+                nextButton.onClick.AddListener(delegate { NavigateQuestion(currentQuestionIndex+1); });
                 resetNextButtonOnClick = false;
             }
-        }       
-        for (int i = 0; i < answerGroups.Length; i++)
+        }
+
+        questionListButtons = transform.Find("Question List").GetComponentsInChildren<Button>();
+        foreach (var button in questionListButtons)
         {
-            answerImage = answerGroups[i].GetComponentInChildren<Image>();
-            button = answerGroups[i].GetComponentInChildren<TextMeshProUGUI>();
-            answerImage.sprite = currentQuestion.GetSprite(i);
-            button.text = currentQuestion.GetAnswer(i);
-        } 
+            button.interactable = true;
+        }
+        questionListButtons = transform.Find("Question List")
+            .GetComponentsInChildren<Button>()
+                .Where(button => button.name.
+                    Contains((currentQuestionIndex + 1).
+                        ToString())).Select(button => button).ToArray();
+   
+        foreach (var button in questionListButtons)
+        {
+            button.interactable = false;
+        }
+
     }
 
     public int GetScore()

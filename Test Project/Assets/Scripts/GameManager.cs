@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private Quiz activeQuiz;
     private StartScreen startScreen;
     private int quizCount;
-    private ShowScoreScreen showScoreScreen;
+    private ScoreScreen _scoreScreen;
     private bool activeQuizComplete;
     private TextMeshProUGUI scoreText;
     
@@ -23,14 +23,14 @@ public class GameManager : MonoBehaviour
     {   
         quizList = FindObjectsOfType<Quiz>();
         startScreen = FindObjectOfType<StartScreen>();
-        showScoreScreen = FindObjectOfType<ShowScoreScreen>();
-        scoreText = showScoreScreen.GetComponentInChildren<TextMeshProUGUI>();
+        _scoreScreen = FindObjectOfType<ScoreScreen>();
+        scoreText = _scoreScreen.GetComponentInChildren<TextMeshProUGUI>();
         foreach(Quiz quiz in quizList)
         {
             quiz.gameObject.SetActive(false);
         }
 
-        showScoreScreen.gameObject.SetActive(false);
+        _scoreScreen.gameObject.SetActive(false);
         startScreen.gameObject.SetActive(true);
     }
 
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             if (quizCount == quizList.Length - 1)
             {
                 activeQuiz.gameObject.SetActive(false);
-                showScoreScreen.gameObject.SetActive(true);
+                _scoreScreen.gameObject.SetActive(true);
             }
             else
             {
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("showing score screen");
             activeQuizComplete = true;
-            showScoreScreen.gameObject.SetActive(true);
+            _scoreScreen.gameObject.SetActive(true);
             scoreText.SetText("Your Score: " + activeQuiz.GetScore() + "/" + activeQuiz.GetNumberOfQuestions());
             
             
