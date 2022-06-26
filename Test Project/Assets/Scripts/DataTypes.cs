@@ -4,7 +4,8 @@ namespace DefaultNamespace
     {
         Active = 1,
         Disabled = 2,
-        Reset = 3
+        Reset = 3,
+        ShowingConfirmationPanel = 4
     }
 
     enum TimerState

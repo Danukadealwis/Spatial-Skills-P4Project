@@ -27,6 +27,7 @@ public class Quiz : MonoBehaviour
     [SerializeField] private Image timerImage;
     private int currentQuestionIndex;
     private bool resetNextButtonOnClick;
+    private ConfirmationPanel confirmationPanel;
     
     /*
     private int correctAnswerIndex;
@@ -47,8 +48,8 @@ public class Quiz : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         nextButton.onClick.AddListener(delegate { NavigateQuestion(currentQuestionIndex+1);});
         previousButton.onClick.AddListener(delegate { NavigateQuestion(currentQuestionIndex-1);});
-
-
+        confirmationPanel = transform.Find("Confirmation Panel").GetComponent<ConfirmationPanel>();
+        confirmationPanel.gameObject.SetActive(false);
     }
     
     //Call this when the next button is selected
@@ -118,7 +119,8 @@ public class Quiz : MonoBehaviour
         {
             nextButton.GetComponentInChildren<TextMeshProUGUI>().text = "Finish Test!";
             nextButton.onClick.RemoveAllListeners();
-            nextButton.onClick.AddListener(delegate { gameManager.OnFinishTest((int) TestType.Mct);});
+            nextButton.onClick.AddListener(ShowConfirmationPanel);
+            // nextButton.onClick.AddListener(delegate { gameManager.OnFinishTest((int) TestType.Mct); });
             previousButton.interactable = true;
             resetNextButtonOnClick = true;
 
@@ -126,6 +128,12 @@ public class Quiz : MonoBehaviour
         {
             previousButton.interactable = false;
             nextButton.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
+            if (resetNextButtonOnClick)
+            {
+                nextButton.onClick.RemoveAllListeners();
+                nextButton.onClick.AddListener(delegate { NavigateQuestion(currentQuestionIndex+1); });
+                resetNextButtonOnClick = false;
+            }
         }
         else
         {
@@ -145,9 +153,8 @@ public class Quiz : MonoBehaviour
         {
             button.interactable = true;
         }
-        questionListButtons = transform.Find("Question List")
-            .GetComponentsInChildren<Button>()
-                .Where(button => button.name.
+        questionListButtons = questionListButtons
+            .Where(button => button.name.
                     Contains((currentQuestionIndex + 1).
                         ToString())).Select(button => button).ToArray();
    
@@ -172,6 +179,22 @@ public class Quiz : MonoBehaviour
         return score;
     }
 
+    public void ShowConfirmationPanel()
+    {
+        
+        TextMeshProUGUI questionsUnanswered;
+        
+        confirmationPanel.gameObject.SetActive(true);
+        questionsUnanswered = confirmationPanel.GetComponentsInChildren<TextMeshProUGUI>()
+            .Where(text => text.name.Contains("Questions Unanswered"))
+                .Select(text => text).ToArray()[0];
+        questionsUnanswered.gameObject.SetActive(userAnswersList.Contains(-1));
+    }
+
+    public void HideConfirmationPanel()
+    {
+        confirmationPanel.gameObject.SetActive(false);
+    }
     // Use scene manager instead
     public void ClearQuiz()
     {
@@ -203,27 +226,29 @@ public class Quiz : MonoBehaviour
 
     void SetButtonState(int state)
     {
-        Button button;
+        Button answerButton;
         TextMeshProUGUI buttonText;
+        
         foreach (GameObject answerGroup in answerGroups)
         {
-            button = answerGroup.GetComponentInChildren<Button>();
+            answerButton = answerGroup.GetComponentInChildren<Button>();
             buttonText = answerGroup.GetComponentInChildren<TextMeshProUGUI>();
             switch ((AnswerButtonState)state)
             {
                 case AnswerButtonState.Active:
-                    button.interactable = true;
+                    answerButton.interactable = true;
                     break;
                 case AnswerButtonState.Disabled:
-                    button.interactable = false;
+                    answerButton.interactable = false;
                     break;
                 case AnswerButtonState.Reset:
                     // Set button color to what it was
-                    button.image.color = Color.white;
+                    answerButton.image.color = Color.white;
                     buttonText.color = Color.black;
-                    button.interactable = true;
+                    answerButton.interactable = true;
                     break;
             }
+            
         }
         
     }
@@ -232,11 +257,11 @@ public class Quiz : MonoBehaviour
     void Update()
     {
         
-        // timerImage.fillAmount = timer.fillFraction;
-        // if (timer.GetTimerState() == (int) TimerState.TimeElapsed)
-        // {
-        //     SetButtonState((int) AnswerButtonState.Disabled);
-        // }
+        timerImage.fillAmount = timer.fillFraction;
+        if (timer.GetTimerState() == (int) TimerState.TimeElapsed)
+        {
+            SetButtonState((int) AnswerButtonState.Disabled);
+        }
         
         
     }
