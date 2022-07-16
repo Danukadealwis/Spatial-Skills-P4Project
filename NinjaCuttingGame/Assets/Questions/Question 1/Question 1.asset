@@ -16,3 +16,6 @@ MonoBehaviour:
   - {fileID: 7396040002768606770, guid: b46c1b7ae27cbff4b9e8bb5e67ccf99e, type: 3}
   - {fileID: 327831339415199098, guid: 28dfa7e186474304ca278ac01bf7c8d3, type: 3}
   - {fileID: 1330058559965689337, guid: f5166ccf38790d74ab039af01d83a4aa, type: 3}
+  questionObject: {fileID: 3243082293213951659, guid: 82f3e7ea86029514980dd1f966516303,
+    type: 3}
+  maxCuts: 5

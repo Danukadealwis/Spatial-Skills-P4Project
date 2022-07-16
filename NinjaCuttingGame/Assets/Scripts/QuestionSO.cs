@@ -10,10 +10,13 @@ public class QuestionSO : ScriptableObject
 {
     
     [SerializeField] public List<GameObject> componentObjects; 
+    [SerializeField] public GameObject questionObject;
+
+    [SerializeField] public double maxCuts;
     // Start is called before the first frame update
     void Start()
     {
-        componentObjects[0].GetComponentInChildren<MeshRenderer>().shadowCastingMode = ShadowCastingMode.Off;
+        
     }
 
     // Update is called once per frame
