@@ -61,6 +61,11 @@ public class QuestionViewer : MonoBehaviour
             playerCorrect[currentQuestionIndex] = 1;
             cutsMade[currentQuestionIndex] = 3;
         }
+
+        if (timerValue >= maxQuestionTime)
+        {
+            QuestionTimeElapsed();
+        }
     }
 
     void DisplayQuestion()
@@ -110,6 +115,11 @@ public class QuestionViewer : MonoBehaviour
         GetNextQuestion();
     }
 
+    void QuestionTimeElapsed()
+    {
+        // Pause Game
+        //
+    }
     void ResetTimer()
     {
         timerValue = 0;
@@ -121,7 +131,6 @@ public class QuestionViewer : MonoBehaviour
         timerChange = 0;
     }
 
-    
     
 }
 
