@@ -86,10 +86,11 @@ public class QuestionGenerator : MonoBehaviour
         questionObject.transform.Translate(0,
             cuttingDeskCollider.bounds.size.y + questionObjectCollider.bounds.size.y*0.5f, 0);
 
+        float pillarStartCoordZ = questionObjectCoords.z + currentQuestion.componentObjects.Count - 1;
         for (int i = 0; i < currentQuestion.componentObjects.Count; i++)
         {
             pillarObjectCoords = new Vector3(pillarObjectCoords.x, pillarObjectCoords.y,
-                pillarObjectCoords.z + (i - 1) * 2.0f); 
+                pillarStartCoordZ - i * 2.0f); 
             pillarList.Add(Instantiate(cmpObjPillar,pillarObjectCoords, Quaternion.identity));  
             Collider pillarCollider = pillarList[i].GetComponentInChildren<Collider>();
             
@@ -105,7 +106,14 @@ public class QuestionGenerator : MonoBehaviour
         }
         ResetTimer();
         
+        // So depending on the number of objects, their start position is different. 
+        // each pillar is 2 away from another pillar.
+        // so if there is 2 pillars, they are each 1 unit away from the middle. 1
+        // if there are 3 pillars, one is in the middle and the others are 2 away from it on either side. 2
+        // 3
+        // 4
         
+        // so the leftmost pillar is equal to 
 
         //Cube = currentQuestion.componentObjects[0];
     }
