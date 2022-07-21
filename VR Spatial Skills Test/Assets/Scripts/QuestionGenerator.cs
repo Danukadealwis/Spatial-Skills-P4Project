@@ -11,6 +11,7 @@ public class QuestionGenerator : MonoBehaviour
     [SerializeField] private List<QuestionSO> questions;
     private int currentQuestionIndex;
     private List<GameObject> componentsList;
+    private List<GameObject> pillarList;
     private GameObject questionObject;
     private QuestionSO currentQuestion;
     private int[] playerCorrect;
@@ -23,11 +24,13 @@ public class QuestionGenerator : MonoBehaviour
     private double[] timeTaken;
     private double[] cutsMade;
     [SerializeField] private GameObject cuttingDesk;
+    [SerializeField] private GameObject cmpObjPillar;
 
     // Start is called before the first frame update
     void Start()
     {
         componentsList = new List<GameObject>();
+        pillarList = new List<GameObject>();
         currentQuestion = questions[currentQuestionIndex];
         DisplayQuestion();
         timerChange = Time.deltaTime/10;
@@ -71,15 +74,34 @@ public class QuestionGenerator : MonoBehaviour
 
     void DisplayQuestion()
     {
-        Vector3 questionObjectCoords = cuttingDesk.GetComponentInChildren<Transform>().localPosition;
-        questionObjectCoords.y += 1;
-        questionObject = Instantiate(currentQuestion.questionObject, questionObjectCoords, Quaternion.identity);
+        Vector3 questionObjectCoords = cuttingDesk.GetComponentInChildren<Transform>().position;   
+        Vector3 pillarObjectCoords = new Vector3(questionObjectCoords.x + 2, questionObjectCoords.y,
+                                                                     questionObjectCoords.z);
         
+        Collider cuttingDeskCollider = cuttingDesk.GetComponentInChildren<Collider>();
+        // questionObjectCoords.y += cuttingDeskCollider.bounds.size.y + questionObjectCollider.bounds.size.y*0.5f;
+        
+        questionObject = Instantiate(currentQuestion.questionObject, questionObjectCoords, Quaternion.identity);
+        Collider questionObjectCollider = questionObject.GetComponentInChildren<Collider>();
+        questionObject.transform.Translate(0,
+            cuttingDeskCollider.bounds.size.y + questionObjectCollider.bounds.size.y*0.5f, 0);
+
         for (int i = 0; i < currentQuestion.componentObjects.Count; i++)
         {
+            pillarObjectCoords = new Vector3(pillarObjectCoords.x, pillarObjectCoords.y,
+                pillarObjectCoords.z + (i - 1) * 2.0f); 
+            pillarList.Add(Instantiate(cmpObjPillar,pillarObjectCoords, Quaternion.identity));  
+            Collider pillarCollider = pillarList[i].GetComponentInChildren<Collider>();
             
-            componentsList.Add(Instantiate(currentQuestion.componentObjects[i], new Vector3(i*2.0f, 2, 2), Quaternion.identity));
+            // Debug.Log("pillar bounds: " + pillarCollider.bounds.size);
+            // Debug.Log("component bounds: " + componentCollider.bounds.size);
+            componentsList.Add(Instantiate(currentQuestion.componentObjects[i], 
+                pillarObjectCoords,
+                Quaternion.identity));
+            Collider componentCollider = componentsList[i].GetComponentInChildren<Collider>();
+            componentsList[i].transform.Translate(0,pillarCollider.bounds.size.y + componentCollider.bounds.size.y * 0.5f,0);
             
+
         }
         ResetTimer();
         

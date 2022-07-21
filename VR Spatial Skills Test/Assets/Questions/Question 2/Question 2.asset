@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Question 2
   m_EditorClassIdentifier: 
   componentObjects:
-  - {fileID: 2120693745937601484, guid: b863f65bb25cef8489f491d4b9428d4f, type: 3}
-  - {fileID: 2038797959170065005, guid: 9069fea5ec86d0a45af96fb7d9032ad4, type: 3}
-  - {fileID: 4686799270751569165, guid: d61f018eef46d5d4b80e10774bc220e7, type: 3}
-  questionObject: {fileID: 4805047259883462476, guid: bba1541fb9c82bc4eb62ccf8ebafac1c,
+  - {fileID: 751734105083358425, guid: 92bf51ef8032f4d20acfc621514dda97, type: 3}
+  - {fileID: 751734105083358425, guid: f2802d8cf2fca4910bf816d3759ca63d, type: 3}
+  - {fileID: 751734105083358425, guid: c8e74f5877c6d455b94474da44f1a6f8, type: 3}
+  questionObject: {fileID: 2315485247128679839, guid: bba1541fb9c82bc4eb62ccf8ebafac1c,
     type: 3}
   maxCuts: 5

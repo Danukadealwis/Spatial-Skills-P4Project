@@ -1,0 +1,54 @@
+{
+    "name": "MouseControls",
+    "maps": [
+        {
+            "name": "MouseControls",
+            "id": "ddede44d-def8-47ad-98e8-7cbb7a70c549",
+            "actions": [
+                {
+                    "name": "HorizontalLook",
+                    "type": "Value",
+                    "id": "cbdb5cd2-fd65-413a-9669-1c390375d2e1",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "VerticalLook",
+                    "type": "Value",
+                    "id": "5a70214c-e1a7-4dcc-b35b-0fa67434bd76",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d0d5a33b-ce7c-404f-afdf-cb2c5d251bb8",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbfc5ea6-66a8-4be5-9487-265ec49b4bf6",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1748,6 +1748,14 @@ PrefabInstance:
       propertyPath: questions.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7856692211247396420, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: questions.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: c493a4b7d3c454a62ab5c3dece3dab5e, type: 2}
+    - target: {fileID: 7856692211247396420, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: questions.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 852f97cb9854b49d3b4a42cac763806b, type: 2}
     - target: {fileID: 7856692211247396423, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3586,6 +3594,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7292655278729786469, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292655278729786469, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7856692211247396423, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3673,6 +3689,30 @@ PrefabInstance:
     - target: {fileID: 7856692211247396427, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
       propertyPath: m_Name
       value: MCT Quiz
+      objectReference: {fileID: 0}
+    - target: {fileID: 8155999593506940449, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8155999593506940449, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8155999593506940449, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8155999593506940449, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192289453752217256, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192289453752217256, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8285775804953145695, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
       propertyPath: m_AnchorMax.x

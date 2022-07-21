@@ -28,6 +28,10 @@ public class MouseLook : MonoBehaviour
         
     }
 
+    // void HandleMoveForward(InputAction.CallbackContext obj)
+    // {
+    //     transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.)
+    // }  
     void HandleHorizontalLookChange(InputAction.CallbackContext obj)
     {
         pitch += obj.ReadValue<float>();
