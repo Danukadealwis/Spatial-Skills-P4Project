@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -16,13 +18,16 @@ public static class MeshSlicer
     /// <param name="textureOffset">Offset to apply to UV coordinates</param>
     /// <param name="topSlice">Out parameter returning fragment mesh data for slice above the plane</param>
     /// <param name="bottomSlice">Out parameter returning fragment mesh data for slice below the plane</param>
+    
+    private static bool correctSlice = true;
     public static void Slice(FragmentData meshData,
                              Vector3 sliceNormal,
                              Vector3 sliceOrigin,
                              Vector2 textureScale,
                              Vector2 textureOffset,
                              out FragmentData topSlice,
-                             out FragmentData bottomSlice)
+                             out FragmentData bottomSlice,
+                             List<float[]> correctVertices)
     {
         topSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
         bottomSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
@@ -48,8 +53,8 @@ public static class MeshSlicer
             slice.AddMappedVertex(vertex, i + offset);
         }
 
-        SplitTriangles(meshData, topSlice, bottomSlice, sliceNormal, sliceOrigin, side, SlicedMeshSubmesh.Default);
-        SplitTriangles(meshData, topSlice, bottomSlice, sliceNormal, sliceOrigin, side, SlicedMeshSubmesh.CutFace);
+        SplitTriangles(meshData, topSlice, bottomSlice, sliceNormal, sliceOrigin, side, SlicedMeshSubmesh.Default, correctVertices);
+        SplitTriangles(meshData, topSlice, bottomSlice, sliceNormal, sliceOrigin, side, SlicedMeshSubmesh.CutFace, correctVertices);
 
         // Fill in the cut plane for each mesh.
         // The slice normal points to the "above" mesh, so the face normal for the cut face
@@ -148,7 +153,8 @@ public static class MeshSlicer
                                        Vector3 sliceNormal,
                                        Vector3 sliceOrigin,
                                        bool[] side,
-                                       SlicedMeshSubmesh subMesh)
+                                       SlicedMeshSubmesh subMesh,
+                                       List<float[]> correctVertices)
     {
         int[] triangles = meshData.GetTriangles((int)subMesh);
 
@@ -177,31 +183,32 @@ public static class MeshSlicer
                 // In these cases, two vertices of the triangle are above the cut plane and one vertex is below
                 if (side[b] && side[c] && !side[a])
                 {
-                    SplitTriangle(b, c, a, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true);
+                    SplitTriangle(b, c, a, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctVertices);
                 }
                 else if (side[c] && side[a] && !side[b])
                 {
-                    SplitTriangle(c, a, b, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true);
+                    SplitTriangle(c, a, b, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctVertices);
                 }
                 else if (side[a] && side[b] && !side[c])
                 {
-                    SplitTriangle(a, b, c, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true);
+                    SplitTriangle(a, b, c, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctVertices);
                 }
                 // In these cases, two vertices of the triangle are below the cut plane and one vertex is above
                 else if (!side[b] && !side[c] && side[a])
                 {
-                    SplitTriangle(b, c, a, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false);
+                    SplitTriangle(b, c, a, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctVertices);
                 }
                 else if (!side[c] && !side[a] && side[b])
                 {
-                    SplitTriangle(c, a, b, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false);
+                    SplitTriangle(c, a, b, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctVertices);
                 }
                 else if (!side[a] && !side[b] && side[c])
                 {
-                    SplitTriangle(a, b, c, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false);
+                    SplitTriangle(a, b, c, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctVertices);
                 }
             }
         }
+        Debug.Log("correctSlice: " + correctSlice);
     }
 
     /// <summary>
@@ -226,7 +233,8 @@ public static class MeshSlicer
                                       FragmentData topSlice,
                                       FragmentData bottomSlice,
                                       SlicedMeshSubmesh subMesh,
-                                      bool v3BelowCutPlane)       
+                                      bool v3BelowCutPlane,
+                                      List<float[]> correctVertices)       
     {
         // - `v1`, `v2`, `v3` are the indexes of the triangle relative to the original mesh data
         // - `v1` and `v2` are on the the side of split plane that belongs to meshA
@@ -269,6 +277,23 @@ public static class MeshSlicer
         if (MathUtils.LinePlaneIntersection(v1.position, v3.position, sliceNormal, sliceOrigin, out v13, out s13) &&
             MathUtils.LinePlaneIntersection(v2.position, v3.position, sliceNormal, sliceOrigin, out v23, out s23))
         {
+            
+                
+            if (v13.x <= correctVertices[0].Max() && v13.x >= correctVertices[0].Min() &&
+                v13.y <= correctVertices[1].Max() && v13.y >= correctVertices[1].Min() &&
+                v13.z <= correctVertices[2].Max() && v13.z >= correctVertices[2].Min() &&
+                v23.x <= correctVertices[0].Max() && v23.x >= correctVertices[0].Min() &&
+                v23.y <= correctVertices[1].Max() && v23.y >= correctVertices[1].Min() &&
+                v23.z <= correctVertices[2].Max() && v23.z >= correctVertices[2].Min()
+            )
+            {
+                
+            }
+            else
+            {
+                correctSlice = false;
+            }
+            
             // Interpolate normals and UV coordinates
             var norm13 = (v1.normal + s13 * (v3.normal - v1.normal)).normalized;
             var norm23 = (v2.normal + s23 * (v3.normal - v2.normal)).normalized;

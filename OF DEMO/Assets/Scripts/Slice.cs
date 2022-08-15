@@ -27,7 +27,7 @@ public class Slice : MonoBehaviour
     public void ComputeSlice(Vector3 sliceNormalWorld, Vector3 sliceOriginWorld)
     {
         var mesh = this.GetComponent<MeshFilter>().sharedMesh;
-
+        SliceConfirmation sliceConfirmation = this.GetComponent<SliceConfirmation>();
         if (mesh != null)
         {
             // If the fragment root object has not yet been created, create it now
@@ -48,11 +48,12 @@ public class Slice : MonoBehaviour
             var sliceOriginLocal = this.transform.InverseTransformPoint(sliceOriginWorld);
 
             Fragmenter.Slice(this.gameObject,
-                             sliceNormalLocal,
-                             sliceOriginLocal,
-                             this.sliceOptions,
-                             sliceTemplate,
-                             this.fragmentRoot.transform);
+                sliceNormalLocal,
+                sliceOriginLocal,
+                this.sliceOptions,
+                sliceTemplate,
+                this.fragmentRoot.transform,
+                sliceConfirmation.GetCorrectVertices());
                     
             // Done with template, destroy it
             GameObject.Destroy(sliceTemplate);

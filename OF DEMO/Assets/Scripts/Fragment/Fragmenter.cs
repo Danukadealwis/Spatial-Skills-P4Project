@@ -56,7 +56,8 @@ public static class Fragmenter
                              options.textureScale,
                              options.textureOffset,
                              out topSlice,
-                             out bottomSlice);
+                             out bottomSlice,
+                             null);
 
             fragments.Enqueue(topSlice);
             fragments.Enqueue(bottomSlice);
@@ -119,7 +120,8 @@ public static class Fragmenter
                              options.textureScale,
                              options.textureOffset,
                              out topSlice,
-                             out bottomSlice);
+                             out bottomSlice,
+                             null);
 
             // Perform next slice on the next frame
             yield return null;
@@ -160,7 +162,8 @@ public static class Fragmenter
                              Vector3 sliceOrigin,
                              SliceOptions options,
                              GameObject fragmentTemplate,
-                             Transform parent)
+                             Transform parent,
+                             List <float[]> correctVertices)
     {
         // Define our source mesh data for the fracturing
         FragmentData sourceMesh = new FragmentData(sourceObject.GetComponent<MeshFilter>().sharedMesh);
@@ -174,7 +177,8 @@ public static class Fragmenter
                          options.textureScale,
                          options.textureOffset,
                          out topSlice,
-                         out bottomSlice);
+                         out bottomSlice,
+                         correctVertices);
 
         int i = 0;
         CreateFragment(topSlice,
