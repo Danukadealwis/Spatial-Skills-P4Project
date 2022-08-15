@@ -9,28 +9,57 @@ using MathNet.Numerics.LinearAlgebra.Double;
 /// </summary>
 public static class MeshSlicer
 {
-
-    private static bool CheckCorrectSlice(Vector3 intersection1, Vector3 intersection2, List<Vector3> correctVertices)
+    
+    
+    private static bool CheckCorrectIntersection(Vector3 intersection, List<Vector3> correctVertices)
     {
-        var coeffMatrix = Matrix<float>.Build;
-        float[,] x = new float[,]{};
+        
+        float[,] intersectionArray = new float[,] { };
+        
+        intersectionArray = new[,]
+        {
+            {intersection.x},
+            {intersection.y},
+            {intersection.z},
+            {1}
+        };
+        
+        
+        Matrix<float> intersectionMatrix;
+        intersectionMatrix = Matrix<float>.Build.DenseOfArray(intersectionArray);
+        
+        float[,] coeffArray = new float[,] { };
+
+        
         for (int cv = 0; cv < correctVertices.Count / 3; cv++)
 
         {
-            x = new [,] 
+            coeffArray = new[,]
             {
                 {correctVertices[cv * 3].x, correctVertices[1 + cv * 3].x, correctVertices[2 + cv * 3].x},
                 {correctVertices[cv * 3].y, correctVertices[1 + cv * 3].y, correctVertices[2 + cv * 3].y},
                 {correctVertices[cv * 3].z, correctVertices[1 + cv * 3].z, correctVertices[2 + cv * 3].z},
+                {1, 1, 1}
             };
         }
 
-        coeffMatrix.DenseOfArray(x);
+        Matrix<float> coeffMatrix = Matrix<float>.Build.DenseOfArray(coeffArray);
+        
+        Matrix<float> coeffMatrixTransposed = coeffMatrix.Transpose();
+        Matrix<float> resultantMatrix = coeffMatrixTransposed.Multiply(coeffMatrix);
+        resultantMatrix = resultantMatrix.Inverse();
+        resultantMatrix = resultantMatrix.Multiply(coeffMatrixTransposed).Multiply(intersectionMatrix);
+        Debug.Log("resultant matrix = " + resultantMatrix);
+        if (resultantMatrix[0, 0] >= 0 && resultantMatrix[0, 0] < 1 &&
+            resultantMatrix[1, 0] >= 0 && resultantMatrix[1, 0] < 1 &&
+            resultantMatrix[2, 0] >= 0 && resultantMatrix[2, 0] < 1)
+        {
+            return true;
+        }return false;
+        
 
-        
-        
-        return true;
-    }
+
+}
     
     private static bool correctSlice = true;
     /// <summary>
@@ -53,7 +82,7 @@ public static class MeshSlicer
                              Vector2 textureOffset,
                              out FragmentData topSlice,
                              out FragmentData bottomSlice,
-                             List<float[]> correctVertices)
+                             List<Vector3> correctVertices)
     {
         topSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
         bottomSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
@@ -180,7 +209,7 @@ public static class MeshSlicer
                                        Vector3 sliceOrigin,
                                        bool[] side,
                                        SlicedMeshSubmesh subMesh,
-                                       List<float[]> correctVertices)
+                                       List<Vector3> correctVertices)
     {
         int[] triangles = meshData.GetTriangles((int)subMesh);
 
@@ -260,7 +289,7 @@ public static class MeshSlicer
                                       FragmentData bottomSlice,
                                       SlicedMeshSubmesh subMesh,
                                       bool v3BelowCutPlane,
-                                      List<float[]> correctVertices)       
+                                      List<Vector3> correctVertices)       
     {
         // - `v1`, `v2`, `v3` are the indexes of the triangle relative to the original mesh data
         // - `v1` and `v2` are on the the side of split plane that belongs to meshA
@@ -303,22 +332,9 @@ public static class MeshSlicer
         if (MathUtils.LinePlaneIntersection(v1.position, v3.position, sliceNormal, sliceOrigin, out v13, out s13) &&
             MathUtils.LinePlaneIntersection(v2.position, v3.position, sliceNormal, sliceOrigin, out v23, out s23))
         {
-            
-                
-            if (v13.x <= correctVertices[0].Max() && v13.x >= correctVertices[0].Min() &&
-                v13.y <= correctVertices[1].Max() && v13.y >= correctVertices[1].Min() &&
-                v13.z <= correctVertices[2].Max() && v13.z >= correctVertices[2].Min() &&
-                v23.x <= correctVertices[0].Max() && v23.x >= correctVertices[0].Min() &&
-                v23.y <= correctVertices[1].Max() && v23.y >= correctVertices[1].Min() &&
-                v23.z <= correctVertices[2].Max() && v23.z >= correctVertices[2].Min()
-            )
-            {
-                
-            }
-            else
-            {
-                correctSlice = false;
-            }
+
+
+            bool result = CheckCorrectIntersection(new Vector3(3.0f, 2.0f, 3.0f),correctVertices);
             
             // Interpolate normals and UV coordinates
             var norm13 = (v1.normal + s13 * (v3.normal - v1.normal)).normalized;

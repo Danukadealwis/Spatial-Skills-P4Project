@@ -29,31 +29,36 @@ public class SliceConfirmation : MonoBehaviour
     //     
     // }
     
-    public List<float[]> GetCorrectVertices()
+    // public List<float[]> GetCorrectVertices()
+    // {
+    //     List<float[]> arrayVertices = new List<float[]>();
+    //     
+    //     arrayVertices.Add(new float[100]);
+    //     arrayVertices.Add(new float[100]);
+    //     arrayVertices.Add(new float[100]);
+    //
+    //
+    //     for (int vertexNumber = 0; vertexNumber < correctVertices.Count; vertexNumber++)
+    //     {
+    //         Debug.Log("correctVertices[vertexNumber]: " + correctVertices[vertexNumber]);
+    //         arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].x;
+    //         arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].y;
+    //         arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].z;
+    //         
+    //         // arrayVertices[0](new float[]{correctVertices[vertexNumber].x}).ToArray();
+    //         // arrayVertices[1].Concat(new float[]{correctVertices[vertexNumber].y}).ToArray();
+    //         // arrayVertices[2].Concat(new float[]{correctVertices[vertexNumber].z}).ToArray();
+    //     }
+    //     
+    //     Debug.Log("arrayVertices[0].Max(): " + arrayVertices[0].Max());
+    //     return arrayVertices;
+    // }
+
+    public List<Vector3> GetCorrectVertices()
     {
-        List<float[]> arrayVertices = new List<float[]>();
-        
-        arrayVertices.Add(new float[100]);
-        arrayVertices.Add(new float[100]);
-        arrayVertices.Add(new float[100]);
-
-
-        for (int vertexNumber = 0; vertexNumber < correctVertices.Count; vertexNumber++)
-        {
-            Debug.Log("correctVertices[vertexNumber]: " + correctVertices[vertexNumber]);
-            arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].x;
-            arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].y;
-            arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].z;
-            
-            // arrayVertices[0](new float[]{correctVertices[vertexNumber].x}).ToArray();
-            // arrayVertices[1].Concat(new float[]{correctVertices[vertexNumber].y}).ToArray();
-            // arrayVertices[2].Concat(new float[]{correctVertices[vertexNumber].z}).ToArray();
-        }
-        
-        Debug.Log("arrayVertices[0].Max(): " + arrayVertices[0].Max());
-        return arrayVertices;
+        return correctVertices;
     }
-    
+
     // Need a function where two intersection points are provided in the form of v23 and v13. 
     // The function uses 
 }

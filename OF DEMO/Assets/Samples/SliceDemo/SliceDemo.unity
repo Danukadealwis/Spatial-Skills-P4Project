@@ -1292,7 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sliceOptions:
-    enableReslicing: 0
+    enableReslicing: 1
     maxResliceCount: 15
     detectFloatingFragments: 0
     insideMaterial: {fileID: -876546973899608171, guid: 88ebe7b80ac0641288c0b44d04ef9e0a, type: 3}
@@ -1332,9 +1332,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctVertices:
-  - {x: 0.23, y: 0.3, z: 0.31}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 1, z: 1}
+  - {x: 5, y: 1, z: 1}
+  - {x: 2, y: 3, z: 5}

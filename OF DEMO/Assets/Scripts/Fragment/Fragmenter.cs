@@ -163,7 +163,7 @@ public static class Fragmenter
                              SliceOptions options,
                              GameObject fragmentTemplate,
                              Transform parent,
-                             List <float[]> correctVertices)
+                             List <Vector3> correctVertices)
     {
         // Define our source mesh data for the fracturing
         FragmentData sourceMesh = new FragmentData(sourceObject.GetComponent<MeshFilter>().sharedMesh);
