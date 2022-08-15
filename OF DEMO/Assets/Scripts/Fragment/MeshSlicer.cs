@@ -1,12 +1,38 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
-
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Double;
 /// <summary>
 /// Class which handles slicing a mesh into two pieces given the origin and normal of the slice plane.
 /// </summary>
 public static class MeshSlicer
 {
+
+    private static bool CheckCorrectSlice(Vector3 intersection1, Vector3 intersection2, List<Vector3> correctVertices)
+    {
+        var coeffMatrix = Matrix<float>.Build;
+        float[,] x = new float[,]{};
+        for (int cv = 0; cv < correctVertices.Count / 3; cv++)
+
+        {
+            x = new [,] 
+            {
+                {correctVertices[cv * 3].x, correctVertices[1 + cv * 3].x, correctVertices[2 + cv * 3].x},
+                {correctVertices[cv * 3].y, correctVertices[1 + cv * 3].y, correctVertices[2 + cv * 3].y},
+                {correctVertices[cv * 3].z, correctVertices[1 + cv * 3].z, correctVertices[2 + cv * 3].z},
+            };
+        }
+
+        coeffMatrix.DenseOfArray(x);
+
+        
+        
+        return true;
+    }
+    
+    private static bool correctSlice = true;
     /// <summary>
     /// Slices the mesh by the plane specified by `sliceNormal` and `sliceOrigin`
     /// The sliced mesh data is return via out parameters.
@@ -19,7 +45,7 @@ public static class MeshSlicer
     /// <param name="topSlice">Out parameter returning fragment mesh data for slice above the plane</param>
     /// <param name="bottomSlice">Out parameter returning fragment mesh data for slice below the plane</param>
     
-    private static bool correctSlice = true;
+    
     public static void Slice(FragmentData meshData,
                              Vector3 sliceNormal,
                              Vector3 sliceOrigin,

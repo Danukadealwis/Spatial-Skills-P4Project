@@ -1,17 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+
 public class SliceConfirmation : MonoBehaviour
 {
 
     [SerializeField] 
-    private List<Vector3> correctVertices;  
+    private List<Vector3> correctVertices;
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -20,6 +24,11 @@ public class SliceConfirmation : MonoBehaviour
         
     }
 
+    // public bool testCorrectVertices()
+    // {
+    //     
+    // }
+    
     public List<float[]> GetCorrectVertices()
     {
         List<float[]> arrayVertices = new List<float[]>();
@@ -44,4 +53,7 @@ public class SliceConfirmation : MonoBehaviour
         Debug.Log("arrayVertices[0].Max(): " + arrayVertices[0].Max());
         return arrayVertices;
     }
+    
+    // Need a function where two intersection points are provided in the form of v23 and v13. 
+    // The function uses 
 }
