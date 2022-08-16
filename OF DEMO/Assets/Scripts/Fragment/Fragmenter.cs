@@ -10,6 +10,8 @@ using UnityEditor;
 
 public static class Fragmenter
 {
+
+
     /// <summary>
     /// Generates the mesh fragments based on the provided options. The generated fragment objects are
     /// stored as children of `fragmentParent`
@@ -21,6 +23,7 @@ public static class Fragmenter
     /// <param name="saveToDisk">If true, the generated fragment meshes will be saved to disk so they can be re-used in prefabs.</param>
     /// <param name="saveFolderPath">The save location for the fragments.</param>
     /// <returns></returns>
+    
     public static void Fracture(GameObject sourceObject,
                                 FractureOptions options,
                                 GameObject fragmentTemplate,
@@ -157,7 +160,7 @@ public static class Fragmenter
     /// <param name="fragmentTemplate">The template GameObject that each slice will clone</param>
     /// <param name="parent">The parent transform for the fragment objects</param>
     /// <returns></returns>
-    public static void Slice(GameObject sourceObject,
+    public static bool Slice(GameObject sourceObject,
                              Vector3 sliceNormal,
                              Vector3 sliceOrigin,
                              SliceOptions options,
@@ -171,7 +174,7 @@ public static class Fragmenter
         FragmentData topSlice, bottomSlice;
 
         // Slice and dice!
-        MeshSlicer.Slice(sourceMesh,
+        bool correctSlice = MeshSlicer.Slice(sourceMesh,
                          sliceNormal,
                          sliceOrigin,
                          options.textureScale,
@@ -198,6 +201,7 @@ public static class Fragmenter
                        "",
                        options.detectFloatingFragments,
                        ref i);
+        return correctSlice;
     }
 
     /// <summary>

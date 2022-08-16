@@ -19,6 +19,8 @@ public class Slice : MonoBehaviour
     /// </summary>
     private GameObject fragmentRoot;
 
+    private bool correctSlice;
+
     /// <summary>
     /// Slices the attached mesh along the cut plane
     /// </summary>
@@ -47,7 +49,7 @@ public class Slice : MonoBehaviour
             var sliceNormalLocal = this.transform.InverseTransformDirection(sliceNormalWorld);
             var sliceOriginLocal = this.transform.InverseTransformPoint(sliceOriginWorld);
 
-            Fragmenter.Slice(this.gameObject,
+            correctSlice = Fragmenter.Slice(this.gameObject,
                 sliceNormalLocal,
                 sliceOriginLocal,
                 this.sliceOptions,

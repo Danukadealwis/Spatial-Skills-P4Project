@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -10,10 +11,10 @@ using MathNet.Numerics.LinearAlgebra.Double;
 public static class MeshSlicer
 {
     
-    
+    private static bool correctSlice = true;
     private static bool CheckCorrectIntersection(Vector3 intersection, List<Vector3> correctVertices)
     {
-        
+
         float[,] intersectionArray = new float[,] { };
         
         intersectionArray = new[,]
@@ -34,6 +35,21 @@ public static class MeshSlicer
         for (int cv = 0; cv < correctVertices.Count / 3; cv++)
 
         {
+            Vector3 normalOfTriangle = Vector3.Cross(
+                                 correctVertices[1 + cv * 3] - correctVertices[cv * 3],
+                                 correctVertices[2 + cv * 3] -correctVertices[cv * 3]) /
+                             Vector3.Cross(
+                                 correctVertices[1 + cv * 3] - correctVertices[cv * 3],
+                                 correctVertices[2 + cv * 3] -correctVertices[cv * 3]).magnitude;
+
+            float distanceToTriangle =
+                Vector3.Dot(normalOfTriangle, 
+                            correctVertices[1 + cv * 3] - correctVertices[cv * 3]);
+            if (distanceToTriangle >= 0.05 || distanceToTriangle <= -0.05)
+            {
+                continue;
+            }
+            
             coeffArray = new[,]
             {
                 {correctVertices[cv * 3].x, correctVertices[1 + cv * 3].x, correctVertices[2 + cv * 3].x},
@@ -41,27 +57,25 @@ public static class MeshSlicer
                 {correctVertices[cv * 3].z, correctVertices[1 + cv * 3].z, correctVertices[2 + cv * 3].z},
                 {1, 1, 1}
             };
+            Matrix<float> coeffMatrix = Matrix<float>.Build.DenseOfArray(coeffArray);
+        
+            Matrix<float> coeffMatrixTransposed = coeffMatrix.Transpose();
+            Matrix<float> barycentricCoordinates = coeffMatrixTransposed.Multiply(coeffMatrix);
+            barycentricCoordinates = barycentricCoordinates.Inverse();
+            barycentricCoordinates = barycentricCoordinates.Multiply(coeffMatrixTransposed).Multiply(intersectionMatrix);
+            
+            if (barycentricCoordinates[0, 0] >= -0.05 && barycentricCoordinates[0, 0] < 1.05 &&
+                barycentricCoordinates[1, 0] >= -0.05 && barycentricCoordinates[1, 0] < 1.05 &&
+                barycentricCoordinates[2, 0] >= -0.05 && barycentricCoordinates[2, 0] < 1.05)
+            {
+                Debug.Log("barycentricCoordinates = " + barycentricCoordinates);
+                return true;
+            }
         }
-
-        Matrix<float> coeffMatrix = Matrix<float>.Build.DenseOfArray(coeffArray);
-        
-        Matrix<float> coeffMatrixTransposed = coeffMatrix.Transpose();
-        Matrix<float> resultantMatrix = coeffMatrixTransposed.Multiply(coeffMatrix);
-        resultantMatrix = resultantMatrix.Inverse();
-        resultantMatrix = resultantMatrix.Multiply(coeffMatrixTransposed).Multiply(intersectionMatrix);
-        Debug.Log("resultant matrix = " + resultantMatrix);
-        if (resultantMatrix[0, 0] >= 0 && resultantMatrix[0, 0] < 1 &&
-            resultantMatrix[1, 0] >= 0 && resultantMatrix[1, 0] < 1 &&
-            resultantMatrix[2, 0] >= 0 && resultantMatrix[2, 0] < 1)
-        {
-            return true;
-        }return false;
-        
-
-
-}
+        return false;
+    }
     
-    private static bool correctSlice = true;
+   
     /// <summary>
     /// Slices the mesh by the plane specified by `sliceNormal` and `sliceOrigin`
     /// The sliced mesh data is return via out parameters.
@@ -75,7 +89,7 @@ public static class MeshSlicer
     /// <param name="bottomSlice">Out parameter returning fragment mesh data for slice below the plane</param>
     
     
-    public static void Slice(FragmentData meshData,
+    public static bool Slice(FragmentData meshData,
                              Vector3 sliceNormal,
                              Vector3 sliceOrigin,
                              Vector2 textureScale,
@@ -116,6 +130,8 @@ public static class MeshSlicer
         // on the above mesh is opposite of the slice normal. Conversely, normal for the
         // cut face on the "below" mesh is in the direction of the slice normal
         FillCutFaces(topSlice, bottomSlice, -sliceNormal, textureScale, textureOffset);
+        Debug.Log("Correct Slice: " + correctSlice);
+        return correctSlice;
     }
 
     /// <summary>
@@ -263,7 +279,6 @@ public static class MeshSlicer
                 }
             }
         }
-        Debug.Log("correctSlice: " + correctSlice);
     }
 
     /// <summary>
@@ -334,8 +349,11 @@ public static class MeshSlicer
         {
 
 
-            bool result = CheckCorrectIntersection(new Vector3(3.0f, 2.0f, 3.0f),correctVertices);
-            
+            if (CheckCorrectIntersection(v13, correctVertices) &&
+                CheckCorrectIntersection(v23, correctVertices))
+            {} else { correctSlice = false;}
+            Debug.Log("correctSlice tri: " + correctSlice);
+            Debug.Log("v13: " + v13 +  "v23: " + v23);
             // Interpolate normals and UV coordinates
             var norm13 = (v1.normal + s13 * (v3.normal - v1.normal)).normalized;
             var norm23 = (v2.normal + s23 * (v3.normal - v2.normal)).normalized;
