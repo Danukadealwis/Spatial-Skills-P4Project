@@ -12,7 +12,7 @@ public static class MeshSlicer
 {
     
     private static bool correctSlice = true;
-    private static bool CheckCorrectIntersection(Vector3 intersection, List<Vector3> correctVertices)
+    private static bool CheckCorrectIntersection(Vector3 intersection, Vector3[] correctVertices)
     {
 
         float[,] intersectionArray = new float[,] { };
@@ -32,7 +32,7 @@ public static class MeshSlicer
         float[,] coeffArray = new float[,] { };
 
         
-        for (int cv = 0; cv < correctVertices.Count / 3; cv++)
+        for (int cv = 0; cv < correctVertices.Length / 3; cv++)
 
         {
             Vector3 normalOfTriangle = Vector3.Cross(
@@ -96,7 +96,7 @@ public static class MeshSlicer
                              Vector2 textureOffset,
                              out FragmentData topSlice,
                              out FragmentData bottomSlice,
-                             List<Vector3> correctVertices)
+                             Vector3[] correctVertices)
     {
         topSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
         bottomSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
@@ -225,7 +225,7 @@ public static class MeshSlicer
                                        Vector3 sliceOrigin,
                                        bool[] side,
                                        SlicedMeshSubmesh subMesh,
-                                       List<Vector3> correctVertices)
+                                       Vector3[] correctVertices)
     {
         int[] triangles = meshData.GetTriangles((int)subMesh);
 
@@ -304,7 +304,7 @@ public static class MeshSlicer
                                       FragmentData bottomSlice,
                                       SlicedMeshSubmesh subMesh,
                                       bool v3BelowCutPlane,
-                                      List<Vector3> correctVertices)       
+                                      Vector3[] correctVertices)       
     {
         // - `v1`, `v2`, `v3` are the indexes of the triangle relative to the original mesh data
         // - `v1` and `v2` are on the the side of split plane that belongs to meshA

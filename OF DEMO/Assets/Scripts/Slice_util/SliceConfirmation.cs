@@ -10,9 +10,11 @@ public class SliceConfirmation : MonoBehaviour
 {
 
     [SerializeField] 
-    private List<Vector3> correctVertices;
+    private Vector3[] correctVertices;
 
-    
+    [SerializeField] private List<GameObject> correctObjects;
+    private List<Mesh> meshes;
+    List<Vector3[]> meshVertices;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,17 @@ public class SliceConfirmation : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public List<Vector3[]> GetCorrectMeshes()
+    {
+        for (int index = 0; index < correctObjects.Count; index++)
+        {
+            meshes.Add(correctObjects[index].GetComponent<MeshFilter>().mesh);
+            meshVertices[index] = meshes[index].vertices;
+        }
+
+        return meshVertices;
     }
 
     // public bool testCorrectVertices()
@@ -54,7 +67,7 @@ public class SliceConfirmation : MonoBehaviour
     //     return arrayVertices;
     // }
 
-    public List<Vector3> GetCorrectVertices()
+    public Vector3[] GetCorrectVertices()
     {
         return correctVertices;
     }

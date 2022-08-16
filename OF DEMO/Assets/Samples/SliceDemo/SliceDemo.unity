@@ -1353,6 +1353,8 @@ MonoBehaviour:
   - {x: 1, y: 0.23765, z: 1}
   - {x: -1, y: 1, z: 1}
   - {x: -1, y: 0.23765, z: 1}
+  correctObjects:
+  - {fileID: 0}
 --- !u!65 &6128388967038914804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1512,3 +1514,4 @@ MonoBehaviour:
   - {x: 1, y: 1, z: 1}
   - {x: 5, y: 1, z: 1}
   - {x: 2, y: 3, z: 5}
+  correctObjects: []
