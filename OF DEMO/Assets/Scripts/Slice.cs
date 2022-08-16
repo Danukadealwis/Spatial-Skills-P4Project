@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,7 +20,7 @@ public class Slice : MonoBehaviour
     /// </summary>
     private GameObject fragmentRoot;
 
-    private bool correctSlice;
+    private List<bool> correctSlice;
 
     /// <summary>
     /// Slices the attached mesh along the cut plane
@@ -55,7 +56,7 @@ public class Slice : MonoBehaviour
                 this.sliceOptions,
                 sliceTemplate,
                 this.fragmentRoot.transform,
-                sliceConfirmation.GetCorrectVertices());
+                sliceConfirmation.GetCorrectMeshes());
                     
             // Done with template, destroy it
             GameObject.Destroy(sliceTemplate);

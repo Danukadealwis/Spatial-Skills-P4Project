@@ -11,7 +11,7 @@ using MathNet.Numerics.LinearAlgebra.Double;
 public static class MeshSlicer
 {
     
-    private static bool correctSlice = true;
+    private static List<bool> correctSlice = new List<bool>();
     private static bool CheckCorrectIntersection(Vector3 intersection, Vector3[] correctVertices)
     {
 
@@ -35,6 +35,9 @@ public static class MeshSlicer
         for (int cv = 0; cv < correctVertices.Length / 3; cv++)
 
         {
+            Debug.Log("0: " +  correctVertices[cv * 3]);
+            Debug.Log("1: " +  correctVertices[1+cv * 3]);
+            Debug.Log("2: " +  correctVertices[2+cv * 3]);
             Vector3 normalOfTriangle = Vector3.Cross(
                                  correctVertices[1 + cv * 3] - correctVertices[cv * 3],
                                  correctVertices[2 + cv * 3] -correctVertices[cv * 3]) /
@@ -89,18 +92,24 @@ public static class MeshSlicer
     /// <param name="bottomSlice">Out parameter returning fragment mesh data for slice below the plane</param>
     
     
-    public static bool Slice(FragmentData meshData,
+    public static List<bool> Slice(FragmentData meshData,
                              Vector3 sliceNormal,
                              Vector3 sliceOrigin,
                              Vector2 textureScale,
                              Vector2 textureOffset,
                              out FragmentData topSlice,
                              out FragmentData bottomSlice,
-                             Vector3[] correctVertices)
+                             List<Vector3[]> correctMeshes)
     {
+        
+        for (int meshIndex = 0; meshIndex < correctMeshes.Count; meshIndex++)
+        {
+            correctSlice.Add(true);
+        }
+        Debug.Log("correctMeshes.Count: " + correctMeshes.Count + "correctSlice.Count" + correctSlice.Count);
         topSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
         bottomSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
-
+    
         // Keep track of what side of the cutting plane each vertex is on
         bool[] side = new bool[meshData.vertexCount];
 
@@ -122,15 +131,16 @@ public static class MeshSlicer
             slice.AddMappedVertex(vertex, i + offset);
         }
 
-        SplitTriangles(meshData, topSlice, bottomSlice, sliceNormal, sliceOrigin, side, SlicedMeshSubmesh.Default, correctVertices);
-        SplitTriangles(meshData, topSlice, bottomSlice, sliceNormal, sliceOrigin, side, SlicedMeshSubmesh.CutFace, correctVertices);
+        SplitTriangles(meshData, topSlice, bottomSlice, sliceNormal, sliceOrigin, side, SlicedMeshSubmesh.Default, correctMeshes);
+        SplitTriangles(meshData, topSlice, bottomSlice, sliceNormal, sliceOrigin, side, SlicedMeshSubmesh.CutFace, correctMeshes);
 
         // Fill in the cut plane for each mesh.
         // The slice normal points to the "above" mesh, so the face normal for the cut face
         // on the above mesh is opposite of the slice normal. Conversely, normal for the
         // cut face on the "below" mesh is in the direction of the slice normal
         FillCutFaces(topSlice, bottomSlice, -sliceNormal, textureScale, textureOffset);
-        Debug.Log("Correct Slice: " + correctSlice);
+        foreach(var slice in correctSlice)
+            Debug.Log("Correct Slice: " + slice);
         return correctSlice;
     }
 
@@ -225,7 +235,7 @@ public static class MeshSlicer
                                        Vector3 sliceOrigin,
                                        bool[] side,
                                        SlicedMeshSubmesh subMesh,
-                                       Vector3[] correctVertices)
+                                       List<Vector3[]> correctMeshes)
     {
         int[] triangles = meshData.GetTriangles((int)subMesh);
 
@@ -254,28 +264,28 @@ public static class MeshSlicer
                 // In these cases, two vertices of the triangle are above the cut plane and one vertex is below
                 if (side[b] && side[c] && !side[a])
                 {
-                    SplitTriangle(b, c, a, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctVertices);
+                    SplitTriangle(b, c, a, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctMeshes);
                 }
                 else if (side[c] && side[a] && !side[b])
                 {
-                    SplitTriangle(c, a, b, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctVertices);
+                    SplitTriangle(c, a, b, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctMeshes);
                 }
                 else if (side[a] && side[b] && !side[c])
                 {
-                    SplitTriangle(a, b, c, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctVertices);
+                    SplitTriangle(a, b, c, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, true,correctMeshes);
                 }
                 // In these cases, two vertices of the triangle are below the cut plane and one vertex is above
                 else if (!side[b] && !side[c] && side[a])
                 {
-                    SplitTriangle(b, c, a, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctVertices);
+                    SplitTriangle(b, c, a, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctMeshes);
                 }
                 else if (!side[c] && !side[a] && side[b])
                 {
-                    SplitTriangle(c, a, b, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctVertices);
+                    SplitTriangle(c, a, b, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctMeshes);
                 }
                 else if (!side[a] && !side[b] && side[c])
                 {
-                    SplitTriangle(a, b, c, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctVertices);
+                    SplitTriangle(a, b, c, sliceNormal, sliceOrigin, meshData, topSlice, bottomSlice, subMesh, false,correctMeshes);
                 }
             }
         }
@@ -304,7 +314,7 @@ public static class MeshSlicer
                                       FragmentData bottomSlice,
                                       SlicedMeshSubmesh subMesh,
                                       bool v3BelowCutPlane,
-                                      Vector3[] correctVertices)       
+                                      List<Vector3[]> correctMeshes)       
     {
         // - `v1`, `v2`, `v3` are the indexes of the triangle relative to the original mesh data
         // - `v1` and `v2` are on the the side of split plane that belongs to meshA
@@ -348,12 +358,21 @@ public static class MeshSlicer
             MathUtils.LinePlaneIntersection(v2.position, v3.position, sliceNormal, sliceOrigin, out v23, out s23))
         {
 
-
-            if (CheckCorrectIntersection(v13, correctVertices) &&
-                CheckCorrectIntersection(v23, correctVertices))
-            {} else { correctSlice = false;}
-            Debug.Log("correctSlice tri: " + correctSlice);
-            Debug.Log("v13: " + v13 +  "v23: " + v23);
+            Vector3[] correctVertices;
+            
+            for (int meshIndex = 0; meshIndex < correctMeshes.Count; meshIndex++)
+            {
+                correctVertices = correctMeshes[meshIndex];
+                if (CheckCorrectIntersection(v13, correctVertices) &&
+                    CheckCorrectIntersection(v23, correctVertices))
+                {}
+                else
+                {
+                    correctSlice[meshIndex] = false;
+                }
+            }
+            
+         
             // Interpolate normals and UV coordinates
             var norm13 = (v1.normal + s13 * (v3.normal - v1.normal)).normalized;
             var norm23 = (v2.normal + s23 * (v3.normal - v2.normal)).normalized;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 
 
@@ -13,8 +14,7 @@ public class SliceConfirmation : MonoBehaviour
     private Vector3[] correctVertices;
 
     [SerializeField] private List<GameObject> correctObjects;
-    private List<Mesh> meshes;
-    List<Vector3[]> meshVertices;
+    List<Vector3[]> meshVertices= new List<Vector3[]>();
     // Start is called before the first frame update
     void Start()
     {
@@ -28,50 +28,23 @@ public class SliceConfirmation : MonoBehaviour
 
     public List<Vector3[]> GetCorrectMeshes()
     {
+
+        Mesh mesh;
         for (int index = 0; index < correctObjects.Count; index++)
         {
-            meshes.Add(correctObjects[index].GetComponent<MeshFilter>().mesh);
-            meshVertices[index] = meshes[index].vertices;
+            mesh = correctObjects[index].GetComponentInChildren<MeshFilter>().sharedMesh;
+            meshVertices.Add(mesh.vertices);
+            Vector3 scaleVector = new Vector3(100f, 100f, 100f);
+            for(int vertex = 0;vertex < meshVertices[index].Length; vertex++)
+            {
+                meshVertices[index][vertex].Scale(scaleVector);
+            }
+
         }
 
         return meshVertices;
     }
 
-    // public bool testCorrectVertices()
-    // {
-    //     
-    // }
     
-    // public List<float[]> GetCorrectVertices()
-    // {
-    //     List<float[]> arrayVertices = new List<float[]>();
-    //     
-    //     arrayVertices.Add(new float[100]);
-    //     arrayVertices.Add(new float[100]);
-    //     arrayVertices.Add(new float[100]);
-    //
-    //
-    //     for (int vertexNumber = 0; vertexNumber < correctVertices.Count; vertexNumber++)
-    //     {
-    //         Debug.Log("correctVertices[vertexNumber]: " + correctVertices[vertexNumber]);
-    //         arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].x;
-    //         arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].y;
-    //         arrayVertices[0][vertexNumber] = correctVertices[vertexNumber].z;
-    //         
-    //         // arrayVertices[0](new float[]{correctVertices[vertexNumber].x}).ToArray();
-    //         // arrayVertices[1].Concat(new float[]{correctVertices[vertexNumber].y}).ToArray();
-    //         // arrayVertices[2].Concat(new float[]{correctVertices[vertexNumber].z}).ToArray();
-    //     }
-    //     
-    //     Debug.Log("arrayVertices[0].Max(): " + arrayVertices[0].Max());
-    //     return arrayVertices;
-    // }
 
-    public Vector3[] GetCorrectVertices()
-    {
-        return correctVertices;
-    }
-
-    // Need a function where two intersection points are provided in the form of v23 and v13. 
-    // The function uses 
 }
