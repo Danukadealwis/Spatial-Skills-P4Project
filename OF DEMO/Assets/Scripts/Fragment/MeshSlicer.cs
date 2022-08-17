@@ -35,9 +35,9 @@ public static class MeshSlicer
         for (int cv = 0; cv < correctVertices.Length / 3; cv++)
 
         {
-            Debug.Log("0: " +  correctVertices[cv * 3]);
-            Debug.Log("1: " +  correctVertices[1+cv * 3]);
-            Debug.Log("2: " +  correctVertices[2+cv * 3]);
+            Debug.Log("0: " +  correctVertices[cv * 3].y);
+            Debug.Log("1: " +  correctVertices[1+cv * 3].y);
+            Debug.Log("2: " +  correctVertices[2+cv * 3].y);
             Vector3 normalOfTriangle = Vector3.Cross(
                                  correctVertices[1 + cv * 3] - correctVertices[cv * 3],
                                  correctVertices[2 + cv * 3] -correctVertices[cv * 3]) /
@@ -67,11 +67,10 @@ public static class MeshSlicer
             barycentricCoordinates = barycentricCoordinates.Inverse();
             barycentricCoordinates = barycentricCoordinates.Multiply(coeffMatrixTransposed).Multiply(intersectionMatrix);
             
-            if (barycentricCoordinates[0, 0] >= -0.05 && barycentricCoordinates[0, 0] < 1.05 &&
-                barycentricCoordinates[1, 0] >= -0.05 && barycentricCoordinates[1, 0] < 1.05 &&
-                barycentricCoordinates[2, 0] >= -0.05 && barycentricCoordinates[2, 0] < 1.05)
+            if (barycentricCoordinates[0, 0] >= -0.07 && barycentricCoordinates[0, 0] < 1.07 &&
+                barycentricCoordinates[1, 0] >= -0.07 && barycentricCoordinates[1, 0] < 1.07 &&
+                barycentricCoordinates[2, 0] >= -0.07 && barycentricCoordinates[2, 0] < 1.07)
             {
-                Debug.Log("barycentricCoordinates = " + barycentricCoordinates);
                 return true;
             }
         }

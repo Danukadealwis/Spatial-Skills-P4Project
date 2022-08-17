@@ -9,7 +9,6 @@ using UnityEngine;
 
 public class SliceConfirmation : MonoBehaviour
 {
-
     [SerializeField] 
     private Vector3[] correctVertices;
 
@@ -39,12 +38,7 @@ public class SliceConfirmation : MonoBehaviour
             {
                 meshVertices[index][vertex].Scale(scaleVector);
             }
-
         }
-
         return meshVertices;
     }
-
-    
-
 }
