@@ -253,6 +253,11 @@ public static class Fragmenter
             fragment.transform.localRotation = Quaternion.identity;
             fragment.transform.localScale = sourceObject.transform.localScale;
 
+            fragment.AddComponent<SliceConfirmation>();
+            SliceConfirmation sliceConfirmation = fragment.GetComponent<SliceConfirmation>();
+            sliceConfirmation.SetCorrectObjects(sourceObject.GetComponent<SliceConfirmation>().GetCorrectObjects());
+            
+
             meshes[k].name = System.Guid.NewGuid().ToString();
 
             // Update mesh to the new sliced mesh

@@ -11,7 +11,7 @@ using MathNet.Numerics.LinearAlgebra.Double;
 public static class MeshSlicer
 {
     
-    private static List<bool> correctSlice = new List<bool>();
+    private static List<bool> correctSlice;
     private static bool CheckCorrectIntersection(Vector3 intersection, Vector3[] correctVertices)
     {
 
@@ -35,9 +35,6 @@ public static class MeshSlicer
         for (int cv = 0; cv < correctVertices.Length / 3; cv++)
 
         {
-            Debug.Log("0: " +  correctVertices[cv * 3].y);
-            Debug.Log("1: " +  correctVertices[1+cv * 3].y);
-            Debug.Log("2: " +  correctVertices[2+cv * 3].y);
             Vector3 normalOfTriangle = Vector3.Cross(
                                  correctVertices[1 + cv * 3] - correctVertices[cv * 3],
                                  correctVertices[2 + cv * 3] -correctVertices[cv * 3]) /
@@ -100,12 +97,13 @@ public static class MeshSlicer
                              out FragmentData bottomSlice,
                              List<Vector3[]> correctMeshes)
     {
+        correctSlice = new List<bool>();
+    
         
         for (int meshIndex = 0; meshIndex < correctMeshes.Count; meshIndex++)
         {
             correctSlice.Add(true);
         }
-        Debug.Log("correctMeshes.Count: " + correctMeshes.Count + "correctSlice.Count" + correctSlice.Count);
         topSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
         bottomSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
     
@@ -138,8 +136,7 @@ public static class MeshSlicer
         // on the above mesh is opposite of the slice normal. Conversely, normal for the
         // cut face on the "below" mesh is in the direction of the slice normal
         FillCutFaces(topSlice, bottomSlice, -sliceNormal, textureScale, textureOffset);
-        foreach(var slice in correctSlice)
-            Debug.Log("Correct Slice: " + slice);
+        Debug.Log("correct: " + correctSlice.Contains(true));
         return correctSlice;
     }
 

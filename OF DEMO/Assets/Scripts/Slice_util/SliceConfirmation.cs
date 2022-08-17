@@ -9,8 +9,6 @@ using UnityEngine;
 
 public class SliceConfirmation : MonoBehaviour
 {
-    [SerializeField] 
-    private Vector3[] correctVertices;
 
     [SerializeField] private List<GameObject> correctObjects;
     List<Vector3[]> meshVertices= new List<Vector3[]>();
@@ -25,6 +23,16 @@ public class SliceConfirmation : MonoBehaviour
         
     }
 
+    public List<GameObject> GetCorrectObjects()
+    {
+        return correctObjects;
+    }
+
+    public void SetCorrectObjects(List<GameObject> otherCorrectObjects)
+    {
+        correctObjects = otherCorrectObjects;
+    }
+    
     public List<Vector3[]> GetCorrectMeshes()
     {
 
@@ -40,5 +48,11 @@ public class SliceConfirmation : MonoBehaviour
             }
         }
         return meshVertices;
+    }
+
+    public void PrintVertices()
+    {
+        var meshes = GetCorrectMeshes();
+        Debug.Log(meshes[1][1]);
     }
 }
