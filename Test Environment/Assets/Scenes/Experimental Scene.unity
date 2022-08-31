@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2850265, g: 0.3713928, b: 0.49600852, a: 1}
+  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1387,7 +1387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d327cd6cfb3516d49ad96107a8b6d8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSensitivity: 1
 --- !u!23 &1078677389
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1550,9 +1549,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1113224771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fe57792e36ffc489b628556d1dc576, type: 3}
+  m_Script: {fileID: 11500000, guid: c630e5d76785e4b3aa02ab424c611965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliceOptions:
+    enableReslicing: 1
+    maxResliceCount: 20
+    detectFloatingFragments: 0
+    insideMaterial: {fileID: 2100000, guid: 5b762f42d3498c64eb3e6b8c8284a09d, type: 2}
+    textureScale: {x: 1, y: 1}
+    textureOffset: {x: 0, y: 0}
+    invokeCallbacks: 0
+  callbackOptions:
+    onCompleted:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &1113224782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1562,21 +1573,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1113224771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1ac885d6b125f44935bf90b4e492a8, type: 3}
+  m_Script: {fileID: 11500000, guid: da5a63ac9b4c44830ab5e771c9ba8743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliceOptions:
-    enableReslicing: 1
-    maxResliceCount: 100
-    detectFloatingFragments: 1
-    insideMaterial: {fileID: 2100008, guid: 47616bd0cda748d4cbedcfc908506b9d, type: 3}
-    textureScale: {x: 1, y: 1}
-    textureOffset: {x: 0, y: 0}
-    invokeCallbacks: 0
-  callbackOptions:
-    onCompleted:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!64 &1113224783
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2327,10 +2326,10 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Slicer, Assembly-CSharp
+      - m_Target: {fileID: 2014288511}
+        m_TargetAssemblyTypeName: Slicer, RuntimeAssembly
         m_MethodName: sliceMesh
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2350,7 +2349,7 @@ MonoBehaviour:
     m_ActionId: 2152418f-9c3f-4a06-9836-2699420ca2cb
     m_ActionName: Object Control/Select Object
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: XR
   m_DefaultActionMap: Slicing
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
