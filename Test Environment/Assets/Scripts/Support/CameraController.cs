@@ -1,5 +1,9 @@
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.InputSystem.HID;
 
 [ExcludeFromCoverage]
 public class CameraController : MonoBehaviour
@@ -11,20 +15,24 @@ public class CameraController : MonoBehaviour
     public float maxSpeed = 5.0f;
 
     [Tooltip("Sensitivity of the mouse for pan / tilt.")]
-    public float mouseSensitivity = 5.0f;
-
+    public float mouseSensitivity = 0.1f;
+    
     private float startTime = 0f;
     private float elapsedTime = 0f;
 
+    private PlayerControls _playerControls;
+
     void Start()
     {
+        _playerControls = new PlayerControls();
+        _playerControls.Enable();
         startTime = Time.time;
     }
 
     void Update()
-    {    
-        float dx = Input.GetAxis("Mouse X")  * mouseSensitivity;
-        float dy = Input.GetAxis("Mouse Y")  * mouseSensitivity;
+    {
+        float dx = _playerControls.Player.Look.ReadValue<Vector2>().x * mouseSensitivity;
+        float dy = _playerControls.Player.Look.ReadValue<Vector2>().y  * mouseSensitivity;
 
         if (elapsedTime > 0.5f)
         {
@@ -48,22 +56,10 @@ public class CameraController : MonoBehaviour
         // Check for player movement. We can handle input here because it is continuous and
         // not instantaneous like jumping.
         var rigidbody = this.transform.parent.GetComponent<Rigidbody>();
-        if (Input.GetKey(KeyCode.W))
-        {
-            rigidbody.AddRelativeForce(Vector3.forward * acceleration, ForceMode.Acceleration);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rigidbody.AddRelativeForce(Vector3.left * acceleration, ForceMode.Acceleration);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rigidbody.AddRelativeForce(Vector3.back * acceleration, ForceMode.Acceleration);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rigidbody.AddRelativeForce(Vector3.right * acceleration, ForceMode.Acceleration);
-        }
+        var inputMovement = _playerControls.Player.Move.ReadValue<Vector2>();
+        Vector3 moveDirection = new Vector3(inputMovement.x,0,  inputMovement.y);
+        
+        rigidbody.AddRelativeForce(moveDirection * acceleration, ForceMode.Acceleration);
         
         // Clamp the player's velocity in the X and Z directions
         Vector2 xzVelocity = new Vector2(rigidbody.velocity.x, rigidbody.velocity.z);

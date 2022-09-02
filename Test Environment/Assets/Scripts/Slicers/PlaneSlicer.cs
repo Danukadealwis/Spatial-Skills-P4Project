@@ -1,10 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.TestTools;
 
 [ExcludeFromCoverage]
 public class PlaneSlicer : MonoBehaviour
 {
-    public float RotationSensitivity = 1f;
+    public float RotationSensitivity = 0.0000001f;
+
+    private PlayerControls _playerControls;
+
+    private void Start()
+    {
+        _playerControls = new PlayerControls();
+        _playerControls.Enable();
+    }
 
     public void OnTriggerStay(Collider collider)
     {
@@ -28,16 +37,16 @@ public class PlaneSlicer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (_playerControls.OFTest.RotateSlicePlaneCCW.IsPressed())
         {
             this.transform.Rotate(Vector3.forward, RotationSensitivity, Space.Self);
         }
-        if (Input.GetKey(KeyCode.E))
+        if (_playerControls.OFTest.RotateSlicePlaneCW.IsPressed())
         {
             this.transform.Rotate(Vector3.forward, -RotationSensitivity, Space.Self);
         }
         
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (_playerControls.Slicing.Slice.WasPressedThisFrame())
         {
             var mesh = this.GetComponent<MeshFilter>().sharedMesh;
             var center = mesh.bounds.center;

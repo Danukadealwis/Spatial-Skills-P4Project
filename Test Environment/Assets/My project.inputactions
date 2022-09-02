@@ -808,6 +808,17 @@
                     "action": "Slice",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c642d197-35f4-47a7-a31c-71df86f143a1",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slice",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -898,6 +909,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "Select Object",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "OFTest",
+            "id": "aabaa127-2021-4956-91d5-561472374a54",
+            "actions": [
+                {
+                    "name": "RotateSlicePlaneCCW",
+                    "type": "Button",
+                    "id": "3b1b4cb7-68ed-443f-8064-e15288044b33",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateSlicePlaneCW",
+                    "type": "Button",
+                    "id": "7f157684-3781-4a97-a272-47ce4737c8bd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleText",
+                    "type": "Button",
+                    "id": "8729d232-53e3-49a5-8522-63ea71a232bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FireProjectile",
+                    "type": "Button",
+                    "id": "30427f4d-e575-45fa-af43-d49855f32979",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "db315806-c8fb-433d-bd3a-6ca7808c44a9",
+                    "path": "<Keyboard>/#(Q)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateSlicePlaneCCW",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0bc38d1d-c44e-4f5a-92cb-58935ef29439",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleText",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8b52e5e-ec74-4ef0-9253-b6f74bc869b0",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateSlicePlaneCW",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f17c8767-8cf7-41b2-aa76-0e3913fd363b",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireProjectile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
