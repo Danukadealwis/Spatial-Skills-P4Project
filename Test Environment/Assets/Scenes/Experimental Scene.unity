@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2850265, g: 0.3713928, b: 0.49600852, a: 1}
+  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2340,19 +2340,7 @@ MonoBehaviour:
     m_ActionId: e7f17d2c-f506-4ad8-bdb8-fd724f626d79
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2014288511}
-        m_TargetAssemblyTypeName: Slicer, RuntimeAssembly
-        m_MethodName: sliceMesh
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: e7c31b72-d762-41e5-8c5a-71120b53b4f1
     m_ActionName: Slicing/Slice
   - m_PersistentCalls:
@@ -2363,6 +2351,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2152418f-9c3f-4a06-9836-2699420ca2cb
     m_ActionName: Object Control/Select Object
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b1b4cb7-68ed-443f-8064-e15288044b33
+    m_ActionName: OFTest/RotateSlicePlaneCCW[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7f157684-3781-4a97-a272-47ce4737c8bd
+    m_ActionName: OFTest/RotateSlicePlaneCW[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8729d232-53e3-49a5-8522-63ea71a232bb
+    m_ActionName: OFTest/ToggleText[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 30427f4d-e575-45fa-af43-d49855f32979
+    m_ActionName: OFTest/FireProjectile[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: XR
   m_DefaultActionMap: Slicing
