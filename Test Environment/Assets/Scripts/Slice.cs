@@ -9,7 +9,7 @@ public class Slice : MonoBehaviour
 {
     public SliceOptions sliceOptions;
     public CallbackOptions callbackOptions;
-
+    
     /// <summary>
     /// The number of times this fragment has been re-sliced.
     /// </summary>
@@ -20,7 +20,7 @@ public class Slice : MonoBehaviour
     /// </summary>
     private GameObject fragmentRoot;
 
-    private List<bool> correctSlice;
+    private int correctSlice;
 
     /// <summary>
     /// Slices the attached mesh along the cut plane

@@ -35,16 +35,23 @@ public class SliceConfirmation : MonoBehaviour
     
     public List<Vector3[]> GetCorrectMeshes()
     {
-
+        Vector3[] vertices;
+        int[] triangles;
         Mesh mesh;
+        Vector3 adjustmentVector = new Vector3(1, 1, 1);
         for (int index = 0; index < correctObjects.Count; index++)
         {
             mesh = correctObjects[index].GetComponentInChildren<MeshFilter>().sharedMesh;
-            meshVertices.Add(mesh.vertices);
-            Vector3 scaleVector = new Vector3(100f, 100f, 100f);
-            for(int vertex = 0;vertex < meshVertices[index].Length; vertex++)
+            vertices = mesh.vertices; 
+            triangles = mesh.triangles;
+            meshVertices.Add(new Vector3[triangles.Length]);
+            
+            for(int triIndex = 0;triIndex < triangles.Length; triIndex++)
             {
-                meshVertices[index][vertex].Scale(scaleVector);
+                meshVertices[index][triIndex] = vertices[triangles[triIndex]];
+                
+                Vector3.Scale(meshVertices[index][triIndex], adjustmentVector);
+                Debug.Log("Output Vert: " + triIndex + " " + meshVertices[index][triIndex]);
             }
         }
         return meshVertices;

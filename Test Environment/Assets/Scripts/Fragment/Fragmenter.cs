@@ -160,7 +160,7 @@ public static class Fragmenter
     /// <param name="fragmentTemplate">The template GameObject that each slice will clone</param>
     /// <param name="parent">The parent transform for the fragment objects</param>
     /// <returns></returns>
-    public static List<bool> Slice(GameObject sourceObject,
+    public static int Slice(GameObject sourceObject,
                              Vector3 sliceNormal,
                              Vector3 sliceOrigin,
                              SliceOptions options,
@@ -174,7 +174,7 @@ public static class Fragmenter
         FragmentData topSlice, bottomSlice;
 
         // Slice and dice!
-        List<bool> correctSlice = MeshSlicer.Slice(sourceMesh,
+        int correctSlice = MeshSlicer.Slice(sourceMesh,
                          sliceNormal,
                          sliceOrigin,
                          options.textureScale,
