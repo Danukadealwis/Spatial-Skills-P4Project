@@ -10,27 +10,17 @@ using UnityEngine;
 public class SliceConfirmation : MonoBehaviour
 {
 
-    [SerializeField] private List<GameObject> correctObjects; 
+    [SerializeField] private List<Mesh> correctMeshes; 
     List<Vector3[]> meshVertices= new List<Vector3[]>();
-    // Start is called before the first frame update
-    void Start()
+
+    public List<Mesh> GetCorrectObjects()
     {
+        return correctMeshes;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetCorrectObjects(List<Mesh> otherCorrectObjects)
     {
-        
-    }
-
-    public List<GameObject> GetCorrectObjects()
-    {
-        return correctObjects;
-    }
-
-    public void SetCorrectObjects(List<GameObject> otherCorrectObjects)
-    {
-        correctObjects = otherCorrectObjects;
+        correctMeshes = otherCorrectObjects;
     }
     
     public List<Vector3[]> GetCorrectMeshes()
@@ -39,9 +29,9 @@ public class SliceConfirmation : MonoBehaviour
         int[] triangles;
         Mesh mesh;
         Vector3 adjustmentVector = new Vector3(1, 1, 1);
-        for (int index = 0; index < correctObjects.Count; index++)
+        for (int index = 0; index < correctMeshes.Count; index++)
         {
-            mesh = correctObjects[index].GetComponentInChildren<MeshFilter>().sharedMesh;
+            mesh = correctMeshes[index];
             vertices = mesh.vertices; 
             triangles = mesh.triangles;
             meshVertices.Add(new Vector3[triangles.Length]);
