@@ -11,8 +11,8 @@ public class QuestionSO : ScriptableObject
     
     [SerializeField] public List<GameObject> componentObjects; 
     [SerializeField] public GameObject questionObject;
-
     [SerializeField] public double maxCuts;
+    
     // Start is called before the first frame update
     void Start()
     {

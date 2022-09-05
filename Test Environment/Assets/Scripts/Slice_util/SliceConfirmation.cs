@@ -10,7 +10,7 @@ using UnityEngine;
 public class SliceConfirmation : MonoBehaviour
 {
 
-    [SerializeField] private List<GameObject> correctObjects;
+    [SerializeField] private List<GameObject> correctObjects; 
     List<Vector3[]> meshVertices= new List<Vector3[]>();
     // Start is called before the first frame update
     void Start()
