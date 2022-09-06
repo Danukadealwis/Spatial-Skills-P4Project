@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644cd18d53dc0c04bb0461423132907a, type: 3}
+  m_Name: TestQuestion1
+  m_EditorClassIdentifier: 
+  componentObjects:
+  - {fileID: 4284222605197570141, guid: 460dd74511c974bd69ed584b691e380a, type: 3}
+  - {fileID: 4070130509008823822, guid: 85d100c49d0d94203a08c4452f3b6e67, type: 3}
+  - {fileID: 4769246187772366644, guid: 9abd9335c1bda4c7f8c56bb708570d54, type: 3}
+  correctMeshes:
+  - {fileID: 4493585093827132993, guid: 2ae455b64634e4b23a618a2332a83bcf, type: 3}
+  - {fileID: -8678823145569952518, guid: ca61111d9c91e46f589c0fa27dcccd68, type: 3}
+  questionObject: {fileID: 3548766320588918289, guid: b60b60b5f086b403f83f30f797be5d7f, type: 3}
+  objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
+  maxCuts: 10

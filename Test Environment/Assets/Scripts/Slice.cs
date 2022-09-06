@@ -61,7 +61,7 @@ public class Slice : MonoBehaviour
                 this.sliceOptions,
                 sliceTemplate,
                 this.fragmentRoot.transform,
-                sliceConfirmation.GetCorrectMeshes());
+                sliceConfirmation.GetCorrectVertices());
             
             gameManager.AddObjectSliced(objectSliced,fragmentRoot.name,gameObject.name);
      
@@ -124,6 +124,11 @@ public class Slice : MonoBehaviour
         }
 
         return obj;
+    }
+
+    public void SetSliceOptions(SliceOptions otherSliceOptions)
+    {
+        sliceOptions = otherSliceOptions;
     }
     
     /// <summary>

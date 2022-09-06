@@ -62,6 +62,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextQuestion"",
+                    ""type"": ""Button"",
+                    ""id"": ""6200926a-8b52-468a-8dbf-80509cc3df8e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,6 +302,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""UndoCut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bce619ed-37c2-4eae-bdad-82d1db03afb1"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""NextQuestion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1114,6 +1134,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_UndoCut = m_Player.FindAction("UndoCut", throwIfNotFound: true);
+        m_Player_NextQuestion = m_Player.FindAction("NextQuestion", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1202,6 +1223,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_UndoCut;
+    private readonly InputAction m_Player_NextQuestion;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1210,6 +1232,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @UndoCut => m_Wrapper.m_Player_UndoCut;
+        public InputAction @NextQuestion => m_Wrapper.m_Player_NextQuestion;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1231,6 +1254,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @UndoCut.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUndoCut;
                 @UndoCut.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUndoCut;
                 @UndoCut.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUndoCut;
+                @NextQuestion.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNextQuestion;
+                @NextQuestion.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNextQuestion;
+                @NextQuestion.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNextQuestion;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1247,6 +1273,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @UndoCut.started += instance.OnUndoCut;
                 @UndoCut.performed += instance.OnUndoCut;
                 @UndoCut.canceled += instance.OnUndoCut;
+                @NextQuestion.started += instance.OnNextQuestion;
+                @NextQuestion.performed += instance.OnNextQuestion;
+                @NextQuestion.canceled += instance.OnNextQuestion;
             }
         }
     }
@@ -1538,6 +1567,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnUndoCut(InputAction.CallbackContext context);
+        void OnNextQuestion(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -255,7 +255,7 @@ public static class      Fragmenter
 
             fragment.AddComponent<SliceConfirmation>();
             SliceConfirmation sliceConfirmation = fragment.GetComponent<SliceConfirmation>();
-            sliceConfirmation.SetCorrectObjects(sourceObject.GetComponent<SliceConfirmation>().GetCorrectObjects());
+            sliceConfirmation.SetCorrectMeshes(sourceObject.GetComponent<SliceConfirmation>().GetCorrectMeshes());
             
 
             meshes[k].name = System.Guid.NewGuid().ToString();

@@ -13,17 +13,17 @@ public class SliceConfirmation : MonoBehaviour
     [SerializeField] private List<Mesh> correctMeshes; 
     List<Vector3[]> meshVertices= new List<Vector3[]>();
 
-    public List<Mesh> GetCorrectObjects()
+    public List<Mesh> GetCorrectMeshes()
     {
         return correctMeshes;
     }
 
-    public void SetCorrectObjects(List<Mesh> otherCorrectObjects)
+    public void SetCorrectMeshes(List<Mesh> otherCorrectObjects)
     {
         correctMeshes = otherCorrectObjects;
     }
     
-    public List<Vector3[]> GetCorrectMeshes()
+    public List<Vector3[]> GetCorrectVertices()
     {
         Vector3[] vertices;
         int[] triangles;
@@ -41,15 +41,9 @@ public class SliceConfirmation : MonoBehaviour
                 meshVertices[index][triIndex] = vertices[triangles[triIndex]];
                 
                 Vector3.Scale(meshVertices[index][triIndex], adjustmentVector);
-                Debug.Log("Output Vert: " + triIndex + " " + meshVertices[index][triIndex]);
             }
         }
         return meshVertices;
     }
-
-    public void PrintVertices()
-    {
-        var meshes = GetCorrectMeshes();
-        Debug.Log(meshes[1][1]);
-    }
+    
 }
