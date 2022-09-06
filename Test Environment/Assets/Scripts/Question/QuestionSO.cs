@@ -9,19 +9,35 @@ using UnityEngine.Rendering;
 public class QuestionSO : ScriptableObject
 {
     
-    [SerializeField] public List<GameObject> componentObjects; 
+    [SerializeField] public List<GameObject> componentObjects;
+    [SerializeField] public List<Mesh> correctMeshes;
     [SerializeField] public GameObject questionObject;
-
+    [SerializeField] public Material objectMaterial;
+    private SliceConfirmation _sliceConfirmation;
+    private Slice _slice;
     [SerializeField] public double maxCuts;
+    private SliceOptions _defaultSliceOptions;
+    
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        _defaultSliceOptions = new SliceOptions()
+        {
+            enableReslicing = true,
+            maxResliceCount = 100,
+            insideMaterial = objectMaterial
+        };
+        questionObject.name = $"{questionObject.name}{questionObject.GetInstanceID().ToString()}";
+        questionObject.AddComponent<Slice>();
+        questionObject.GetComponent<MeshRenderer>().material = objectMaterial;
+        _slice = questionObject.GetComponent<Slice>();
+        _slice.SetSliceOptions(_defaultSliceOptions);
+
+        questionObject.AddComponent<SliceConfirmation>();
+        _sliceConfirmation = questionObject.GetComponent<SliceConfirmation>();
+        _sliceConfirmation.SetCorrectMeshes(correctMeshes);
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

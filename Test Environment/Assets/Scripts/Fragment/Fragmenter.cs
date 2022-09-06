@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 using UnityEditor;
 #endif
 
-public static class Fragmenter
+public static class      Fragmenter
 {
 
 
@@ -160,7 +160,7 @@ public static class Fragmenter
     /// <param name="fragmentTemplate">The template GameObject that each slice will clone</param>
     /// <param name="parent">The parent transform for the fragment objects</param>
     /// <returns></returns>
-    public static List<bool> Slice(GameObject sourceObject,
+    public static int Slice(GameObject sourceObject,
                              Vector3 sliceNormal,
                              Vector3 sliceOrigin,
                              SliceOptions options,
@@ -174,7 +174,7 @@ public static class Fragmenter
         FragmentData topSlice, bottomSlice;
 
         // Slice and dice!
-        List<bool> correctSlice = MeshSlicer.Slice(sourceMesh,
+        int objectSliced = MeshSlicer.Slice(sourceMesh,
                          sliceNormal,
                          sliceOrigin,
                          options.textureScale,
@@ -201,7 +201,7 @@ public static class Fragmenter
                        "",
                        options.detectFloatingFragments,
                        ref i);
-        return correctSlice;
+        return objectSliced;
     }
 
     /// <summary>
@@ -248,14 +248,14 @@ public static class Fragmenter
         for(int k = 0; k < meshes.Length; k++)
         {
             GameObject fragment = GameObject.Instantiate(fragmentTemplate, parent);
-            fragment.name = $"Fragment{i}";
+            fragment.name = $"Fragment{fragment.GetInstanceID()}";
             fragment.transform.localPosition = Vector3.zero;
             fragment.transform.localRotation = Quaternion.identity;
             fragment.transform.localScale = sourceObject.transform.localScale;
 
             fragment.AddComponent<SliceConfirmation>();
             SliceConfirmation sliceConfirmation = fragment.GetComponent<SliceConfirmation>();
-            sliceConfirmation.SetCorrectObjects(sourceObject.GetComponent<SliceConfirmation>().GetCorrectObjects());
+            sliceConfirmation.SetCorrectMeshes(sourceObject.GetComponent<SliceConfirmation>().GetCorrectMeshes());
             
 
             meshes[k].name = System.Guid.NewGuid().ToString();

@@ -2,16 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime;
 using UnityEngine;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
+using UnityEngine.Rendering;
+
 /// <summary>
 /// Class which handles slicing a mesh into two pieces given the origin and normal of the slice plane.
 /// </summary>
 public static class MeshSlicer
 {
+    private static bool[] correctSlices;
     
-    private static List<bool> correctSlice;
     private static bool CheckCorrectIntersection(Vector3 intersection, Vector3[] correctVertices)
     {
 
@@ -47,6 +50,7 @@ public static class MeshSlicer
                             correctVertices[1 + cv * 3] - correctVertices[cv * 3]);
             if (distanceToTriangle >= 0.05 || distanceToTriangle <= -0.05)
             {
+                Debug.Log("distanceToTriangle: " + distanceToTriangle);
                 continue;
             }
             
@@ -64,9 +68,9 @@ public static class MeshSlicer
             barycentricCoordinates = barycentricCoordinates.Inverse();
             barycentricCoordinates = barycentricCoordinates.Multiply(coeffMatrixTransposed).Multiply(intersectionMatrix);
             
-            if (barycentricCoordinates[0, 0] >= -0.07 && barycentricCoordinates[0, 0] < 1.07 &&
-                barycentricCoordinates[1, 0] >= -0.07 && barycentricCoordinates[1, 0] < 1.07 &&
-                barycentricCoordinates[2, 0] >= -0.07 && barycentricCoordinates[2, 0] < 1.07)
+            if (barycentricCoordinates[0, 0] >= -0.01 && barycentricCoordinates[0, 0] < 1.01 &&
+                barycentricCoordinates[1, 0] >= -0.01 && barycentricCoordinates[1, 0] < 1.01 &&
+                barycentricCoordinates[2, 0] >= -0.01 && barycentricCoordinates[2, 0] < 1.01)
             {
                 return true;
             }
@@ -88,7 +92,7 @@ public static class MeshSlicer
     /// <param name="bottomSlice">Out parameter returning fragment mesh data for slice below the plane</param>
     
     
-    public static List<bool> Slice(FragmentData meshData,
+    public static int Slice(FragmentData meshData,
                              Vector3 sliceNormal,
                              Vector3 sliceOrigin,
                              Vector2 textureScale,
@@ -97,13 +101,10 @@ public static class MeshSlicer
                              out FragmentData bottomSlice,
                              List<Vector3[]> correctMeshes)
     {
-        correctSlice = new List<bool>();
-    
         
-        for (int meshIndex = 0; meshIndex < correctMeshes.Count; meshIndex++)
-        {
-            correctSlice.Add(true);
-        }
+        correctSlices = Enumerable.Repeat(true, correctMeshes.Count).ToArray();
+        
+
         topSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
         bottomSlice = new FragmentData(meshData.vertexCount, meshData.triangleCount);
     
@@ -136,8 +137,10 @@ public static class MeshSlicer
         // on the above mesh is opposite of the slice normal. Conversely, normal for the
         // cut face on the "below" mesh is in the direction of the slice normal
         FillCutFaces(topSlice, bottomSlice, -sliceNormal, textureScale, textureOffset);
-        Debug.Log("correct: " + correctSlice.Contains(true));
-        return correctSlice;
+        int objectSliced = correctSlices.Contains(true) ? Array.IndexOf(correctSlices, true) : -1;
+        Debug.Log("objectSliced: " + objectSliced);
+        return objectSliced;
+
     }
 
     /// <summary>
@@ -168,7 +171,7 @@ public static class MeshSlicer
         // Triangulate the cut face
         var triangulator = new ConstrainedTriangulator(topSlice.CutVertices, topSlice.Constraints, sliceNormal);
         int[] triangles = triangulator.Triangulate();
-
+        
         // Update normal and UV for the cut face vertices
         for (int i = 0; i < topSlice.CutVertices.Count; i++)
         {
@@ -352,8 +355,8 @@ public static class MeshSlicer
 
         if (MathUtils.LinePlaneIntersection(v1.position, v3.position, sliceNormal, sliceOrigin, out v13, out s13) &&
             MathUtils.LinePlaneIntersection(v2.position, v3.position, sliceNormal, sliceOrigin, out v23, out s23))
-        {
-
+        { 
+            // for every slice, you do what is specified below. 
             Vector3[] correctVertices;
             
             for (int meshIndex = 0; meshIndex < correctMeshes.Count; meshIndex++)
@@ -364,7 +367,7 @@ public static class MeshSlicer
                 {}
                 else
                 {
-                    correctSlice[meshIndex] = false;
+                    correctSlices[meshIndex] = false;
                 }
             }
             

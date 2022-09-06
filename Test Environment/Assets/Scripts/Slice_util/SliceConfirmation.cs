@@ -10,49 +10,40 @@ using UnityEngine;
 public class SliceConfirmation : MonoBehaviour
 {
 
-    [SerializeField] private List<GameObject> correctObjects;
+    [SerializeField] private List<Mesh> correctMeshes; 
     List<Vector3[]> meshVertices= new List<Vector3[]>();
-    // Start is called before the first frame update
-    void Start()
+
+    public List<Mesh> GetCorrectMeshes()
     {
+        return correctMeshes;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetCorrectMeshes(List<Mesh> otherCorrectObjects)
     {
-        
-    }
-
-    public List<GameObject> GetCorrectObjects()
-    {
-        return correctObjects;
-    }
-
-    public void SetCorrectObjects(List<GameObject> otherCorrectObjects)
-    {
-        correctObjects = otherCorrectObjects;
+        correctMeshes = otherCorrectObjects;
     }
     
-    public List<Vector3[]> GetCorrectMeshes()
+    public List<Vector3[]> GetCorrectVertices()
     {
-
+        Vector3[] vertices;
+        int[] triangles;
         Mesh mesh;
-        for (int index = 0; index < correctObjects.Count; index++)
+        Vector3 adjustmentVector = new Vector3(1, 1, 1);
+        for (int index = 0; index < correctMeshes.Count; index++)
         {
-            mesh = correctObjects[index].GetComponentInChildren<MeshFilter>().sharedMesh;
-            meshVertices.Add(mesh.vertices);
-            Vector3 scaleVector = new Vector3(100f, 100f, 100f);
-            for(int vertex = 0;vertex < meshVertices[index].Length; vertex++)
+            mesh = correctMeshes[index];
+            vertices = mesh.vertices; 
+            triangles = mesh.triangles;
+            meshVertices.Add(new Vector3[triangles.Length]);
+            
+            for(int triIndex = 0;triIndex < triangles.Length; triIndex++)
             {
-                meshVertices[index][vertex].Scale(scaleVector);
+                meshVertices[index][triIndex] = vertices[triangles[triIndex]];
+                
+                Vector3.Scale(meshVertices[index][triIndex], adjustmentVector);
             }
         }
         return meshVertices;
     }
-
-    public void PrintVertices()
-    {
-        var meshes = GetCorrectMeshes();
-        Debug.Log(meshes[1][1]);
-    }
+    
 }
