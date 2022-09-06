@@ -9,7 +9,7 @@ public class Slice : MonoBehaviour
 {
     public SliceOptions sliceOptions;
     public CallbackOptions callbackOptions;
-
+    
     /// <summary>
     /// The number of times this fragment has been re-sliced.
     /// </summary>
@@ -20,7 +20,8 @@ public class Slice : MonoBehaviour
     /// </summary>
     private GameObject fragmentRoot;
 
-    private List<bool> correctSlice;
+    private GameManager gameManager;
+    private int objectSliced;
 
     /// <summary>
     /// Slices the attached mesh along the cut plane
@@ -31,6 +32,10 @@ public class Slice : MonoBehaviour
     {
         var mesh = this.GetComponent<MeshFilter>().sharedMesh;
         SliceConfirmation sliceConfirmation = this.GetComponent<SliceConfirmation>();
+        gameManager = FindObjectOfType<GameManager>();
+        
+        
+        
         if (mesh != null)
         {
             // If the fragment root object has not yet been created, create it now
@@ -50,14 +55,16 @@ public class Slice : MonoBehaviour
             var sliceNormalLocal = this.transform.InverseTransformDirection(sliceNormalWorld);
             var sliceOriginLocal = this.transform.InverseTransformPoint(sliceOriginWorld);
 
-            correctSlice = Fragmenter.Slice(this.gameObject,
+            objectSliced = Fragmenter.Slice(this.gameObject,
                 sliceNormalLocal,
                 sliceOriginLocal,
                 this.sliceOptions,
                 sliceTemplate,
                 this.fragmentRoot.transform,
-                sliceConfirmation.GetCorrectMeshes());
-                    
+                sliceConfirmation.GetCorrectVertices());
+            
+            gameManager.AddObjectSliced(objectSliced,fragmentRoot.name,gameObject.name);
+     
             // Done with template, destroy it
             GameObject.Destroy(sliceTemplate);
 
@@ -117,6 +124,11 @@ public class Slice : MonoBehaviour
         }
 
         return obj;
+    }
+
+    public void SetSliceOptions(SliceOptions otherSliceOptions)
+    {
+        sliceOptions = otherSliceOptions;
     }
     
     /// <summary>
