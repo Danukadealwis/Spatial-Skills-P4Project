@@ -63,7 +63,7 @@ public class Slice : MonoBehaviour
                 this.fragmentRoot.transform,
                 sliceConfirmation.GetCorrectVertices());
             
-            gameManager.AddObjectSliced(objectSliced,fragmentRoot.name,gameObject.name);
+            gameManager.ObjectSliced(objectSliced,fragmentRoot.name,gameObject.name);
      
             // Done with template, destroy it
             GameObject.Destroy(sliceTemplate);

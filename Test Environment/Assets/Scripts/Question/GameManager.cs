@@ -9,31 +9,38 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+    struct QuestionData
+    {
+        public int SlicesMade;
+        public int UndoCount;
+        public double TimeTaken;
+        public bool AnsweredCorrectly;
+    }
     private List<int> _objectsSliced;
     private List<string> _fragmentRoots;
     private List<string> _slicedObjs;
-    private int undoCount;
+    private List<QuestionData> _allQuestionsData;
+    private int _undoCount;
     
     private PlayerInput _playerInput;
     private InputAction _undoAction;
     private InputAction _nextQuestionAction;
 
     [SerializeField] private List<QuestionSO> questions;
-    private int currentQuestionIndex;
-    private List<GameObject> componentsList;
-    private List<GameObject> pillarList;
-    private GameObject questionObject;
-    private QuestionSO currentQuestion;
-    private int[] playerCorrect;
-    private int gameScore;
+    private int _currentQuestionIndex;
+    private List<GameObject> _componentsList;
+    private List<GameObject> _pillarList;
+    private GameObject _questionObject;
+    private QuestionSO _currentQuestion;
+    private int _gameScore;
     
     [SerializeField] private double timeToCompleteQuiz = 300f;
-    private double timerValue;
-    private double timerChange;
+    private double _timerValue;
+    private double _timerChange;
     public double maxQuestionTime;
-    private double[] timeTaken;
-    private double[] cutsMade;
+    private double _timeTaken;
+    private double _slicesMade;
+    private int _answerStatus;
     [SerializeField] private GameObject cuttingDesk;
     [SerializeField] private GameObject cmpObjPillar;
     
@@ -44,22 +51,20 @@ public class GameManager : MonoBehaviour
         _playerInput.SwitchCurrentActionMap("Player");
         _undoAction = _playerInput.currentActionMap.FindAction("UndoCut");
         _nextQuestionAction = _playerInput.currentActionMap.FindAction("NextQuestion");
-        
+
+        _allQuestionsData = new List<QuestionData>();
 
         _objectsSliced = new List<int>();
         _fragmentRoots = new List<string>();
         _slicedObjs = new List<string>();
-        undoCount = 0;
+        _undoCount = 0;
         
         
-        pillarList = new List<GameObject>();
-        componentsList = new List<GameObject>();
-        currentQuestion = questions[currentQuestionIndex];
+        _pillarList = new List<GameObject>();
+        _componentsList = new List<GameObject>();
+        _currentQuestion = questions[_currentQuestionIndex];
         DisplayQuestion();
-        timerChange = Time.deltaTime/10;
-        playerCorrect = new int[questions.Count];
-        timeTaken = new double[questions.Count];
-        cutsMade = new double[questions.Count];
+        _timerChange = Time.deltaTime/10;
         maxQuestionTime = 40.0;
         
     }
@@ -77,7 +82,12 @@ public class GameManager : MonoBehaviour
             GetNextQuestion();
             return;
         }
+
+        _timerValue += _timerChange;
+
     }
+    
+    
 
     void DisplayQuestion(){
         Vector3 questionObjectCoords = cuttingDesk.GetComponentInChildren<Transform>().position;   
@@ -87,28 +97,28 @@ public class GameManager : MonoBehaviour
         Collider cuttingDeskCollider = cuttingDesk.GetComponentInChildren<Collider>();
         // questionObjectCoords.y += cuttingDeskCollider.bounds.size.y + questionObjectCollider.bounds.size.y*0.5f;
         
-        questionObject = Instantiate(currentQuestion.questionObject, questionObjectCoords, Quaternion.identity);
-        Collider questionObjectCollider = questionObject.GetComponentInChildren<Collider>();
-        questionObject.transform.Translate(0,
+        _questionObject = Instantiate(_currentQuestion.questionObject, questionObjectCoords, Quaternion.identity);
+        Collider questionObjectCollider = _questionObject.GetComponentInChildren<Collider>();
+        _questionObject.transform.Translate(0,
             cuttingDeskCollider.bounds.size.y + questionObjectCollider.bounds.size.y*0.5f, 0);
 
-        float pillarStartCoordZ = questionObjectCoords.z + currentQuestion.componentObjects.Count - 1;
-        for (int i = 0; i < currentQuestion.componentObjects.Count; i++)
+        float pillarStartCoordZ = questionObjectCoords.z + _currentQuestion.componentObjects.Count - 1;
+        for (int i = 0; i < _currentQuestion.componentObjects.Count; i++)
         {
             pillarObjectCoords = new Vector3(pillarObjectCoords.x, pillarObjectCoords.y,
                 pillarStartCoordZ - i * 4.0f); 
-            pillarList.Add(Instantiate(cmpObjPillar,pillarObjectCoords, Quaternion.identity));  
-            Collider pillarCollider = pillarList[i].GetComponentInChildren<Collider>();
+            _pillarList.Add(Instantiate(cmpObjPillar,pillarObjectCoords, Quaternion.identity));  
+            Collider pillarCollider = _pillarList[i].GetComponentInChildren<Collider>();
           
-            componentsList.Add(Instantiate(currentQuestion.componentObjects[i], 
+            _componentsList.Add(Instantiate(_currentQuestion.componentObjects[i], 
                 pillarObjectCoords,
                 Quaternion.identity));
-            Collider componentCollider = componentsList[i].GetComponentInChildren<Collider>();
-            componentsList[i].transform.Translate(0,pillarCollider.bounds.size.y + componentCollider.bounds.size.y * 0.5f,0);
+            Collider componentCollider = _componentsList[i].GetComponentInChildren<Collider>();
+            _componentsList[i].transform.Translate(0,pillarCollider.bounds.size.y + componentCollider.bounds.size.y * 0.5f,0);
             
 
         }
-        ResetTimer();
+        ResetCurrentQuestionData();
         
     }
 
@@ -122,72 +132,113 @@ public class GameManager : MonoBehaviour
 
             Destroy(root.transform.gameObject);
             obj.SetActive(true);
-            undoCount++;
+            _undoCount++;
             _fragmentRoots.RemoveAt(_fragmentRoots.Count - 1);
             _slicedObjs.RemoveAt(_slicedObjs.Count - 1);
             _objectsSliced.RemoveAt(_objectsSliced.Count - 1);
         }
     }
     
-    void QuestionComplete()
+    private void QuestionComplete()
     {
+        
         StopTimer();
-        timeTaken[currentQuestionIndex] = timerValue;
-        Debug.Log(" time score: " + maxQuestionTime / timeTaken[currentQuestionIndex]*100);
-        Debug.Log(" cuts score: " + currentQuestion.maxCuts / cutsMade[currentQuestionIndex] * 200);
-        if (playerCorrect[currentQuestionIndex] == 1)
+        _timeTaken = _timerValue;
+        
+        
+        Debug.Log(" time score: " + maxQuestionTime / _timeTaken*100);
+        Debug.Log(" cuts score: " + _currentQuestion.maxCuts / _slicesMade * 200);
+        if (_answerStatus == 1)
         {
-            gameScore += 5000
-                         + Math.Min(2000, Convert.ToInt32(maxQuestionTime / timeTaken[currentQuestionIndex]*100))
-                         - Math.Min(500, Convert.ToInt32(undoCount*200));
+            _gameScore += 5000
+                         + Math.Min(2000, Convert.ToInt32(maxQuestionTime / _timeTaken*100))
+                         - Math.Min(500, Convert.ToInt32(_slicesMade*200));
         }
-        Debug.Log("Game Score is: " + gameScore);
+        Debug.Log("Game Score is: " + _gameScore);
+        _allQuestionsData.Add(new QuestionData()
+            {
+                SlicesMade = Convert.ToInt16(_slicesMade),
+                TimeTaken = _timeTaken,
+                AnsweredCorrectly = _answerStatus == 1,
+                UndoCount = _undoCount
+            }
+        );
+        
+
         GetNextQuestion();
     }
     
     void GetNextQuestion()
     {
-        currentQuestionIndex++;
-        currentQuestion = questions[currentQuestionIndex];
+        _currentQuestionIndex++;
+        _currentQuestion = questions[_currentQuestionIndex];
         
-        foreach (var component in componentsList)
+        foreach (var component in _componentsList)
         {
             Destroy(component);
         }
 
-        foreach (var pillar in pillarList)
+        foreach (var pillar in _pillarList)
         {
             Destroy(pillar);
         }
-        componentsList.Clear();
-        pillarList.Clear();
-        Destroy(GameObject.Find($"{questionObject.name}Slices"));
-        Destroy(questionObject);
+        _componentsList.Clear();
+        _pillarList.Clear();
+        Destroy(GameObject.Find($"{_questionObject.name}Slices"));
+        Destroy(_questionObject);
         DisplayQuestion();
     }
 
-    public void AddObjectSliced(int value, string fragmentRootName, string slicedObjName)
+    private void UpdateSliceUI(){}
+
+    public void ObjectSliced(int value, string fragmentRootName, string slicedObjName)
 
     {
         _objectsSliced.Add(value);
         _fragmentRoots.Add(fragmentRootName);
         _slicedObjs.Add(slicedObjName);
+        _slicesMade++;
+        CheckAnswer();
+        if (_answerStatus != 0)
+        {
+            QuestionComplete();
+            return;
+        }
+        UpdateSliceUI();
     }
-    
+
+    private void CheckAnswer()
+    {
+        var consecutiveCorrectSlices = 0;
+        foreach (var s in _objectsSliced)
+        {
+            consecutiveCorrectSlices += s != -1 ? 1 : 0;
+            if (s == -1) break;
+        }
+
+        if (_objectsSliced.TrueForAll(s => s != -1) &&
+            _objectsSliced.Count == _currentQuestion.componentObjects.Count - 1) _answerStatus = 1;
+        else if (_currentQuestion.maxCuts - _slicesMade <
+            _currentQuestion.componentObjects.Count - consecutiveCorrectSlices) _answerStatus = -1;
+    }
+
     void QuestionTimeElapsed()
     {
         // Pause Game
         //
     }
-    void ResetTimer()
+    private void ResetCurrentQuestionData()
     {
-        timerValue = 0;
-        timerChange = Time.deltaTime/10;
+        _timerValue = 0;
+        _timerChange = Time.deltaTime/10;
+        _slicesMade = 0;
+        _undoCount = 0;
+        _answerStatus = 0;
     }
 
     void StopTimer()
     {
-        timerChange = 0;
+        _timerChange = 0;
     }
     
     
