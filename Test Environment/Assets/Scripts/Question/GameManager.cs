@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _timerValue += _timerChange;
         if (_undoAction.WasPressedThisFrame())
         {
             UndoCut();
@@ -82,9 +83,6 @@ public class GameManager : MonoBehaviour
             GetNextQuestion();
             return;
         }
-
-        _timerValue += _timerChange;
-
     }
     
     
@@ -152,19 +150,15 @@ public class GameManager : MonoBehaviour
         {
             _gameScore += 5000
                          + Math.Min(2000, Convert.ToInt32(maxQuestionTime / _timeTaken*100))
-                         - Math.Min(500, Convert.ToInt32(_slicesMade*200));
+                         - Math.Min(500, Convert.ToInt32(_currentQuestion.maxCuts / _slicesMade * 200));
         }
         Debug.Log("Game Score is: " + _gameScore);
-        _allQuestionsData.Add(new QuestionData()
-            {
+        _allQuestionsData.Add(new QuestionData {
                 SlicesMade = Convert.ToInt16(_slicesMade),
                 TimeTaken = _timeTaken,
                 AnsweredCorrectly = _answerStatus == 1,
-                UndoCount = _undoCount
-            }
-        );
-        
-
+                UndoCount = _undoCount 
+        });
         GetNextQuestion();
     }
     
@@ -182,8 +176,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(pillar);
         }
-        _componentsList.Clear();
-        _pillarList.Clear();
+
+        _objectsSliced = new List<int>();
+        _componentsList = new List<GameObject>();
+        _pillarList = new List<GameObject>();
         Destroy(GameObject.Find($"{_questionObject.name}Slices"));
         Destroy(_questionObject);
         DisplayQuestion();
@@ -193,7 +189,7 @@ public class GameManager : MonoBehaviour
 
     public void ObjectSliced(int value, string fragmentRootName, string slicedObjName)
 
-    {
+    {   
         _objectsSliced.Add(value);
         _fragmentRoots.Add(fragmentRootName);
         _slicedObjs.Add(slicedObjName);
@@ -217,9 +213,13 @@ public class GameManager : MonoBehaviour
         }
 
         if (_objectsSliced.TrueForAll(s => s != -1) &&
-            _objectsSliced.Count == _currentQuestion.componentObjects.Count - 1) _answerStatus = 1;
+            _objectsSliced.Count == _currentQuestion.componentObjects.Count - 1)
+        {
+            _answerStatus = 1;
+            Debug.Log("Correct!");
+        }
         else if (_currentQuestion.maxCuts - _slicesMade <
-            _currentQuestion.componentObjects.Count - consecutiveCorrectSlices) _answerStatus = -1;
+            _currentQuestion.componentObjects.Count - 1 - consecutiveCorrectSlices) _answerStatus = -1;
     }
 
     void QuestionTimeElapsed()
