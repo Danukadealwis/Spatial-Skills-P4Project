@@ -25,6 +25,12 @@ GameObject:
   - component: {fileID: 1938594554124392968}
   - component: {fileID: 4698354942580219889}
   - component: {fileID: 3212191366264630970}
+  - component: {fileID: -7593608515268553913}
+  - component: {fileID: 1529880207427707196}
+  - component: {fileID: 6006130127849337090}
+  - component: {fileID: -5391417073341739365}
+  - component: {fileID: 8732171427120424772}
+  - component: {fileID: 2063846519095135882}
   m_Layer: 0
   m_Name: TestCuber34
   m_TagString: Untagged
@@ -163,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctMeshes:
-  - {fileID: 4493585093827132993, guid: d9b42ebd1760541dbaca4e5eb8f3cfd5, type: 3}
-  - {fileID: -8678823145569952518, guid: a2f2657a8c8974896a30c961e0e72fb8, type: 3}
+  - {fileID: 4493585093827132993, guid: 2ae455b64634e4b23a618a2332a83bcf, type: 3}
+  - {fileID: -8678823145569952518, guid: ca61111d9c91e46f589c0fa27dcccd68, type: 3}
 --- !u!114 &4207441097297190156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +344,117 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
 --- !u!114 &3212191366264630970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548766320588918289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bec879e4b634bbeac6d998b7215d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctMeshes: []
+--- !u!114 &-7593608515268553913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548766320588918289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c630e5d76785e4b3aa02ab424c611965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliceOptions:
+    enableReslicing: 0
+    maxResliceCount: 1
+    detectFloatingFragments: 0
+    insideMaterial: {fileID: 0}
+    textureScale: {x: 1, y: 1}
+    textureOffset: {x: 0, y: 0}
+    invokeCallbacks: 0
+  callbackOptions:
+    onCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1529880207427707196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548766320588918289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bec879e4b634bbeac6d998b7215d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctMeshes: []
+--- !u!114 &6006130127849337090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548766320588918289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c630e5d76785e4b3aa02ab424c611965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliceOptions:
+    enableReslicing: 0
+    maxResliceCount: 1
+    detectFloatingFragments: 0
+    insideMaterial: {fileID: 0}
+    textureScale: {x: 1, y: 1}
+    textureOffset: {x: 0, y: 0}
+    invokeCallbacks: 0
+  callbackOptions:
+    onCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &-5391417073341739365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548766320588918289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bec879e4b634bbeac6d998b7215d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctMeshes: []
+--- !u!114 &8732171427120424772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548766320588918289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c630e5d76785e4b3aa02ab424c611965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliceOptions:
+    enableReslicing: 0
+    maxResliceCount: 1
+    detectFloatingFragments: 0
+    insideMaterial: {fileID: 0}
+    textureScale: {x: 1, y: 1}
+    textureOffset: {x: 0, y: 0}
+    invokeCallbacks: 0
+  callbackOptions:
+    onCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &2063846519095135882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
