@@ -3,54 +3,72 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mime;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using Image = UnityEngine.UI.Image;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    
+
+    private enum QuestionStatus
+    {
+        Unanswered,
+        CorrectAnswer,
+        TimeElapsed,
+        SlicesUsed
+    }
     struct QuestionData
     {
         public int SlicesMade;
         public int UndoCount;
         public double TimeTaken;
-        public bool AnsweredCorrectly;
+        public QuestionStatus QuestionResult;
     }
-    private List<int> _objectsSliced;
-    private List<string> _fragmentRoots;
-    private List<string> _slicedObjs;
-    private List<QuestionData> _allQuestionsData;
-    private int _undoCount;
     
+    // Input System
     private PlayerInput _playerInput;
     private InputAction _undoAction;
     private InputAction _nextQuestionAction;
-
+    
+    // Game Data
     [SerializeField] private List<QuestionSO> questions;
     private int _currentQuestionIndex;
     private List<GameObject> _componentsList;
     private List<GameObject> _pillarList;
     private GameObject _questionObject;
     private QuestionSO _currentQuestion;
-    private int _gameScore;
+    private List<int> _objectsSliced;
+    private List<string> _fragmentRoots;
+    private List<string> _slicedObjs;
     
-    [SerializeField] private double timeToCompleteQuiz = 300f;
+    // User question data
     private double _timerValue;
     private double _timerChange;
     public double maxQuestionTime;
     private double _timeTaken;
-    private double _slicesMade;
-    private int _answerStatus;
+    private int _slicesMade;
+    private int _undoCount;
+    private int _gameScore;
+    private QuestionStatus _answerStatus;
+    private List<QuestionData> _allQuestionsData;
+    
+    // Game assets
     [SerializeField] private GameObject cuttingDesk;
     [SerializeField] private GameObject cmpObjPillar;
 
+    // UI Elements
     [SerializeField] private GameObject _sliceImagePrefab;
     [SerializeField] private Sprite _sliceUsedSprite;
     [SerializeField] private Sprite _sliceUnusedSprite;
     [SerializeField] private GameObject _sliceMarkers;
     private List<GameObject> _sliceMarkersList;
+    [SerializeField] private Text _scoreText;
+
     
     // Start is called before the first frame update
     void Start()
@@ -75,10 +93,6 @@ public class GameManager : MonoBehaviour
         _timerChange = Time.deltaTime/10;
         maxQuestionTime = 40.0;
         
-       
-        // Image image = imagegame.GetComponent<Image>();
-        // image.sprite = _sliceUsedSprite;
-
     }
 
     // Update is called once per frame
@@ -128,6 +142,9 @@ public class GameManager : MonoBehaviour
             
 
         }
+
+        _scoreText.text = $"Score: {_gameScore}";
+        
         ResetCurrentQuestionData();
         InitialiseSliceUI();
 
@@ -144,7 +161,7 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateSliceUI()
     {
-        _sliceMarkersList[^(int)_slicesMade].GetComponent<Image>().sprite = _sliceUsedSprite;
+        _sliceMarkersList[^_slicesMade].GetComponent<Image>().sprite = _sliceUsedSprite;
     }
     
     public void UndoCut()
@@ -169,24 +186,32 @@ public class GameManager : MonoBehaviour
         
         StopTimer();
         _timeTaken = _timerValue;
-        
-        
-        Debug.Log(" time score: " + maxQuestionTime / _timeTaken*100);
-        Debug.Log(" cuts score: " + _currentQuestion.maxCuts / _slicesMade * 200);
-        if (_answerStatus == 1)
+
+        if (_answerStatus == QuestionStatus.CorrectAnswer)
         {
+            int unusedSlicesBonus =
+                ( _currentQuestion.maxCuts - _slicesMade > _currentQuestion.componentObjects.Count + 1 )? (_currentQuestion.maxCuts - _currentQuestion.componentObjects.Count + 1 - _slicesMade) * 50 : 0;
+            int timeBonus = Math.Min(2000, Convert.ToInt32(maxQuestionTime / _timeTaken * 100));
             _gameScore += 5000
-                         + Math.Min(2000, Convert.ToInt32(maxQuestionTime / _timeTaken*100))
-                         - Math.Min(500, Convert.ToInt32(_currentQuestion.maxCuts / _slicesMade * 200));
+                          + timeBonus
+                          + unusedSlicesBonus;
+            Debug.Log("Time Bonus: " + timeBonus);
+            Debug.Log("Unused Slices Bonus: " + unusedSlicesBonus);
         }
         Debug.Log("Game Score is: " + _gameScore);
         _allQuestionsData.Add(new QuestionData {
-                SlicesMade = Convert.ToInt16(_slicesMade),
+                SlicesMade = _slicesMade,
                 TimeTaken = _timeTaken,
-                AnsweredCorrectly = _answerStatus == 1,
+                QuestionResult = _answerStatus,
                 UndoCount = _undoCount 
         });
+        DisplayQuestionResult();
         GetNextQuestion();
+    }
+
+    void DisplayQuestionResult()
+    {
+        
     }
     
     void GetNextQuestion()
@@ -239,11 +264,11 @@ public class GameManager : MonoBehaviour
         if (_objectsSliced.TrueForAll(s => s != -1) &&
             _objectsSliced.Count == _currentQuestion.componentObjects.Count - 1)
         {
-            _answerStatus = 1;
+            _answerStatus = QuestionStatus.CorrectAnswer;
             Debug.Log("Correct!");
         }
         else if (_currentQuestion.maxCuts - _slicesMade <
-            _currentQuestion.componentObjects.Count - 1 - consecutiveCorrectSlices) _answerStatus = -1;
+            _currentQuestion.componentObjects.Count - 1 - consecutiveCorrectSlices) _answerStatus = QuestionStatus.SlicesUsed;
     }
 
     void QuestionTimeElapsed()
@@ -257,7 +282,7 @@ public class GameManager : MonoBehaviour
         _timerChange = Time.deltaTime/10;
         _slicesMade = 0;
         _undoCount = 0;
-        _answerStatus = 0;
+        _answerStatus = QuestionStatus.Unanswered;
     }
 
     void StopTimer()

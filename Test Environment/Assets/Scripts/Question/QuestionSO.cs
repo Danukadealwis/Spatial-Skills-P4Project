@@ -15,7 +15,7 @@ public class QuestionSO : ScriptableObject
     [SerializeField] public Material objectMaterial;
     private SliceConfirmation _sliceConfirmation;
     private Slice _slice;
-    [SerializeField] public double maxCuts;
+    [SerializeField] public int maxCuts;
     private SliceOptions _defaultSliceOptions;
     
     // Start is called before the first frame update
