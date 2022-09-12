@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Security.Cryptography;
+using Image = UnityEngine.UI.Image;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
@@ -43,6 +45,12 @@ public class GameManager : MonoBehaviour
     private int _answerStatus;
     [SerializeField] private GameObject cuttingDesk;
     [SerializeField] private GameObject cmpObjPillar;
+
+    [SerializeField] private GameObject _sliceImagePrefab;
+    [SerializeField] private Sprite _sliceUsedSprite;
+    [SerializeField] private Sprite _sliceUnusedSprite;
+    [SerializeField] private GameObject _sliceMarkers;
+    private List<GameObject> _sliceMarkersList;
     
     // Start is called before the first frame update
     void Start()
@@ -67,6 +75,10 @@ public class GameManager : MonoBehaviour
         _timerChange = Time.deltaTime/10;
         maxQuestionTime = 40.0;
         
+       
+        // Image image = imagegame.GetComponent<Image>();
+        // image.sprite = _sliceUsedSprite;
+
     }
 
     // Update is called once per frame
@@ -117,9 +129,24 @@ public class GameManager : MonoBehaviour
 
         }
         ResetCurrentQuestionData();
-        
+        InitialiseSliceUI();
+
     }
 
+    private void InitialiseSliceUI()
+    {
+        _sliceMarkersList = new List<GameObject>();
+        for (int i = 0; i < _currentQuestion.maxCuts; i++)
+        {
+            _sliceMarkersList.Add(Instantiate(_sliceImagePrefab, _sliceMarkers.transform));
+            _sliceMarkersList[i].GetComponent<Image>().sprite = _sliceUnusedSprite;
+        }
+    }
+    private void UpdateSliceUI()
+    {
+        _sliceMarkersList[^(int)_slicesMade].GetComponent<Image>().sprite = _sliceUsedSprite;
+    }
+    
     public void UndoCut()
     {
         if (_slicedObjs.Count != 0)
@@ -168,14 +195,11 @@ public class GameManager : MonoBehaviour
         _currentQuestion = questions[_currentQuestionIndex];
         
         foreach (var component in _componentsList)
-        {
             Destroy(component);
-        }
-
-        foreach (var pillar in _pillarList)
-        {
+        foreach (var pillar in _pillarList) 
             Destroy(pillar);
-        }
+        foreach (var sliceMarker in _sliceMarkersList) 
+            Destroy(sliceMarker);
 
         _objectsSliced = new List<int>();
         _componentsList = new List<GameObject>();
@@ -185,7 +209,7 @@ public class GameManager : MonoBehaviour
         DisplayQuestion();
     }
 
-    private void UpdateSliceUI(){}
+    
 
     public void ObjectSliced(int value, string fragmentRootName, string slicedObjName)
 
@@ -240,7 +264,4 @@ public class GameManager : MonoBehaviour
     {
         _timerChange = 0;
     }
-    
-    
-    
 }

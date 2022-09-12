@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.nosuchstudio.ui.bidirectionalhorizontallayoutgroup": {
+      "version": "https://github.com/hk1ll3r/BidirectionalHorizontalLayoutGroup.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e169018cc7fea32479a351cccf826b5a907cb114"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
