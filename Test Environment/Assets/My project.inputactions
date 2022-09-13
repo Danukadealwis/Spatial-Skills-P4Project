@@ -285,6 +285,17 @@
                 },
                 {
                     "name": "",
+                    "id": "f9090e46-10f0-4375-b3c7-3903ee2fd64c",
+                    "path": "<OpenVROculusTouchController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UndoCut",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "bce619ed-37c2-4eae-bdad-82d1db03afb1",
                     "path": "<Keyboard>/n",
                     "interactions": "",
