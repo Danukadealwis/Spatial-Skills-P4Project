@@ -21,4 +21,5 @@ MonoBehaviour:
   - {fileID: -8678823145569952518, guid: ca61111d9c91e46f589c0fa27dcccd68, type: 3}
   questionObject: {fileID: 3548766320588918289, guid: b60b60b5f086b403f83f30f797be5d7f, type: 3}
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
-  maxCuts: 10
+  maxQuestionTime: 101
+  maxCuts: 9
