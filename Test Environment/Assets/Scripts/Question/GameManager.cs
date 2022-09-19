@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
         _componentsList = new List<GameObject>();
         _currentQuestion = questions[_currentQuestionIndex];
 
-        maxQuestionTime = 10.0f;
+        maxQuestionTime = 100.0f;
         _correctAnswerPoints = 5000;
 
         _correctAnswerMessages = resultCanvas.transform.Find("Messages");
