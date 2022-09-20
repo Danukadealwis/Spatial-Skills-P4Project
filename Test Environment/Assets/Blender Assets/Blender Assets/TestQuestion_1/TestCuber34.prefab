@@ -42,6 +42,8 @@ GameObject:
   - component: {fileID: 8538470850568854977}
   - component: {fileID: 4937858774706654883}
   - component: {fileID: -3837853439222784076}
+  - component: {fileID: 5333245414088906782}
+  - component: {fileID: -1508559238125263975}
   m_Layer: 10
   m_Name: TestCuber34
   m_TagString: Untagged
@@ -783,3 +785,40 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 1
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
+--- !u!114 &5333245414088906782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548766320588918289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c630e5d76785e4b3aa02ab424c611965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliceOptions:
+    enableReslicing: 0
+    maxResliceCount: 1
+    detectFloatingFragments: 0
+    insideMaterial: {fileID: 0}
+    textureScale: {x: 1, y: 1}
+    textureOffset: {x: 0, y: 0}
+    invokeCallbacks: 0
+  callbackOptions:
+    onCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &-1508559238125263975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548766320588918289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bec879e4b634bbeac6d998b7215d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctMeshes: []
