@@ -36,8 +36,11 @@ public class GameManager : MonoBehaviour
         public int GameScore;
         public int QuestionsAnsweredCorrectly;
     }
-
-    private int _correctAnswerPoints;
+    
+    //Constants
+    private const int CorrectAnswerPoints = 5000;
+    private const float DistanceToPillar = 3.0f;
+    private const float DistanceBetweenPillar = 2.5f;
 
     // Input System
     private PlayerInput _playerInput;
@@ -135,9 +138,9 @@ public class GameManager : MonoBehaviour
     {
         resultCanvas.SetActive(false);
         Vector3 questionObjectCoords = cuttingDesk.GetComponentInChildren<Transform>().position;
-        Vector3 pillarObjectCoords = new Vector3(questionObjectCoords.x + 4, questionObjectCoords.y,
+        Vector3 pillarObjectCoords = new Vector3(questionObjectCoords.x + DistanceToPillar, questionObjectCoords.y,
             questionObjectCoords.z);
-
+        GameObject socketInteractor;
         Collider cuttingDeskCollider = cuttingDesk.GetComponentInChildren<Collider>();
         // questionObjectCoords.y += cuttingDeskCollider.bounds.size.y + questionObjectCollider.bounds.size.y*0.5f;
 
@@ -146,22 +149,20 @@ public class GameManager : MonoBehaviour
         _questionObject.transform.Translate(0,
             cuttingDeskCollider.bounds.size.y + questionObjectCollider.bounds.size.y * 0.5f, 0);
 
-        float pillarStartCoordZ = questionObjectCoords.z + _currentQuestion.componentObjects.Count - 1;
+        float pillarStartCoordZ = questionObjectCoords.z +(_currentQuestion.componentObjects.Count - 1)*DistanceBetweenPillar/2;
         for (int i = 0; i < _currentQuestion.componentObjects.Count; i++)
         {
             pillarObjectCoords = new Vector3(pillarObjectCoords.x, pillarObjectCoords.y,
-                pillarStartCoordZ - i * 4.0f);
+                pillarStartCoordZ - i * DistanceBetweenPillar);
             _pillarList.Add(Instantiate(cmpObjPillar, pillarObjectCoords, Quaternion.identity));
             Collider pillarCollider = _pillarList[i].GetComponentInChildren<Collider>();
-
+            socketInteractor = _pillarList[i].transform.Find("Socket Interactor").gameObject;
             _componentsList.Add(Instantiate(_currentQuestion.componentObjects[i],
-                pillarObjectCoords,
-                Quaternion.identity));
-            Collider componentCollider = _componentsList[i].GetComponentInChildren<Collider>();
-            _componentsList[i].transform
-                .Translate(0, pillarCollider.bounds.size.y + componentCollider.bounds.size.y * 0.5f, 0);
+                socketInteractor.GetComponent<Transform>().position,_currentQuestion.componentObjects[i].transform.rotation));
+            _componentsList[i].transform.SetParent(_pillarList[i].transform);
+            _componentsList[i].transform.localPosition = socketInteractor.transform.localPosition;
+            
         }
-
         _scoreText.text = $"Score: {_gameScore}";
 
         ResetCurrentQuestionData();
@@ -216,7 +217,7 @@ public class GameManager : MonoBehaviour
                     ? (_currentQuestion.maxCuts - _currentQuestion.componentObjects.Count + 1 - _slicesMade) * 50
                     : 0;
             _speedBonus = Math.Min(2000, Convert.ToInt32(_currentQuestion.maxQuestionTime / _timeTaken * 100));
-            _gameScore += _correctAnswerPoints
+            _gameScore += CorrectAnswerPoints
                           + _speedBonus
                           + _unusedSlicesBonus;
             Debug.Log("Time Bonus: " + _speedBonus);
@@ -249,7 +250,7 @@ public class GameManager : MonoBehaviour
                 _resultTexts.Add(Instantiate(gameText, _correctAnswerMessages));
                 _resultTexts.Add(Instantiate(gameText, _correctAnswerMessages));
                 _resultTexts[0].GetComponent<Text>().text = "Nice Work!";
-                _resultTexts[1].GetComponent<Text>().text = $"CorrectAnswer: {_correctAnswerPoints}";
+                _resultTexts[1].GetComponent<Text>().text = $"CorrectAnswer: {CorrectAnswerPoints}";
                 _resultTexts[2].GetComponent<Text>().text = $"Speed Bonus: {_speedBonus}";
                 _resultTexts[3].GetComponent<Text>().text = $"Unused Slices Bonus: {_unusedSlicesBonus}";
                 _resultTexts[4].GetComponent<Text>().text = $"Game Score: {_gameScore} Points!";
@@ -355,7 +356,6 @@ public class GameManager : MonoBehaviour
         _componentsList = new List<GameObject>();
         _currentQuestionIndex = 0;
         _currentQuestion = questions[_currentQuestionIndex];
-        _correctAnswerPoints = 5000;
 
         _correctAnswerMessages = resultCanvas.transform.Find("Messages");
         _sliceMarkers = gameInformation.transform.Find("SlicesUsed/SliceMarkers").gameObject;
