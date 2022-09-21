@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 using Random = UnityEngine.Random;
 
 #if UNITY_EDITOR
@@ -252,11 +253,14 @@ public static class      Fragmenter
             fragment.transform.localPosition = Vector3.zero;
             fragment.transform.localRotation = Quaternion.identity;
             fragment.transform.localScale = sourceObject.transform.localScale;
-
+            
             fragment.AddComponent<SliceConfirmation>();
             SliceConfirmation sliceConfirmation = fragment.GetComponent<SliceConfirmation>();
             sliceConfirmation.SetCorrectMeshes(sourceObject.GetComponent<SliceConfirmation>().GetCorrectMeshes());
-            
+
+            fragment.AddComponent<XRGrabInteractable>();
+            fragment.GetComponent<XRGrabInteractable>().smoothRotation = true;
+            fragment.GetComponent<XRGrabInteractable>().smoothPosition = true;
 
             meshes[k].name = System.Guid.NewGuid().ToString();
 
