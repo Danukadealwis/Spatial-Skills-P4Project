@@ -29,16 +29,6 @@ public class QuestionSO : ScriptableObject
             insideMaterial = objectMaterial
         };
         questionObject.name = $"{questionObject.name}{questionObject.GetInstanceID().ToString()}";
-        questionObject.AddComponent<Slice>();
-        questionObject.GetComponent<MeshRenderer>().material = objectMaterial;
-        _slice = questionObject.GetComponent<Slice>();
-        _slice.SetSliceOptions(_defaultSliceOptions);
-
-        questionObject.AddComponent<SliceConfirmation>();
-        _sliceConfirmation = questionObject.GetComponent<SliceConfirmation>();
-        _sliceConfirmation.SetCorrectMeshes(correctMeshes);
-
-
     }
 
 }
