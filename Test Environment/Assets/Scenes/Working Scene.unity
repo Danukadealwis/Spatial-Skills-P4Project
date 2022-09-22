@@ -2375,6 +2375,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4680757731159730826, guid: 0fde05fa0f3321942a21896ff4f0856f, type: 3}
   m_PrefabInstance: {fileID: 1011559619}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &605520172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+  m_PrefabInstance: {fileID: 1384148074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60523e0647cc6ab43acc73cb266a32a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &610071471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4727,6 +4738,30 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 22943629}
+    - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 605520172}
+    - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_attachTransform
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.XR.Interaction.Toolkit.XRBaseInteractor, Unity.XR.Interaction.Toolkit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Transform, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3221428415816343673, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

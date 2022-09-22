@@ -261,6 +261,12 @@ public static class      Fragmenter
             fragment.AddComponent<XRGrabInteractable>();
             fragment.GetComponent<XRGrabInteractable>().smoothRotation = true;
             fragment.GetComponent<XRGrabInteractable>().smoothPosition = true;
+            fragment.GetComponent<XRGrabInteractable>().forceGravityOnDetach = true;
+            fragment.GetComponent<XRGrabInteractable>().throwOnDetach = false;
+            fragment.GetComponent<XRGrabInteractable>().interactionLayers = LayerMask.NameToLayer("Object");
+            fragment.GetComponent<Rigidbody>().useGravity = true;
+
+            fragment.layer = LayerMask.NameToLayer("Object");
 
             meshes[k].name = System.Guid.NewGuid().ToString();
 
