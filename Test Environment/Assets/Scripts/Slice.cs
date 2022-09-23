@@ -34,7 +34,8 @@ public class Slice : MonoBehaviour
         SliceConfirmation sliceConfirmation = this.GetComponent<SliceConfirmation>();
         gameManager = FindObjectOfType<GameManager>();
         
-        
+
+
         
         if (mesh != null)
         {

@@ -11,7 +11,9 @@ using Image = UnityEngine.UI.Image;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class GameManager : MonoBehaviour
 {
@@ -76,6 +78,11 @@ public class GameManager : MonoBehaviour
     // Game assets
     [SerializeField] private GameObject cuttingDesk;
     [SerializeField] private GameObject cmpObjPillar;
+    private Transform currentRotation;
+    [SerializeField] private GameObject leftHandController;
+    XRRayInteractor rayInteractor;
+    Transform benchSocket;
+    XRSocketInteractor benchSocketInteractor;
 
     // UI Elements
     [SerializeField] private GameObject sliceImagePrefab;
@@ -132,6 +139,12 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        if (rayInteractor.interactablesSelected.Count > 0 && benchSocket && !benchSocket.GetComponent<XRSocketInteractor>().hasSelection) {
+            Debug.Log("position of held: " + rayInteractor.interactablesSelected[0].transform);
+            benchSocket.transform.Find("rotation").transform.rotation = rayInteractor.interactablesSelected[0].transform.rotation;
+        }
+
+        
     }
 
     void DisplayQuestion()
@@ -165,9 +178,26 @@ public class GameManager : MonoBehaviour
         }
         _scoreText.text = $"Score: {_gameScore}";
 
+        benchSocket = cuttingDesk.transform.Find("Socket");
+        benchSocketInteractor = benchSocket.GetComponent<XRSocketInteractor>();
+
+        // HoverEnterEventArgs hoverEnterEventArgs =
+        //     new HoverEnterEventArgs();
+        // benchSocketInteractor.hoverEntered.AddListener(hoverEnterEventArgs);
+        // benchSocketInteractor.hoverEntered.Invoke(hoverEnterEventArgs);
+
+        // Hover entered needs to call the function XRSocketInteractor.attachtransform
+        // and have the transform of the held object as a parameter.
+        
         ResetCurrentQuestionData();
         InitialiseSliceUI();
+        
 
+    }
+
+    public void HeldObjectRotation(){
+        currentRotation = cuttingDesk.transform.Find("Socket/rotation");
+        
     }
 
     private void InitialiseSliceUI()
@@ -366,7 +396,7 @@ public class GameManager : MonoBehaviour
         _endScoreText = endScreen.transform.Find("Messages/EndScoreText").gameObject.GetComponent<Text>();
         _endQuestionsAnsweredText = endScreen.transform.Find("Messages/EndQuestionsAnsText").gameObject.GetComponent<Text>();
         endScreen.SetActive(false);
-        
+        rayInteractor = leftHandController.GetComponent<XRRayInteractor>();
     }
 
     public void ObjectSliced(int value, string fragmentRootName, string slicedObjName)
