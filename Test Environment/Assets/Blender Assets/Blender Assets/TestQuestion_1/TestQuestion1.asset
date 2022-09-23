@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: TestQuestion1
   m_EditorClassIdentifier: 
   componentObjects:
-  - {fileID: 4284222605197570141, guid: 460dd74511c974bd69ed584b691e380a, type: 3}
-  - {fileID: 4070130509008823822, guid: 85d100c49d0d94203a08c4452f3b6e67, type: 3}
-  - {fileID: 4769246187772366644, guid: 9abd9335c1bda4c7f8c56bb708570d54, type: 3}
+  - {fileID: 5079648196796123713, guid: 41f234c632a6766479bdf8e2b684eed9, type: 3}
+  - {fileID: 897108614576090406, guid: 6e9f8cf2824dc2242b6106bed4edadd5, type: 3}
+  - {fileID: 2838396086998641109, guid: a011b1fc38c38ca4eaaf535ea049d61e, type: 3}
   correctMeshes:
   - {fileID: 4493585093827132993, guid: 2ae455b64634e4b23a618a2332a83bcf, type: 3}
   - {fileID: -8678823145569952518, guid: ca61111d9c91e46f589c0fa27dcccd68, type: 3}
   questionObject: {fileID: 3548766320588918289, guid: b60b60b5f086b403f83f30f797be5d7f, type: 3}
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
   maxQuestionTime: 101
-  maxCuts: 9
+  maxCuts: 8
