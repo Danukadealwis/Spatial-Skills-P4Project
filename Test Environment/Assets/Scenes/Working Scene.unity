@@ -3546,6 +3546,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8903058273634951509, guid: f1fc5bb90ac285e4486771552d63bcb8, type: 3}
   m_PrefabInstance: {fileID: 975882260}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1085374985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1085374986}
+  m_Layer: 0
+  m_Name: rotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1085374986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085374985}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1994518484}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1085946212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5440707293445741943, guid: 494f6d43e170e9145bc7865d243ee00b, type: 3}
@@ -4735,9 +4766,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 1085374986}
+    - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 22943629}
+    - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_ShowInteractableHoverMeshes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1425810167, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
       propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 2
@@ -4762,6 +4801,14 @@ PrefabInstance:
       propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Transform, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1425810168, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: leftHandController
+      value: 
+      objectReference: {fileID: 1777404848}
     - target: {fileID: 3221428415816343673, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6463,10 +6510,10 @@ MonoBehaviour:
   m_HoverToSelect: 0
   m_HoverTimeToSelect: 0.5
   m_EnableUIInteraction: 1
-  m_AllowAnchorControl: 0
+  m_AllowAnchorControl: 1
   m_UseForceGrab: 0
   m_RotateSpeed: 180
-  m_TranslateSpeed: 1
+  m_TranslateSpeed: 0
   m_AnchorRotateReferenceFrame: {fileID: 0}
 --- !u!114 &1777404853
 MonoBehaviour:
@@ -7755,6 +7802,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff62b58c5a9ea164fa8ddf8038e10cd1, type: 3}
+--- !u!4 &1994518484 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1425810166, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+  m_PrefabInstance: {fileID: 1384148074}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1995387816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4661435515762813124, guid: e289bf5debb17f6459818c207d781953, type: 3}
