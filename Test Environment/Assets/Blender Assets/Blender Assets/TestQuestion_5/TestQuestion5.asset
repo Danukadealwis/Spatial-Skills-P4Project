@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644cd18d53dc0c04bb0461423132907a, type: 3}
+  m_Name: TestQuestion5
+  m_EditorClassIdentifier: 
+  componentObjects:
+  - {fileID: 5401959069353210751, guid: 7a57e27f5f331448e899cc29abd975ed, type: 3}
+  - {fileID: 7724432734495326686, guid: a1bb8a073a9e44abd98c96dc94a5b533, type: 3}
+  - {fileID: 6880019747318995494, guid: ee823d2312cbb4d21ab250f6e501253d, type: 3}
+  questionObject: {fileID: 2006942937818944491, guid: 2f2b9c729178543428376e2ec2b91d0a, type: 3}
+  maxQuestionTime: 101
+  maxCuts: 12

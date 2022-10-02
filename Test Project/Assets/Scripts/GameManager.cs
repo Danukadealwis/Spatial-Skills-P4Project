@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private Quiz[] quizList;
+    private Quiz[] _quizList;
     private Quiz activeQuiz;
     private StartScreen startScreen;
     private int quizCount;
@@ -21,17 +21,30 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        quizList = FindObjectsOfType<Quiz>();
+        _quizList = FindObjectsOfType<Quiz>();
         startScreen = FindObjectOfType<StartScreen>();
         _scoreScreen = FindObjectOfType<ScoreScreen>();
         scoreText = _scoreScreen.GetComponentInChildren<TextMeshProUGUI>();
-        foreach(Quiz quiz in quizList)
+        foreach(Quiz quiz in _quizList)
         {
             quiz.gameObject.SetActive(false);
         }
-
+        
         _scoreScreen.gameObject.SetActive(false);
         startScreen.gameObject.SetActive(true);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     // Update is called once per frame
@@ -59,7 +72,7 @@ public class GameManager : MonoBehaviour
         // Calculate the total scores 
         if (testType == (int) TestType.CombinedTest)
         {
-            if (quizCount == quizList.Length - 1)
+            if (quizCount == _quizList.Length - 1)
             {
                 activeQuiz.gameObject.SetActive(false);
                 _scoreScreen.gameObject.SetActive(true);
@@ -67,7 +80,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 quizCount++;
-                activeQuiz = quizList[quizCount];
+                activeQuiz = _quizList[quizCount];
             }
         }
         else
@@ -92,14 +105,14 @@ public class GameManager : MonoBehaviour
         switch ((TestType)testType)
         {
             case TestType.Mct:
-                activeQuiz = quizList.Where(quiz => quiz.name.Contains("MCT")).Select(quiz => quiz).ToArray()[0];
+                activeQuiz = _quizList.Where(quiz => quiz.name.Contains("MCT")).Select(quiz => quiz).ToArray()[0];
                
                 break;
             case TestType.Mrt:
-                activeQuiz = quizList.Where(quiz => quiz.name.Contains("MRT")).Select(quiz => quiz).ToArray()[0];
+                activeQuiz = _quizList.Where(quiz => quiz.name.Contains("MRT")).Select(quiz => quiz).ToArray()[0];
                 break;
             case TestType.CombinedTest:
-                activeQuiz = quizList[0];
+                activeQuiz = _quizList[0];
                 quizCount = 0;
                 break;
 

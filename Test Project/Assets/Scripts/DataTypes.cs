@@ -11,8 +11,10 @@ namespace DefaultNamespace
     enum TimerState
     {
         QuizStart = 1,
-        TimeElapsed = 2,
-        QuizComplete = 3
+        QuizRunning = 2,
+        TimeElapsed = 3,
+        QuizComplete = 4,
+        
         
     }
     

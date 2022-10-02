@@ -154,11 +154,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questions:
-  - {fileID: 11400000, guid: 5a49dd2afd69644cba14c0c5c60fcfea, type: 2}
-  - {fileID: 11400000, guid: 138c8e5f038cd494fa0b390e9db17e14, type: 2}
-  - {fileID: 11400000, guid: a94c1578b4b2347bc87c719cba601b67, type: 2}
+  - {fileID: 11400000, guid: aab154a597a6048e7809a91e907219e1, type: 2}
+  - {fileID: 11400000, guid: aab154a597a6048e7809a91e907219e1, type: 2}
+  - {fileID: 11400000, guid: aab154a597a6048e7809a91e907219e1, type: 2}
   cuttingDesk: {fileID: 1279293197}
-  cmpObjPillar: {fileID: 637253451697942150, guid: 1ed44f6ab425aa44aa5197d3b823c04c, type: 3}
+  cmpObjPillar: {fileID: 4559440400204255681, guid: 71a63efbe4e6c4c4bb4a32b8991ca303, type: 3}
+  leftHandController: {fileID: 930574271445928817}
   sliceImagePrefab: {fileID: 9120853878471469371, guid: 4ad8b85b591b4478fb8f0f8e6ddeba56, type: 3}
   sliceUsedSprite: {fileID: 21300000, guid: 31fb3d4b26a58424fb87cc02a749435a, type: 3}
   sliceUnusedSprite: {fileID: 21300000, guid: f32299201bc7b49458bcbd55241e6c6f, type: 3}

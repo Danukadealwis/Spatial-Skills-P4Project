@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
@@ -10,13 +11,13 @@ public class Timer : MonoBehaviour
     [SerializeField] private float timeToCompleteQuiz = 300f;
     private float timerValue;
     private float timerChange;
-    public int timerState = 0;
     public float fillFraction;
+    private TimerState _timerState;
 
 
     void Start()
     {
-        timerChange = Time.deltaTime;
+        _timerState = TimerState.QuizStart;
     }
 
 
@@ -24,40 +25,44 @@ public class Timer : MonoBehaviour
     void Update()
     {
     
-        timerValue -= timerChange;
         // Debug.Log(timerChange);
+        
+        fillFraction = timerValue / timeToCompleteQuiz;
+        switch (_timerState)
+        {
+            case TimerState.QuizStart:
+                timerValue = timeToCompleteQuiz;
+                _timerState = TimerState.QuizRunning;
+                Debug.Log(_timerState);
+                break;
+            case TimerState.QuizRunning:
+                timerValue -= Time.deltaTime;
+                break;
+            case TimerState.QuizComplete:
+                timerValue = float.MaxValue;
+                break;
+            case TimerState.TimeElapsed:
+                timerValue = timeToCompleteQuiz;
+                break;
+                
+        }
         if (timerValue <= 0)
         {
-            SetTimerState((int)TimerState.TimeElapsed);
+            _timerState = TimerState.TimeElapsed;
         }
-        fillFraction = timerValue / timeToCompleteQuiz;
 
     }
 
     public void SetTimerState(int state)
     {
-        switch ((TimerState)state)
-        {
-            case TimerState.QuizStart:
-                timerChange = Time.deltaTime;
-                timerValue = timeToCompleteQuiz;
-                break;
-            case TimerState.QuizComplete:
-                timerChange = 0;
-                break;
-            case TimerState.TimeElapsed:
-                timerChange = 0;
-                timerValue = timeToCompleteQuiz;
-                break;
-                
-        }
+        
 
-        timerState = state;
+        _timerState = (TimerState)state;
 
     }
 
     public int GetTimerState()
     {
-        return timerState;
+        return (int)_timerState;
     } 
 }
