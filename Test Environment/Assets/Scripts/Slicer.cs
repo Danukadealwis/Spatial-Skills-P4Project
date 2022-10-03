@@ -7,20 +7,26 @@ public class Slicer : MonoBehaviour
 
     public void OnTriggerStay(Collider collider)
     {
+        var MeshRenderer = collider.gameObject.GetComponent<MeshRenderer>();
+        if(MeshRenderer != null){
         var material = collider.gameObject.GetComponent<MeshRenderer>().material;
         if (material.name.StartsWith("HighlightSlice"))
         {
             material.SetVector("CutPlaneNormal", this.transform.up);
             material.SetVector("CutPlaneOrigin", this.transform.position);
         }
+        }
     }
 
     public void OnTriggerExit(Collider collider)
     {
+        var MeshRenderer = collider.gameObject.GetComponent<MeshRenderer>();
+        if(MeshRenderer != null){
         var material = collider.gameObject.GetComponent<MeshRenderer>().material;
         if (material.name.StartsWith("HighlightSlice"))
         {
             material.SetVector("CutPlaneOrigin", Vector3.positiveInfinity);
+        }
         }
     }
 

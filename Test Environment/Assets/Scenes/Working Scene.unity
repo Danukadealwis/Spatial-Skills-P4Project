@@ -1147,6 +1147,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4180260915083844862, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180260915083844862, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aabb2b189f949a349b892a6d5c2d465f, type: 2}
     - target: {fileID: 4180260915230551722, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -5065,6 +5073,26 @@ PrefabInstance:
       propertyPath: leftHandController
       value: 
       objectReference: {fileID: 1777404848}
+    - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: questions.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: questions.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a49dd2afd69644cba14c0c5c60fcfea, type: 2}
+    - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: questions.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: bbf69f86ac27d4c419a7913a35ac127c, type: 2}
+    - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: questions.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a49dd2afd69644cba14c0c5c60fcfea, type: 2}
+    - target: {fileID: 2210480611301441175, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: XR
+      objectReference: {fileID: 0}
     - target: {fileID: 3221428415816343673, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6297,7 +6325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763674583}
   m_LocalRotation: {x: -0, y: -0.7247734, z: 0, w: -0.6889873}
-  m_LocalPosition: {x: 1.228, y: 1.0070732, z: 3.092}
+  m_LocalPosition: {x: 2.162, y: 1.0070732, z: 3.045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
