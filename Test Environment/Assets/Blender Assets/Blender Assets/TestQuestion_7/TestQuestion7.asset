@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644cd18d53dc0c04bb0461423132907a, type: 3}
+  m_Name: TestQuestion7
+  m_EditorClassIdentifier: 
+  componentObjects:
+  - {fileID: 32116838778020343, guid: f3641524161b9433dbdeef874ef5cc7f, type: 3}
+  - {fileID: 3870679507713913524, guid: c5be3ed20712d41afbe2780a90209fcc, type: 3}
+  - {fileID: 3732431151912129070, guid: 2bab924a60eb94f6a8fd4a3efe5dedd9, type: 3}
+  - {fileID: 3847973081025521979, guid: 3c0c411241f3a432ab94c0a32da3fa4c, type: 3}
+  correctMeshes:
+  - {fileID: 4493585093827132993, guid: 6e008b680880d45329d1c32d6fca2f51, type: 3}
+  - {fileID: 4493585093827132993, guid: 4e4fe28f4cf864591bd44531f56666ef, type: 3}
+  - {fileID: 4493585093827132993, guid: 94bc910acd5f74a84bfed73c4630a719, type: 3}
+  questionObject: {fileID: 2015285589389469653, guid: 7cf630ed037374189812a8d58e288ec1, type: 3}
+  objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
+  bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
+  maxQuestionTime: 498
+  maxCuts: 13
