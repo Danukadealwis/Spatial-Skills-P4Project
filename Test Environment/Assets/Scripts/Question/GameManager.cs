@@ -128,13 +128,12 @@ public class GameManager : MonoBehaviour
                     isSocketDeactivated = false;
                 }
             }
-            
+           
             if (!_isTutorialQuestion)
             {   _timerValue += _questionComplete ? 0:Time.deltaTime;
-                _timeRemaining = Math.Max(0, Convert.ToInt32(_currentQuestion.maxQuestionTime - _timerValue));
                 _timeRemainingText.text = $"Time Remaining: {_timeRemaining}";
             }else _timeRemainingText.text = "Time Remaining: ∞";
-            
+            _timeRemaining = Math.Max(0, Convert.ToInt32(_currentQuestion.maxQuestionTime - _timerValue));
             if (_undoAction.WasPressedThisFrame())
             {   cuttingDesk.transform.Find("Socket").gameObject.SetActive(false);
                 leftHandController.GetComponent<XRRayInteractor>().enabled = false;
@@ -259,7 +258,7 @@ public class GameManager : MonoBehaviour
         _timeTaken = _timerValue;
         _timerValue = Single.MaxValue;
 
-        if (_answerStatus == QuestionStatus.CorrectAnswer)
+        if (_answerStatus == QuestionStatus.CorrectAnswer && !_isTutorialQuestion)
         {
             _unusedSlicesBonus =
                 (_currentQuestion.maxCuts - _slicesMade > _currentQuestion.componentObjects.Count - 1)
@@ -271,11 +270,7 @@ public class GameManager : MonoBehaviour
                           + _unusedSlicesBonus;
             Debug.Log("Time Bonus: " + _speedBonus);
             Debug.Log("Unused Slices Bonus: " + _unusedSlicesBonus);
-        }
-
-        Debug.Log("Game Score is: " + _gameScore);
-        if (!_isTutorialQuestion)
-        {
+            Debug.Log("Game Score is: " + _gameScore);
             _allQuestionsData.Add(new QuestionData
             {
                 SlicesMade = _slicesMade,
@@ -334,13 +329,16 @@ public class GameManager : MonoBehaviour
     }
 
     void ResetGameScene()
-    {
+    {   
         foreach (var component in _componentsList)
             Destroy(component);
         foreach (var pillar in _pillarList)
             Destroy(pillar);
-        foreach (var sliceMarker in _sliceMarkersList)
-            Destroy(sliceMarker);
+        if (!_isTutorialQuestion)
+        {
+            foreach (var sliceMarker in _sliceMarkersList)
+                Destroy(sliceMarker);
+        }
         foreach (var text in _resultTexts)
             Destroy(text);
 
@@ -360,13 +358,14 @@ public class GameManager : MonoBehaviour
 
         Destroy(_questionObject);
 
+       
     }
 
     public void GetNextQuestion()
     {
-        _currentQuestionIndex = !_isTutorialQuestion ? _currentQuestionIndex++ : 0;
-        _isTutorialQuestion = false;
+        _currentQuestionIndex = !_isTutorialQuestion ? _currentQuestionIndex+1 : 0;
         ResetGameScene();
+        _isTutorialQuestion = false;
         if (_currentQuestionIndex == questions.Count)
         {
             resultCanvas.SetActive(false);

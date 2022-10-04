@@ -4893,9 +4893,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 13400000, guid: bf3f24a941240bf4cb1aa26e3bef9339, type: 2}
     - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: tutorialQuestion
+      value: 
+      objectReference: {fileID: 11400000, guid: bbf69f86ac27d4c419a7913a35ac127c, type: 2}
+    - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
       propertyPath: leftHandController
       value: 
       objectReference: {fileID: 1777404848}
+    - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: questions.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a49dd2afd69644cba14c0c5c60fcfea, type: 2}
+    - target: {fileID: 2210480611301441161, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
+      propertyPath: questions.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a49dd2afd69644cba14c0c5c60fcfea, type: 2}
     - target: {fileID: 2210480612300347977, guid: 164e726efcb5e484ab9ae4b2807d4607, type: 3}
       propertyPath: m_Material
       value: 
