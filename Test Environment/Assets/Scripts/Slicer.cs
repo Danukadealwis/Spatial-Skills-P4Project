@@ -10,11 +10,13 @@ public class Slicer : MonoBehaviour
     {
         var MeshRenderer = collider.gameObject.GetComponent<MeshRenderer>();
         if(MeshRenderer != null){
-        var material = collider.gameObject.GetComponent<MeshRenderer>().material;
-            if (material.name.StartsWith("HighlightSlice"))
-            {
-                material.SetVector("CutPlaneNormal", this.transform.up);
-                material.SetVector("CutPlaneOrigin", this.transform.position);
+        var materials = collider.gameObject.GetComponent<MeshRenderer>().materials;
+        foreach(var material in materials){
+                if (material.name.StartsWith("HighlightSlice"))
+                {
+                    material.SetVector("CutPlaneNormal", this.transform.up);
+                    material.SetVector("CutPlaneOrigin", this.transform.position);
+                }
             }
         }
     }
@@ -23,10 +25,12 @@ public class Slicer : MonoBehaviour
     {
         var MeshRenderer = collider.gameObject.GetComponent<MeshRenderer>();
         if(MeshRenderer != null){
-            var material = collider.gameObject.GetComponent<MeshRenderer>().material;
-            if (material.name.StartsWith("HighlightSlice"))
-            {
-                material.SetVector("CutPlaneOrigin", Vector3.positiveInfinity);
+            var materials = collider.gameObject.GetComponent<MeshRenderer>().materials;
+            foreach(var material in materials){
+                if (material.name.StartsWith("HighlightSlice"))
+                {
+                    material.SetVector("CutPlaneOrigin", Vector3.positiveInfinity);
+                }
             }
         }
     }

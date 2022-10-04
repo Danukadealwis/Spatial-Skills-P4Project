@@ -1052,13 +1052,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4180260915830980323, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4180260915988001569, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4180260915988001571, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4180260916162790456, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180260916162790458, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4180260916752968664, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
       propertyPath: m_RootOrder
@@ -1123,6 +1135,10 @@ PrefabInstance:
     - target: {fileID: 4180260916752968670, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
       propertyPath: m_ForceGravityOnDetach
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180260917002747980, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4180260917002748850, guid: 6053ac2e1fe77754aa86601bdeec8a6b, type: 3}
       propertyPath: m_Layer
