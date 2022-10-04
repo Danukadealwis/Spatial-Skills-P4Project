@@ -311,7 +311,29 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<OpenVROculusTouchController>{RightHand}/secondaryButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""UndoCut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""383402d4-6ea7-4fc3-8913-cd2e90873778"",
+                    ""path"": ""<XRSimulatedController>{RightHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""UndoCut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f7ec3a8-cef0-4376-9b33-1c975fa78425"",
+                    ""path"": ""<XRInputV1::Oculus::OculusTouchControllerRight>{RightHand}/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
                     ""action"": ""UndoCut"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

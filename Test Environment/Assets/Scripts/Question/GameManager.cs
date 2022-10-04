@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     private const int CorrectAnswerPoints = 5000;
     private const float DistanceToPillar = 3.0f;
     private const float DistanceBetweenPillar = 2.5f;
+    private const float socketDeactivateTime = 3.0f;
 
     // Input System
     private PlayerInput _playerInput;
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
     private List<int> _objectsSliced;
     private List<string> _fragmentRoots;
     private List<string> _slicedObjs;
+    private bool isSocketDeactivated;
 
     // User question data
     private float _timerValue;
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
     XRRayInteractor rayInteractor;
     Transform benchSocket;
     XRSocketInteractor benchSocketInteractor;
+    float socketDeactivationTimer = 0;
 
     // UI Elements
     [SerializeField] private GameObject sliceImagePrefab;
@@ -115,14 +118,25 @@ public class GameManager : MonoBehaviour
     {
         if (_answerStatus == QuestionStatus.Unanswered)
         {
+            
+            if(isSocketDeactivated){
+                socketDeactivationTimer += Time.deltaTime;
+                if(socketDeactivationTimer >= socketDeactivateTime){
+                    cuttingDesk.transform.Find("Socket").gameObject.SetActive(true);
+                    isSocketDeactivated = false;
+                }
+            }
             _timerValue += _questionComplete ? 0:Time.deltaTime;
             _timeRemaining = Math.Max(0, Convert.ToInt32(_currentQuestion.maxQuestionTime - _timerValue));
             _timeRemainingText.text = $"Time Remaining: {_timeRemaining}";
             if (_undoAction.WasPressedThisFrame())
-            {
+            {   cuttingDesk.transform.Find("Socket").gameObject.SetActive(false);
+                leftHandController.GetComponent<XRRayInteractor>().enabled = false;
                 UndoCut();
+                cuttingDesk.transform.Find("Socket").gameObject.SetActive(true);
+                leftHandController.GetComponent<XRRayInteractor>().enabled = true;
                 return;
-            }
+            } 
 
             if (_nextQuestionAction.WasPressedThisFrame())
             {
@@ -140,11 +154,18 @@ public class GameManager : MonoBehaviour
         }
 
         if (rayInteractor.interactablesSelected.Count > 0 && benchSocket && !benchSocket.GetComponent<XRSocketInteractor>().hasSelection) {
-            Debug.Log("position of held: " + rayInteractor.interactablesSelected[0].transform);
             benchSocket.transform.Find("rotation").transform.rotation = rayInteractor.interactablesSelected[0].transform.rotation;
         }
 
         
+    }
+
+    public void DeactivateSocket() {
+        // calling this function will deactivate the socket for 3 seconds
+        // 
+        socketDeactivationTimer = 0;
+        cuttingDesk.transform.Find("Socket").gameObject.SetActive(false);
+        isSocketDeactivated = true;
     }
 
     void DisplayQuestion()
@@ -178,7 +199,8 @@ public class GameManager : MonoBehaviour
         }
         _scoreText.text = $"Score: {_gameScore}";
 
-        benchSocket = cuttingDesk.transform.Find("Socket");
+        //benchSocket = cuttingDesk.transform.Find("Socket");
+        benchSocket = cuttingDesk.transform.Find("Socket").transform;
         benchSocketInteractor = benchSocket.GetComponent<XRSocketInteractor>();
 
         // HoverEnterEventArgs hoverEnterEventArgs =
@@ -216,10 +238,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void UndoCut()
-    {
+    {   
+        Debug.Log("UNDO CUT!");
         if (_slicedObjs.Count != 0)
         {
-            Debug.Log("_slicedObjs.Count:" + _slicedObjs.Count);
             var allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
             GameObject obj = allObjects.Single(o => o.name == _slicedObjs.Last());
             GameObject root = GameObject.Find(_fragmentRoots.Last()).gameObject;
@@ -376,6 +398,7 @@ public class GameManager : MonoBehaviour
         _playerInput.SwitchCurrentActionMap("Player");
         _undoAction = _playerInput.currentActionMap.FindAction("UndoCut");
         _nextQuestionAction = _playerInput.currentActionMap.FindAction("NextQuestion");
+        Debug.Log(_undoAction.bindings);
 
         _allQuestionsData = new List<QuestionData>();
         _objectsSliced = new List<int>();
