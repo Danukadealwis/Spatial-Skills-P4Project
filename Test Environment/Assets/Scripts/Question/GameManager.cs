@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     // Game Data
     [SerializeField] private List<QuestionSO> questions;
+    [SerializeField] private QuestionSO tutorialQuestion;
     private int _currentQuestionIndex;
     private List<GameObject> _componentsList;
     private List<GameObject> _pillarList;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
     private List<string> _fragmentRoots;
     private List<string> _slicedObjs;
     private bool isSocketDeactivated;
+    private bool _isTutorialQuestion;
 
     // User question data
     private float _timerValue;
@@ -126,9 +128,13 @@ public class GameManager : MonoBehaviour
                     isSocketDeactivated = false;
                 }
             }
-            _timerValue += _questionComplete ? 0:Time.deltaTime;
-            _timeRemaining = Math.Max(0, Convert.ToInt32(_currentQuestion.maxQuestionTime - _timerValue));
-            _timeRemainingText.text = $"Time Remaining: {_timeRemaining}";
+            
+            if (!_isTutorialQuestion)
+            {   _timerValue += _questionComplete ? 0:Time.deltaTime;
+                _timeRemaining = Math.Max(0, Convert.ToInt32(_currentQuestion.maxQuestionTime - _timerValue));
+                _timeRemainingText.text = $"Time Remaining: {_timeRemaining}";
+            }else _timeRemainingText.text = "Time Remaining: ∞";
+            
             if (_undoAction.WasPressedThisFrame())
             {   cuttingDesk.transform.Find("Socket").gameObject.SetActive(false);
                 leftHandController.GetComponent<XRRayInteractor>().enabled = false;
@@ -202,19 +208,10 @@ public class GameManager : MonoBehaviour
         //benchSocket = cuttingDesk.transform.Find("Socket");
         benchSocket = cuttingDesk.transform.Find("Socket").transform;
         benchSocketInteractor = benchSocket.GetComponent<XRSocketInteractor>();
-
-        // HoverEnterEventArgs hoverEnterEventArgs =
-        //     new HoverEnterEventArgs();
-        // benchSocketInteractor.hoverEntered.AddListener(hoverEnterEventArgs);
-        // benchSocketInteractor.hoverEntered.Invoke(hoverEnterEventArgs);
-
-        // Hover entered needs to call the function XRSocketInteractor.attachtransform
-        // and have the transform of the held object as a parameter.
         
         ResetCurrentQuestionData();
-        InitialiseSliceUI();
+        if (!_isTutorialQuestion) InitialiseSliceUI();
         
-
     }
 
     public void HeldObjectRotation(){
@@ -277,13 +274,17 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("Game Score is: " + _gameScore);
-        _allQuestionsData.Add(new QuestionData
+        if (!_isTutorialQuestion)
         {
-            SlicesMade = _slicesMade,
-            TimeTaken = _timeTaken,
-            QuestionResult = _answerStatus,
-            UndoCount = _undoCount
-        });
+            _allQuestionsData.Add(new QuestionData
+            {
+                SlicesMade = _slicesMade,
+                TimeTaken = _timeTaken,
+                QuestionResult = _answerStatus,
+                UndoCount = _undoCount
+            });
+        }
+
         DisplayQuestionResult();
     }
 
@@ -301,11 +302,20 @@ public class GameManager : MonoBehaviour
                 _resultTexts.Add(Instantiate(gameText, _correctAnswerMessages));
                 _resultTexts.Add(Instantiate(gameText, _correctAnswerMessages));
                 _resultTexts.Add(Instantiate(gameText, _correctAnswerMessages));
-                _resultTexts[0].GetComponent<Text>().text = "Nice Work!";
-                _resultTexts[1].GetComponent<Text>().text = $"CorrectAnswer: {CorrectAnswerPoints}";
-                _resultTexts[2].GetComponent<Text>().text = $"Speed Bonus: {_speedBonus}";
-                _resultTexts[3].GetComponent<Text>().text = $"Unused Slices Bonus: {_unusedSlicesBonus}";
-                _resultTexts[4].GetComponent<Text>().text = $"Game Score: {_gameScore} Points!";
+                if (!_isTutorialQuestion)
+                {
+                    _resultTexts[0].GetComponent<Text>().text = "Nice Work!";
+                    _resultTexts[1].GetComponent<Text>().text = $"CorrectAnswer: {CorrectAnswerPoints}";
+                    _resultTexts[2].GetComponent<Text>().text = $"Speed Bonus: {_speedBonus}";
+                    _resultTexts[3].GetComponent<Text>().text = $"Unused Slices Bonus: {_unusedSlicesBonus}";
+                    _resultTexts[4].GetComponent<Text>().text = $"Game Score: {_gameScore} Points!";
+                }
+                else
+                {
+                    _resultTexts[0].GetComponent<Text>().text = "Nice Work!";
+                    _resultTexts[1].GetComponent<Text>().text = "You finished the tutorial Question";
+                }
+
                 break;
             case QuestionStatus.SlicesUsed:
                 _resultTexts.Add(Instantiate(gameText, _correctAnswerMessages));
@@ -354,11 +364,11 @@ public class GameManager : MonoBehaviour
 
     public void GetNextQuestion()
     {
-        _currentQuestionIndex++;
+        _currentQuestionIndex = !_isTutorialQuestion ? _currentQuestionIndex++ : 0;
+        _isTutorialQuestion = false;
         ResetGameScene();
         if (_currentQuestionIndex == questions.Count)
         {
-            
             resultCanvas.SetActive(false);
             DisplayEndScreen();
             return;
@@ -396,6 +406,7 @@ public class GameManager : MonoBehaviour
     }
     private void  StartGame()
     {
+        
         _playerInput = GetComponent<PlayerInput>();
         _playerInput.SwitchCurrentActionMap("Player");
         _undoAction = _playerInput.currentActionMap.FindAction("UndoCut");
@@ -410,8 +421,10 @@ public class GameManager : MonoBehaviour
         _pillarList = new List<GameObject>();
         _componentsList = new List<GameObject>();
         _currentQuestionIndex = 0;
-        _currentQuestion = questions[_currentQuestionIndex];
 
+        _currentQuestion = tutorialQuestion == null ? questions[_currentQuestionIndex] : tutorialQuestion;
+        _isTutorialQuestion = tutorialQuestion != null;
+        
         _correctAnswerMessages = resultCanvas.transform.Find("Messages");
         _sliceMarkers = gameInformation.transform.Find("SlicesUsed/SliceMarkers").gameObject;
         _scoreText = gameInformation.transform.Find("TimeAndScore/ScoreText").gameObject.GetComponent<Text>();
@@ -431,9 +444,12 @@ public class GameManager : MonoBehaviour
         _objectsSliced.Add(value);
         _fragmentRoots.Add(fragmentRootName);
         _slicedObjs.Add(slicedObjName);
-        _slicesMade++;
         CheckAnswer();
-        UpdateSliceUI();
+        if (!_isTutorialQuestion)
+        {
+            _slicesMade++;
+            UpdateSliceUI();
+        }
         if (_answerStatus == 0) return;
         QuestionComplete();
         
@@ -456,7 +472,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Correct!");
         }
         else if (_currentQuestion.maxCuts - _slicesMade <
-                 _currentQuestion.componentObjects.Count - 1 - consecutiveCorrectSlices)
+                 _currentQuestion.componentObjects.Count - 1 - consecutiveCorrectSlices && !_isTutorialQuestion)
             _answerStatus = QuestionStatus.SlicesUsed;
     }
 
