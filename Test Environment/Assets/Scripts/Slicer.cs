@@ -1,9 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Slicer : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
+    [SerializeField] GameObject benchSocket;
+    [SerializeField] GameObject handSocket;
+    GameObject socket;
+    GameObject hand;
+
 
 
     public void OnTriggerStay(Collider collider)
@@ -44,6 +51,14 @@ public class Slicer : MonoBehaviour
             var mesh = this.GetComponent<MeshFilter>().sharedMesh;
             var center = mesh.bounds.center;
             var extents = mesh.bounds.extents;
+            if(benchSocket.GetComponent<XRSocketInteractor>().firstInteractableSelected != null){
+                socket = benchSocket.GetComponent<XRSocketInteractor>().firstInteractableSelected.transform.gameObject;
+            }
+            if(handSocket.GetComponent<XRRayInteractor>().firstInteractableSelected != null){
+                hand = handSocket.GetComponent<XRRayInteractor>().firstInteractableSelected.transform.gameObject;
+            }
+            
+            Debug.Log(socket);
 
             extents = new Vector3(extents.x * this.transform.localScale.x,
                                   extents.y * this.transform.localScale.y,
@@ -54,10 +69,10 @@ public class Slicer : MonoBehaviour
             
             foreach(RaycastHit hit in hits)
             {
-                var obj = hit.collider.gameObject;
+                GameObject obj = hit.collider.gameObject;
                 var sliceObj = obj.GetComponent<Slice>();
 
-                if (sliceObj != null)
+                if (sliceObj != null && (obj == socket || obj == hand))
                 {   
                     gameManager.DeactivateSocket();
                     sliceObj.GetComponent<MeshRenderer>()?.material.SetVector("CutPlaneOrigin", Vector3.positiveInfinity);

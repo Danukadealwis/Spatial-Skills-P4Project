@@ -81,9 +81,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject cuttingDesk;
     [SerializeField] private GameObject cmpObjPillar;
     private Transform currentRotation;
-    [SerializeField] private GameObject leftHandController;
+    [SerializeField] public GameObject leftHandController;
     XRRayInteractor rayInteractor;
-    Transform benchSocket;
+    public Transform benchSocket;
     XRSocketInteractor benchSocketInteractor;
     float socketDeactivationTimer = 0;
 
