@@ -17,8 +17,8 @@ MonoBehaviour:
   - {fileID: 7188387380943885868, guid: ad2c2a4e9c899ea47b911de04b579512, type: 3}
   - {fileID: 3155095472678748784, guid: 8a2fdd4e41c170944885d29728b077e7, type: 3}
   correctMeshes:
-  - {fileID: 4493585093827132993, guid: 2ae455b64634e4b23a618a2332a83bcf, type: 3}
-  - {fileID: -8678823145569952518, guid: ca61111d9c91e46f589c0fa27dcccd68, type: 3}
+  - {fileID: 4493585093827132993, guid: ce2d1ce6fcc750147a5783a829e85c71, type: 3}
+  - {fileID: 4493585093827132993, guid: 3bf4c6ea28856e449851ddf794890ebb, type: 3}
   questionObject: {fileID: 6290627779616218815, guid: 37268272b24c47b488275a71752c605e, type: 3}
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
   maxQuestionTime: 101
