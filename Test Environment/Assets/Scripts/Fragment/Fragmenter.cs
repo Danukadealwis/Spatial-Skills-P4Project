@@ -262,9 +262,12 @@ public static class      Fragmenter
             fragment.GetComponent<XRGrabInteractable>().smoothRotation = true;
             fragment.GetComponent<XRGrabInteractable>().smoothPosition = true;
             fragment.GetComponent<XRGrabInteractable>().forceGravityOnDetach = true;
-            fragment.GetComponent<XRGrabInteractable>().throwOnDetach = false;
             fragment.GetComponent<XRGrabInteractable>().interactionLayers = LayerMask.NameToLayer("Object");
+            fragment.GetComponent<XRGrabInteractable>().velocityScale = 0.25f;
             fragment.GetComponent<Rigidbody>().useGravity = true;
+            fragment.GetComponent<XRGrabInteractable>().useDynamicAttach = true;
+            fragment.GetComponent<XRGrabInteractable>().snapToColliderVolume = false;
+            fragment.GetComponent<XRGrabInteractable>().movementType = XRBaseInteractable.MovementType.VelocityTracking;
             fragment.tag = "FragmentRoot";
             fragment.layer = LayerMask.NameToLayer("Object");
 
@@ -284,6 +287,7 @@ public static class      Fragmenter
             // Compute mass of the sliced object by dividing mesh bounds by density
             var parentRigidBody = sourceObject.GetComponent<Rigidbody>();
             var rigidBody = fragment.GetComponent<Rigidbody>();
+            rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
             var size = fragmentMesh.bounds.size;
             float density = (parentSize.x * parentSize.y * parentSize.z) / parentMass;
