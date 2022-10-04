@@ -339,8 +339,10 @@ public class GameManager : MonoBehaviour
         _objectsSliced = new List<int>();
         _componentsList = new List<GameObject>();
         _pillarList = new List<GameObject>();
-        if (GameObject.Find($"{_questionObject.name}Slices") != null)
-            Destroy(GameObject.Find($"{_questionObject.name}Slices"));
+        var fragmentRoots = GameObject.FindGameObjectsWithTag("FragmentRoot");
+        if (fragmentRoots != null)
+            foreach(var root in fragmentRoots)
+                Destroy(root);
         else
         {
             Debug.Log("Null found");

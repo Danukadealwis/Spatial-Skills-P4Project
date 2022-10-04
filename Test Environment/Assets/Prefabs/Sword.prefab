@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4180260915083844862}
   - component: {fileID: 4180260915083844861}
   - component: {fileID: 4180260915083844860}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Slice Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4180260915083844835}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: aabb2b189f949a349b892a6d5c2d465f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,6 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1334220d1b17347a6cb75aa1100f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  benchSocket: {fileID: 0}
+  handSocket: {fileID: 0}
 --- !u!1 &4180260915230551722
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4180260915230551723}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grip Offset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +157,7 @@ GameObject:
   - component: {fileID: 4180260915830980349}
   - component: {fileID: 4180260915830980348}
   - component: {fileID: 4180260915830980323}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Guard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +238,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4180260915830980321}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -252,7 +255,7 @@ GameObject:
   - component: {fileID: 4180260915988001597}
   - component: {fileID: 4180260915988001596}
   - component: {fileID: 4180260915988001571}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pommel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +336,7 @@ SphereCollider:
   m_GameObject: {fileID: 4180260915988001569}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -349,7 +352,7 @@ GameObject:
   - component: {fileID: 4180260916162790452}
   - component: {fileID: 4180260916162790459}
   - component: {fileID: 4180260916162790458}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +433,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4180260916162790456}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -446,7 +449,7 @@ GameObject:
   - component: {fileID: 4180260916752968664}
   - component: {fileID: 4180260916752968671}
   - component: {fileID: 4180260916752968670}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +465,7 @@ Transform:
   m_GameObject: {fileID: 4180260916752968669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.899, y: 1.08, z: -5.883}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4180260916162790457}
@@ -618,7 +621,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
+  m_ForceGravityOnDetach: 1
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
 --- !u!1 &4180260917002748850
@@ -633,7 +636,7 @@ GameObject:
   - component: {fileID: 4180260917002747982}
   - component: {fileID: 4180260917002747981}
   - component: {fileID: 4180260917002747980}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +718,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4180260917002748850}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1

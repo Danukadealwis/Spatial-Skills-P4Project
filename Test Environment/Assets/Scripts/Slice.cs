@@ -44,6 +44,7 @@ public class Slice : MonoBehaviour
             {
                 // Create a game object to contain the fragments
                 this.fragmentRoot = new GameObject($"{this.name}Slices");
+                this.fragmentRoot.tag = "FragmentRoot";
                 this.fragmentRoot.transform.SetParent(this.transform.parent);
 
                 // Each fragment will handle its own scale

@@ -265,7 +265,7 @@ public static class      Fragmenter
             fragment.GetComponent<XRGrabInteractable>().throwOnDetach = false;
             fragment.GetComponent<XRGrabInteractable>().interactionLayers = LayerMask.NameToLayer("Object");
             fragment.GetComponent<Rigidbody>().useGravity = true;
-
+            fragment.tag = "FragmentRoot";
             fragment.layer = LayerMask.NameToLayer("Object");
 
             meshes[k].name = System.Guid.NewGuid().ToString();

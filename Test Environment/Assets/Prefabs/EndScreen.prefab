@@ -476,7 +476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3261950277137451011, guid: b3063102c5e61406198b2f1dd011e70a, type: 3}
       propertyPath: m_Text
-      value: 'Your Score: 47203 '
+      value: 'Final Score: 12323'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3063102c5e61406198b2f1dd011e70a, type: 3}
@@ -582,7 +582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3261950277137451011, guid: b3063102c5e61406198b2f1dd011e70a, type: 3}
       propertyPath: m_Text
-      value: 'Questions Answered Correctly: 5/10'
+      value: 'QuestionsAnsweredCorrectly: 2/3'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3063102c5e61406198b2f1dd011e70a, type: 3}
