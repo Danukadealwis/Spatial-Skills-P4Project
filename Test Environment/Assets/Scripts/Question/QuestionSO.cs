@@ -49,9 +49,5 @@ public class QuestionSO : ScriptableObject
         questionObject.GetComponent<Slice>().SetSliceOptions(_defaultSliceOptions);
         questionObject.GetComponent<SliceConfirmation>().SetCorrectMeshes(correctMeshes);
         questionObject.GetComponent<MeshRenderer>().material = objectMaterial;
-
     }
-
-    
-
 }
