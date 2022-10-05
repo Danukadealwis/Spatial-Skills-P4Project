@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 644cd18d53dc0c04bb0461423132907a, type: 3}
-  m_Name: TestQuestion7
+  m_Name: TestQuestion_9
   m_EditorClassIdentifier: 
   componentObjects:
-  - {fileID: 1252827078991269694, guid: f3641524161b9433dbdeef874ef5cc7f, type: 3}
-  - {fileID: 9176297299899403780, guid: 1603d4398a1037f49b54d3cc6aa0c50f, type: 3}
-  - {fileID: 1654886724919113901, guid: 3c0c411241f3a432ab94c0a32da3fa4c, type: 3}
+  - {fileID: 8836499410517031357, guid: 7a364bb3a900a39479e87476336de63f, type: 3}
+  - {fileID: 6441234283805253805, guid: 7799fa5c68d06f043a3e1a96ad836ad7, type: 3}
+  - {fileID: 5702219847726251708, guid: 654aa6c57a948824ab7aa384d1480cf1, type: 3}
   correctMeshes:
-  - {fileID: 4493585093827132993, guid: 6e008b680880d45329d1c32d6fca2f51, type: 3}
-  - {fileID: 4493585093827132993, guid: 4e4fe28f4cf864591bd44531f56666ef, type: 3}
-  questionObject: {fileID: 4872263577348064115, guid: 7cf630ed037374189812a8d58e288ec1, type: 3}
+  - {fileID: 4493585093827132993, guid: 7d9f9c56647e170429eda4fc161cd149, type: 3}
+  - {fileID: 4493585093827132993, guid: f73e5119ba4b0494584ad14e013f6231, type: 3}
+  questionObject: {fileID: 2666235868326396611, guid: 2a16fc53e8c4cef4d90f60cd03f8e300, type: 3}
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
   bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
-  maxQuestionTime: 498
-  maxCuts: 13
+  maxQuestionTime: 380
+  maxCuts: 12
