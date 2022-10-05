@@ -15,11 +15,11 @@ TagManager:
   - Water
   - UI
   - Interactable
-  - 
+  - Bounding Walls
   - Player
   - Cutting tool
   - Object
-  - 
+  - TargetObject
   - 
   - 
   - 

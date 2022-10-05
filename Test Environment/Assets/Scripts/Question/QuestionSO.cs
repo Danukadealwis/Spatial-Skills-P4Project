@@ -53,11 +53,12 @@ public class QuestionSO : ScriptableObject
         questionObject.GetComponent<MeshRenderer>().material = objectMaterial;
 
         foreach(var component in componentObjects){
-            component.layer = LayerMask.NameToLayer("Object");
+            component.layer = LayerMask.NameToLayer("TargetObject");
             component.GetComponent<XRGrabInteractable>().smoothRotation = true;
             component.GetComponent<XRGrabInteractable>().smoothPosition = true;
             component.GetComponent<XRGrabInteractable>().forceGravityOnDetach = true;
-            component.GetComponent<XRGrabInteractable>().interactionLayers = LayerMask.NameToLayer("Object");
+            component.GetComponent<XRGrabInteractable>().interactionLayers += LayerMask.NameToLayer("Object");
+            component.GetComponent<XRGrabInteractable>().interactionLayers += LayerMask.NameToLayer("TargetObject");
             component.GetComponent<XRGrabInteractable>().velocityScale = 0.25f;
             component.GetComponent<XRGrabInteractable>().useDynamicAttach = true;
             component.GetComponent<XRGrabInteractable>().snapToColliderVolume = false;

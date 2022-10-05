@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2195388566680852402}
   - component: {fileID: 5774765388736490180}
   - component: {fileID: 8674149614348812448}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Target2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 10
+    m_Bits: 84
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}

@@ -48,6 +48,7 @@ MonoBehaviour:
   questions:
   - {fileID: 11400000, guid: bbf69f86ac27d4c419a7913a35ac127c, type: 2}
   - {fileID: 11400000, guid: bbf69f86ac27d4c419a7913a35ac127c, type: 2}
+  tutorialQuestion: {fileID: 0}
   cuttingDesk: {fileID: 2210480612415829489}
   cmpObjPillar: {fileID: 4559440400204255681, guid: 71a63efbe4e6c4c4bb4a32b8991ca303, type: 3}
   leftHandController: {fileID: 0}
@@ -732,6 +733,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6071734277594582639}
     m_Modifications:
+    - target: {fileID: 1425810166, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.795
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425810168, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 456225205554129249, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 456225205554129249, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 456225205554129249, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9969096
+      objectReference: {fileID: 0}
+    - target: {fileID: 456225205554129249, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00010281645
+      objectReference: {fileID: 0}
+    - target: {fileID: 456225205554129249, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0013049509
+      objectReference: {fileID: 0}
+    - target: {fileID: 456225205554129249, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.07854603
+      objectReference: {fileID: 0}
+    - target: {fileID: 456225205554129249, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 456225205554129249, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 9.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642727976468684849, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217752740978224948, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5603329907157658314, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -779,6 +828,38 @@ PrefabInstance:
     - target: {fileID: 5603329907157658315, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
       propertyPath: m_Name
       value: Cutting bench
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672241864513861890, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672241864513861890, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672241864513861890, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9576217
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672241864513861890, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672241864513861890, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672241864513861890, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.2880291
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672241864513861890, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672241864513861890, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d5c8e6c373a9f042b6a978d957623da, type: 3}
