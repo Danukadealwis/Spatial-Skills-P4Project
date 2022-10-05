@@ -109,8 +109,11 @@ public class GameManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
+        // foreach(var question in questions){
+        //     question.Awake();
+        // }
+        // tutorialQuestion.Awake();
         StartGame();
         DisplayQuestion();
     }
