@@ -75,8 +75,12 @@ public class Slicer : MonoBehaviour
                 if (sliceObj != null && (obj == socket || obj == hand))
                 {   
                     gameManager.DeactivateSocket();
+            
                     sliceObj.GetComponent<MeshRenderer>()?.material.SetVector("CutPlaneOrigin", Vector3.positiveInfinity);
+                    
+                    gameManager.leftHandController.GetComponent<XRRayInteractor>().enabled = false;
                     sliceObj.ComputeSlice(this.transform.up, this.transform.position);
+                    gameManager.leftHandController.GetComponent<XRRayInteractor>().enabled = true;
                 }
             }
     }

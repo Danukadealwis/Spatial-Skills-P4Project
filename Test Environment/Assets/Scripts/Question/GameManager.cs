@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     private LastGameData _lastGameData;
 
     // Game assets
-    [SerializeField] private GameObject cuttingDesk;
+    [SerializeField] public GameObject cuttingDesk;
     [SerializeField] private GameObject cmpObjPillar;
     private Transform currentRotation;
     [SerializeField] public GameObject leftHandController;
@@ -110,10 +110,10 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
-        // foreach(var question in questions){
-        //     question.Awake();
-        // }
-        // tutorialQuestion.Awake();
+        foreach(var question in questions){
+            question.Awake();
+        }
+        tutorialQuestion.Awake();
         StartGame();
         DisplayQuestion();
     }
