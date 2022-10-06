@@ -17,9 +17,11 @@ MonoBehaviour:
   - {fileID: 897108614576090406, guid: 6e9f8cf2824dc2242b6106bed4edadd5, type: 3}
   - {fileID: 2838396086998641109, guid: a011b1fc38c38ca4eaaf535ea049d61e, type: 3}
   correctMeshes:
-  - {fileID: 4493585093827132993, guid: 2ae455b64634e4b23a618a2332a83bcf, type: 3}
-  - {fileID: -8678823145569952518, guid: ca61111d9c91e46f589c0fa27dcccd68, type: 3}
+  - {fileID: 4493585093827132993, guid: d9b42ebd1760541dbaca4e5eb8f3cfd5, type: 3}
+  - {fileID: -8678823145569952518, guid: a2f2657a8c8974896a30c961e0e72fb8, type: 3}
   questionObject: {fileID: 3548766320588918289, guid: b60b60b5f086b403f83f30f797be5d7f, type: 3}
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
+  bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
   maxQuestionTime: 101
   maxCuts: 8
+  scalingEffect: 0.175

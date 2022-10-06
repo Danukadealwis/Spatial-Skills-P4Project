@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 3548766320588918289}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 1.23, z: -3.2}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.175, y: 0.175, z: 0.175}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -163,7 +163,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3548766320588918289}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correctMeshes:
-  - {fileID: 4493585093827132993, guid: 2ae455b64634e4b23a618a2332a83bcf, type: 3}
-  - {fileID: -8678823145569952518, guid: ca61111d9c91e46f589c0fa27dcccd68, type: 3}
+  - {fileID: 4493585093827132993, guid: d9b42ebd1760541dbaca4e5eb8f3cfd5, type: 3}
+  - {fileID: -8678823145569952518, guid: a2f2657a8c8974896a30c961e0e72fb8, type: 3}
 --- !u!114 &4207441097297190156
 MonoBehaviour:
   m_ObjectHideFlags: 0
