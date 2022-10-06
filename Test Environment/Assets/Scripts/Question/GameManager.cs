@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
     
     //Constants
     private const int CorrectAnswerPoints = 5000;
-    private const float DistanceToPillar = 3.0f;
-    private const float DistanceBetweenPillar = 2.5f;
+    private const float DistanceToPillar = 2.0f;
+    private const float DistanceBetweenPillar = 2.0f;
     private const float socketDeactivateTime = 1.0f;
 
     // Input System

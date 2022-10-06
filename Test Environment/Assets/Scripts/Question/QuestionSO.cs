@@ -19,6 +19,7 @@ public class QuestionSO : ScriptableObject
     private Slice _slice;
     [Range(1, 500)] [SerializeField] public float maxQuestionTime;
     [Range(1, 15)] [SerializeField] public int maxCuts;
+    [Range(0.0f, 1.0f)][SerializeField] public float scalingEffect;
     private SliceOptions _defaultSliceOptions;
     
     // Start is called before the first frame update
@@ -30,10 +31,11 @@ public class QuestionSO : ScriptableObject
             maxResliceCount = 100,
             insideMaterial = objectMaterial
         };
+
+
         questionObject.name = $"{questionObject.name}{questionObject.GetInstanceID().ToString()}";
         questionObject.layer = LayerMask.NameToLayer("Object");
-
-
+        questionObject.transform.localScale = new Vector3(scalingEffect,scalingEffect,scalingEffect);
         questionObject.GetComponent<XRGrabInteractable>().smoothRotation = true;
         questionObject.GetComponent<XRGrabInteractable>().smoothPosition = true;
         questionObject.GetComponent<XRGrabInteractable>().forceGravityOnDetach = true;
@@ -57,8 +59,8 @@ public class QuestionSO : ScriptableObject
             component.GetComponent<XRGrabInteractable>().smoothRotation = true;
             component.GetComponent<XRGrabInteractable>().smoothPosition = true;
             component.GetComponent<XRGrabInteractable>().forceGravityOnDetach = true;
-            component.GetComponent<XRGrabInteractable>().interactionLayers += LayerMask.NameToLayer("Object");
-            component.GetComponent<XRGrabInteractable>().interactionLayers += LayerMask.NameToLayer("TargetObject");
+            Debug.Log("int layers: " + component.GetComponent<XRGrabInteractable>().interactionLayers.value);
+            component.GetComponent<XRGrabInteractable>().interactionLayers = 4;
             component.GetComponent<XRGrabInteractable>().velocityScale = 0.25f;
             component.GetComponent<XRGrabInteractable>().useDynamicAttach = true;
             component.GetComponent<XRGrabInteractable>().snapToColliderVolume = false;
@@ -66,6 +68,7 @@ public class QuestionSO : ScriptableObject
             component.GetComponent<Rigidbody>().useGravity = true;
             component.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             component.GetComponent<BoxCollider>().material = bounceMaterial;
+            component.transform.localScale = new Vector3(scalingEffect,scalingEffect,scalingEffect);
 
         }
     }
