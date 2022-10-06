@@ -20,6 +20,7 @@ public class Quiz : MonoBehaviour
     [SerializeField] private GameObject[] answerGroups;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button previousButton;
+    [SerializeField] private TextMeshProUGUI questionText;
     private GameManager gameManager;
     private int[] userAnswersList; 
     private Timer timer;
@@ -86,13 +87,13 @@ public class Quiz : MonoBehaviour
         TextMeshProUGUI questionNumberIndicator;
         TextMeshProUGUI answerButtonText;
         Button[] questionListButtons;
-       
-        
+
+        questionText.text = currentQuestion.questionText;
         for (int i = 0; i < answerGroups.Length; i++)
         {
             answerButton = answerGroups[i].GetComponentInChildren<Button>();
             answerButtonText = answerGroups[i].GetComponentInChildren<TextMeshProUGUI>();
-
+          
             if (userAnswersList != null)
             {
                 if (userAnswersList[currentQuestionIndex] == i)
@@ -107,6 +108,7 @@ public class Quiz : MonoBehaviour
             }
             answerImage = answerGroups[i].GetComponentInChildren<Image>();
             answerImage.sprite = currentQuestion.GetSprite(i);
+            answerImage.preserveAspect = true;
             answerButtonText.text = currentQuestion.GetAnswer(i);
             
         }
@@ -115,6 +117,8 @@ public class Quiz : MonoBehaviour
         questionNumberIndicator.text = "Question: " + (currentQuestionIndex + 1) + "/" + questions.Count;
         
         questionImage.sprite = currentQuestion.GetQuestionImage();
+        questionImage.preserveAspect = true;
+        
         if (currentQuestionIndex == questions.Count - 1)
         {
             nextButton.GetComponentInChildren<TextMeshProUGUI>().text = "Finish Test!";
@@ -135,6 +139,7 @@ public class Quiz : MonoBehaviour
                 resetNextButtonOnClick = false;
             }
         }
+        
         else
         {
             previousButton.interactable = true;

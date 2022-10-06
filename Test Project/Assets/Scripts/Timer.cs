@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
                 Debug.Log(_timerState);
                 break;
             case TimerState.QuizRunning:
-                timerValue -= Time.deltaTime;
+                // timerValue -= Time.deltaTime;
                 break;
             case TimerState.QuizComplete:
                 timerValue = float.MaxValue;
@@ -44,7 +44,7 @@ public class Timer : MonoBehaviour
             case TimerState.TimeElapsed:
                 timerValue = timeToCompleteQuiz;
                 break;
-                
+            
         }
         if (timerValue <= 0)
         {

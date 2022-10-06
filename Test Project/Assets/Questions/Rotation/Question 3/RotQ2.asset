@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f846fede78be4cf4b156ce2b783cdb1, type: 3}
+  m_Name: RotQ2
+  m_EditorClassIdentifier: 
+  answers:
+  - A
+  - B
+  - C
+  - D
+  correctAnswerIndex: 0
+  questionImage: {fileID: 21300000, guid: 75cbd1e7b9a504f9192fa541991c2224, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: ddccf6fcb3c9e488ab34eec399b2fc44, type: 3}
+  - {fileID: 21300000, guid: f3dcd750a519945909bd6223db1ac0f6, type: 3}
+  - {fileID: 21300000, guid: 6381d0ff85e0347b8bf7f49259868d1f, type: 3}
+  - {fileID: 21300000, guid: 4bf3ccb230adf4c0aa4da479a7a89a42, type: 3}
+  questionText: 
