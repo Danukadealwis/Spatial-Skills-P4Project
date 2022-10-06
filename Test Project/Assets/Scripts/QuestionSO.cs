@@ -13,9 +13,8 @@ public class QuestionSO : ScriptableObject
     [SerializeField] private int correctAnswerIndex;
     [SerializeField] private Sprite questionImage;
     [SerializeField] private Sprite[] sprites = new Sprite[4];
+    [SerializeField] public string questionText;
     
-    
-
 
     public string GetAnswer(int index)
     {

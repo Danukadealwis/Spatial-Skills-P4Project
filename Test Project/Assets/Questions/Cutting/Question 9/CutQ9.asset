@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f846fede78be4cf4b156ce2b783cdb1, type: 3}
+  m_Name: CutQ9
+  m_EditorClassIdentifier: 
+  answers:
+  - A
+  - B
+  - C
+  - D
+  correctAnswerIndex: 2
+  questionImage: {fileID: 21300000, guid: b3c5fb8ef162448cd96fb80736d8fd97, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: a6eee1b9127d046698912ffa2a53efef, type: 3}
+  - {fileID: 21300000, guid: 9ded184e399e548d9ab58cff15b9a549, type: 3}
+  - {fileID: 21300000, guid: 2a19887cc5f3d40089a82fc94d7dd9e1, type: 3}
+  - {fileID: 21300000, guid: 62d0ebe9d02ee4513a33f3bd1463d3a6, type: 3}
+  questionText: Choose the cross-section that matches the image when cut by a given
+    plane

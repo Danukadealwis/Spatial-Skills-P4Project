@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f846fede78be4cf4b156ce2b783cdb1, type: 3}
+  m_Name: CutQ8
+  m_EditorClassIdentifier: 
+  answers:
+  - A
+  - B
+  - C
+  - D
+  correctAnswerIndex: 1
+  questionImage: {fileID: 21300000, guid: fc30a240e75dd46c2afb191b11b779df, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 35ff4c7ce59bc4dbf96f5451ffe3a2a8, type: 3}
+  - {fileID: 21300000, guid: 1cbd21da05e894fc79adab87d799e1ca, type: 3}
+  - {fileID: 21300000, guid: 65919e2fbb52e4866b91c0760b998b2b, type: 3}
+  - {fileID: 21300000, guid: d4430b587732a494b954cebc8584065b, type: 3}
+  questionText: What group of shapes can be assembled to make the shape shown?

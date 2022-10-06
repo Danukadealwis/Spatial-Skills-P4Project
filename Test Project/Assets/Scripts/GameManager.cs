@@ -33,18 +33,6 @@ public class GameManager : MonoBehaviour
         _scoreScreen.gameObject.SetActive(false);
         startScreen.gameObject.SetActive(true);
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 
     // Update is called once per frame
