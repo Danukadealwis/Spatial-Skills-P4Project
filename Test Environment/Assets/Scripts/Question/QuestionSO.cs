@@ -14,6 +14,7 @@ public class QuestionSO : ScriptableObject
     [SerializeField] public List<Mesh> correctMeshes;
     [SerializeField] public GameObject questionObject;
     [SerializeField] public Material objectMaterial;
+    [SerializeField] public Material targetMaterial;
     [SerializeField] public PhysicMaterial bounceMaterial;
     private SliceConfirmation _sliceConfirmation;
     private Slice _slice;
@@ -69,6 +70,7 @@ public class QuestionSO : ScriptableObject
             component.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             component.GetComponent<BoxCollider>().material = bounceMaterial;
             component.transform.localScale = new Vector3(scalingEffect,scalingEffect,scalingEffect);
+            component.GetComponent<MeshRenderer>().material = targetMaterial;
 
         }
     }

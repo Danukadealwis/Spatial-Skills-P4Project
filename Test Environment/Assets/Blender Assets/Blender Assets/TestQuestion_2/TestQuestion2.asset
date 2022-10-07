@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 4493585093827132993, guid: 60360b327571c410fb4c6f6fc89a6d94, type: 3}
   questionObject: {fileID: 5532548193191768193, guid: 87f229b0d1d6151498b0c906988ba55b, type: 3}
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
+  targetMaterial: {fileID: 2100000, guid: 688403c03c4f0964b898cc426e48d647, type: 2}
   bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
   maxQuestionTime: 163
   maxCuts: 10
