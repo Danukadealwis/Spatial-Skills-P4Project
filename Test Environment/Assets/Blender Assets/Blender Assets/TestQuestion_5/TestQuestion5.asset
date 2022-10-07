@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: TestQuestion5
   m_EditorClassIdentifier: 
   componentObjects:
-  - {fileID: 5401959069353210751, guid: 7a57e27f5f331448e899cc29abd975ed, type: 3}
-  - {fileID: 7724432734495326686, guid: a1bb8a073a9e44abd98c96dc94a5b533, type: 3}
-  - {fileID: 6880019747318995494, guid: ee823d2312cbb4d21ab250f6e501253d, type: 3}
+  - {fileID: 5464378345935394606, guid: 7a57e27f5f331448e899cc29abd975ed, type: 3}
+  - {fileID: 5577207336006111996, guid: a1bb8a073a9e44abd98c96dc94a5b533, type: 3}
+  - {fileID: 8886546049540556043, guid: ee823d2312cbb4d21ab250f6e501253d, type: 3}
+  correctMeshes:
+  - {fileID: 4493585093827132993, guid: 85fb0c24c39914fe78b09ab079f95d53, type: 3}
+  - {fileID: 4493585093827132993, guid: 1a99f08df3f1a44ce828d13c58bec9c9, type: 3}
   questionObject: {fileID: 2006942937818944491, guid: 2f2b9c729178543428376e2ec2b91d0a, type: 3}
+  objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
+  bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
   maxQuestionTime: 101
   maxCuts: 12
+  scalingEffect: 0.109

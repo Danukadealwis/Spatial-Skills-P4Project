@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: TestQuestion1
   m_EditorClassIdentifier: 
   componentObjects:
-  - {fileID: 5079648196796123713, guid: 41f234c632a6766479bdf8e2b684eed9, type: 3}
-  - {fileID: 897108614576090406, guid: 6e9f8cf2824dc2242b6106bed4edadd5, type: 3}
-  - {fileID: 2838396086998641109, guid: a011b1fc38c38ca4eaaf535ea049d61e, type: 3}
+  - {fileID: 1276861578938735060, guid: 41f234c632a6766479bdf8e2b684eed9, type: 3}
+  - {fileID: 516394312634304929, guid: 6e9f8cf2824dc2242b6106bed4edadd5, type: 3}
+  - {fileID: 401174739485203324, guid: a011b1fc38c38ca4eaaf535ea049d61e, type: 3}
   correctMeshes:
-  - {fileID: 4493585093827132993, guid: d9b42ebd1760541dbaca4e5eb8f3cfd5, type: 3}
-  - {fileID: -8678823145569952518, guid: a2f2657a8c8974896a30c961e0e72fb8, type: 3}
-  questionObject: {fileID: 3548766320588918289, guid: b60b60b5f086b403f83f30f797be5d7f, type: 3}
+  - {fileID: 4493585093827132993, guid: cad69af1100f8e8468477033e6b3c772, type: 3}
+  - {fileID: -8678823145569952518, guid: 4a8e9c682e9e26b4d8ca58e2ef2d6104, type: 3}
+  questionObject: {fileID: 330986570313138330, guid: 546017ab4fa89804694a1ac1e48f8a8f, type: 3}
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
   bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
   maxQuestionTime: 101

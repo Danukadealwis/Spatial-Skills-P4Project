@@ -22,5 +22,6 @@ MonoBehaviour:
   questionObject: {fileID: 4872263577348064115, guid: 7cf630ed037374189812a8d58e288ec1, type: 3}
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
   bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
-  maxQuestionTime: 498
+  maxQuestionTime: 223
   maxCuts: 13
+  scalingEffect: 0.14

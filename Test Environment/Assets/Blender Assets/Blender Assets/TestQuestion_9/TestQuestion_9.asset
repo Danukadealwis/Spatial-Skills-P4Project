@@ -24,3 +24,4 @@ MonoBehaviour:
   bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
   maxQuestionTime: 380
   maxCuts: 12
+  scalingEffect: 0.184
