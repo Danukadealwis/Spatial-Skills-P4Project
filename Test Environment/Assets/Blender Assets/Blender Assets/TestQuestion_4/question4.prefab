@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7549286245321590560}
   - component: {fileID: 8777068307013569134}
   - component: {fileID: 5204224939113987012}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: question4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1359786795016005353}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
