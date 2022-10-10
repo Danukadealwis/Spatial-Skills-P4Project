@@ -25,6 +25,6 @@ MonoBehaviour:
   objectMaterial: {fileID: 2100000, guid: aa63c8e6cdd7f8941ad24e6847b96439, type: 2}
   targetMaterial: {fileID: 2100000, guid: 688403c03c4f0964b898cc426e48d647, type: 2}
   bounceMaterial: {fileID: 13400000, guid: 0734f60dbe452a240ad45c111bddb5a7, type: 2}
-  maxQuestionTime: 158
-  maxCuts: 11
+  maxQuestionTime: 200
+  maxCuts: 10
   scalingEffect: 0.064

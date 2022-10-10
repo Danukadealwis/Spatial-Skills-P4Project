@@ -18,10 +18,10 @@ MonoBehaviour:
   - C
   - D
   correctAnswerIndex: 3
-  questionImage: {fileID: 21300000, guid: f6bb0142987794dc6a9ec22d61f0c0dd, type: 3}
+  questionImage: {fileID: 21300000, guid: a4d78e2a48a04b94c84e67916bae0838, type: 3}
   sprites:
-  - {fileID: 21300000, guid: e1a86e620b9484f9bb4b73d983a8bd23, type: 3}
-  - {fileID: 21300000, guid: 50bb21001e0024de0a9299e5734ee7ba, type: 3}
-  - {fileID: 21300000, guid: e38d3332d24d74b638a35783895e13c2, type: 3}
+  - {fileID: 21300000, guid: 816c81f35d5c80e42aeb1c9c25194cf7, type: 3}
+  - {fileID: 21300000, guid: ec34d2bbf9e561346a25bbffa9b8bb82, type: 3}
+  - {fileID: 21300000, guid: bc245ccd39713b14fb8ac423170f26b1, type: 3}
   - {fileID: 21300000, guid: 68a5a6e4a3ef5464aa94ee8cc48b10fd, type: 3}
   questionText: What group of shapes can be assembled to make the shape shown?

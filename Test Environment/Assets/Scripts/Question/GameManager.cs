@@ -40,9 +40,9 @@ public class GameManager : MonoBehaviour
     }
     
     //Constants
-    private const int CorrectAnswerPoints = 5000;
-    private const float DistanceToPillar = 2.0f;
-    private const float DistanceBetweenPillar = 2.0f;
+    private const int CorrectAnswerPoints = 2000;
+    private const float DistanceToPillar = 1.2f;
+    private const float DistanceBetweenPillar = 1.5f;
     private const float socketDeactivateTime = 1.0f;
 
     // Input System
@@ -238,7 +238,7 @@ public class GameManager : MonoBehaviour
 
     public void UndoCut()
     {   
-        Debug.Log("UNDO CUT!");
+        //Debug.Log("UNDO CUT!");
         if (_slicedObjs.Count != 0)
         {
             var allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
@@ -356,7 +356,7 @@ public class GameManager : MonoBehaviour
                 Destroy(root);
         else
         {
-            Debug.Log("Null found");
+            //Debug.Log("Null found");
         }
 
         Destroy(_questionObject);
@@ -413,7 +413,7 @@ public class GameManager : MonoBehaviour
         _playerInput.SwitchCurrentActionMap("Player");
         _undoAction = _playerInput.currentActionMap.FindAction("UndoCut");
         _nextQuestionAction = _playerInput.currentActionMap.FindAction("NextQuestion");
-        Debug.Log(_undoAction.bindings);
+        //Debug.Log(_undoAction.bindings);
 
         _allQuestionsData = new List<QuestionData>();
         _objectsSliced = new List<int>();
@@ -469,9 +469,9 @@ public class GameManager : MonoBehaviour
         if (_objectsSliced.TrueForAll(s => s != -1) &&
             _objectsSliced.Count == _currentQuestion.componentObjects.Count - 1)
         {
-            Debug.Log("_objectsSliced.Count" + _objectsSliced.Count);
+            //Debug.Log("_objectsSliced.Count" + _objectsSliced.Count);
             _answerStatus = QuestionStatus.CorrectAnswer;
-            Debug.Log("Correct!");
+            Debug.Log("Question Correct!" + _currentQuestionIndex + 1);
         }
         else if (_currentQuestion.maxCuts - _slicesMade <
                  _currentQuestion.componentObjects.Count - 1 - consecutiveCorrectSlices && !_isTutorialQuestion)

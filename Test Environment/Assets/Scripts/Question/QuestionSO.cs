@@ -60,7 +60,7 @@ public class QuestionSO : ScriptableObject
             component.GetComponent<XRGrabInteractable>().smoothRotation = true;
             component.GetComponent<XRGrabInteractable>().smoothPosition = true;
             component.GetComponent<XRGrabInteractable>().forceGravityOnDetach = true;
-            Debug.Log("int layers: " + component.GetComponent<XRGrabInteractable>().interactionLayers.value);
+            //Debug.Log("int layers: " + component.GetComponent<XRGrabInteractable>().interactionLayers.value);
             component.GetComponent<XRGrabInteractable>().interactionLayers = 4;
             component.GetComponent<XRGrabInteractable>().velocityScale = 0.25f;
             component.GetComponent<XRGrabInteractable>().useDynamicAttach = true;
