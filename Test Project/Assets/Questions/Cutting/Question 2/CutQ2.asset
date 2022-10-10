@@ -24,4 +24,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2c4c4bcf387ee49c0ab3c95516e9a359, type: 3}
   - {fileID: 21300000, guid: b1847ec53312e43ee90a5db6cfcdaa26, type: 3}
   - {fileID: 21300000, guid: 29ab71750e60145eabb3d2bc9f2d910f, type: 3}
-  questionText: 
+  questionText: Choose the cross-section that matches the image when cut by a given
+    plane

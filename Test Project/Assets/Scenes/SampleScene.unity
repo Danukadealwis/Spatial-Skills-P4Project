@@ -679,7 +679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &390673073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3442,7 +3442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7848110618840684773, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 242.74677
+      value: 242.74673
       objectReference: {fileID: 0}
     - target: {fileID: 7856692211247396420, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
       propertyPath: questionText
@@ -3459,7 +3459,7 @@ PrefabInstance:
     - target: {fileID: 7856692211247396420, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
       propertyPath: questions.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: ff47e82d2efb94c618f80d8c169b62b5, type: 2}
+      objectReference: {fileID: 11400000, guid: a0d3787fc22118244b05da1f7587938b, type: 2}
     - target: {fileID: 7856692211247396420, guid: 006cd999df47f42cc855d8b77c7593c7, type: 3}
       propertyPath: questions.Array.data[2]
       value: 
