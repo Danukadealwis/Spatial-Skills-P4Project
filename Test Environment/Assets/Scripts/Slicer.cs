@@ -58,7 +58,6 @@ public class Slicer : MonoBehaviour
                 hand = handSocket.GetComponent<XRRayInteractor>().firstInteractableSelected.transform.gameObject;
             }
             
-            Debug.Log(socket);
 
             extents = new Vector3(extents.x * this.transform.localScale.x,
                                   extents.y * this.transform.localScale.y,

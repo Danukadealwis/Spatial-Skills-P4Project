@@ -238,7 +238,7 @@ public class GameManager : MonoBehaviour
 
     public void UndoCut()
     {   
-        //Debug.Log("UNDO CUT!");
+        Debug.Log("UNDO CUT!");
         if (_slicedObjs.Count != 0)
         {
             var allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
@@ -271,8 +271,6 @@ public class GameManager : MonoBehaviour
             _gameScore += CorrectAnswerPoints
                           + _speedBonus
                           + _unusedSlicesBonus;
-            Debug.Log("Time Bonus: " + _speedBonus);
-            Debug.Log("Unused Slices Bonus: " + _unusedSlicesBonus);
             Debug.Log("Game Score is: " + _gameScore);
             _allQuestionsData.Add(new QuestionData
             {
@@ -329,6 +327,7 @@ public class GameManager : MonoBehaviour
                 _resultTexts[1].GetComponent<Text>().text = "You ran out of time!";
                 break;
         }
+        Debug.Log ("Question: " + _currentQuestionIndex + _answerStatus);
     }
 
     void ResetGameScene()
@@ -467,14 +466,13 @@ public class GameManager : MonoBehaviour
         }
 
         if (_objectsSliced.TrueForAll(s => s != -1) &&
-            _objectsSliced.Count == _currentQuestion.componentObjects.Count - 1)
-        {
+            _objectsSliced.Count == _currentQuestion.componentObjects.Count - 1 && _objectsSliced.Distinct().Count() == _objectsSliced.Count)
+        {   
             //Debug.Log("_objectsSliced.Count" + _objectsSliced.Count);
             _answerStatus = QuestionStatus.CorrectAnswer;
-            Debug.Log("Question Correct!" + _currentQuestionIndex + 1);
+            
         }
-        else if (_currentQuestion.maxCuts - _slicesMade <
-                 _currentQuestion.componentObjects.Count - 1 - consecutiveCorrectSlices && !_isTutorialQuestion)
+        else if (_slicesMade + 1 == _currentQuestion.maxCuts && !_isTutorialQuestion)
             _answerStatus = QuestionStatus.SlicesUsed;
     }
 
