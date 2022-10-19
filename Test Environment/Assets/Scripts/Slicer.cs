@@ -12,7 +12,11 @@ public class Slicer : MonoBehaviour
     GameObject hand;
 
 
-
+    
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+ Modified by Birendra De Alwis and Nicholas Roe
+*/
     public void OnTriggerStay(Collider collider)
     {
         var MeshRenderer = collider.gameObject.GetComponent<MeshRenderer>();

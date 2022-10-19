@@ -8,6 +8,10 @@ using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using UnityEngine.Rendering;
 
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+ Modified by Birendra De Alwis and Nicholas Roe
+*/
 /// <summary>
 /// Class which handles slicing a mesh into two pieces given the origin and normal of the slice plane.
 /// </summary>

@@ -1,5 +1,10 @@
 using UnityEngine.TestTools;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
+
 /// <summary>
 /// Data structure that holds triangulation adjacency data for a quad
 /// </summary>

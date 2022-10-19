@@ -3,6 +3,10 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.TestTools;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
 [ExcludeFromCoverage]
 public class Projectile : MonoBehaviour
 {

@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
 public enum TriggerType 
 {
     Collision,

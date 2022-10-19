@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
 public enum SlicedMeshSubmesh
 {
     Default = 0,

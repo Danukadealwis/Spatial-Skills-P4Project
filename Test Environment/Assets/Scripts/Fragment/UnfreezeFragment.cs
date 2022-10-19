@@ -1,6 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
+
 public class UnfreezeFragment : MonoBehaviour
 {
     [Tooltip("Options for triggering the fracture")]

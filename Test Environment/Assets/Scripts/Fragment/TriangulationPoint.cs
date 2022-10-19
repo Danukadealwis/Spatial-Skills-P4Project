@@ -1,6 +1,12 @@
 using UnityEngine;
 using UnityEngine.TestTools;
 
+
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
+
 /// <summary>
 /// This data structure is used to represent a point during triangulation.
 /// </summary>

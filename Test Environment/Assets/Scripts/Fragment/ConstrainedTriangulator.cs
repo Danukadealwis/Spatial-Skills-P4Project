@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
+
 /// <summary>
 /// Class for triangulating a set of 3D points with edge constraints. Supports convex and non-convex polygons
 /// as well as polygons with holes.

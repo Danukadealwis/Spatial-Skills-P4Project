@@ -1,5 +1,9 @@
 using UnityEngine.TestTools;
 
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+
+*/
 /// <summary>
 /// Represents an edge constraint between two vertices in the triangulation
 /// </summary>

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
 public class ToggleText : MonoBehaviour
 {
     public KeyCode toggleKey;

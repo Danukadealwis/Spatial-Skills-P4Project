@@ -1,6 +1,11 @@
 using UnityEngine;
 using UnityEngine.TestTools;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
+
 /// <summary>
 /// Data structure containing position/normal/UV data for a single vertex
 /// </summary>

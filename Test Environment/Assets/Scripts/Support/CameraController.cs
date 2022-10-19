@@ -5,6 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.HID;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
+
 [ExcludeFromCoverage]
 public class CameraController : MonoBehaviour
 {

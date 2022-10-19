@@ -9,6 +9,12 @@ using Random = UnityEngine.Random;
 using UnityEditor;
 #endif
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+ Modified by Birendra De Alwis and Nicholas Roe
+*/
+
 public static class      Fragmenter
 {
 

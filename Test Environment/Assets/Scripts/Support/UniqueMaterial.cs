@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
 public class UniqueMaterial : MonoBehaviour
 {
     // Start is called before the first frame update

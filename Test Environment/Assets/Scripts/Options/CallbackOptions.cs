@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
 [Serializable]
 public class CallbackOptions
 {

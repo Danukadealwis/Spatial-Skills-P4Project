@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
+
 /// <summary>
 /// Logic for triangulating a set of 3D points. Only supports convex polygons.
 /// </summary>

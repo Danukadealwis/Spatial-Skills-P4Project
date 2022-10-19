@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+*/
 public class PlayerMovement : MonoBehaviour
 {
     InputActionAsset playerControls;

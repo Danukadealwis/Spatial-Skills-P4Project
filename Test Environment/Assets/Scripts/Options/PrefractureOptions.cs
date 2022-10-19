@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/*
+ Part of the OpenFracture Open Source Project by Greenheck D., Dearborn J
+ */
 [Serializable]
 /// <summary>
 /// Options for prefracturing a mesh
